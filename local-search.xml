@@ -4,50 +4,11 @@
   
   
   <entry>
-    <title>page</title>
-    <link href="/2026/02/12/page/"/>
-    <url>/2026/02/12/page/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>test</title>
-    <link href="/2026/02/12/test/"/>
-    <url>/2026/02/12/test/</url>
-    
-    <content type="html"><![CDATA[<p>111</p><p>222</p><p>333</p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>blog开头代码</title>
-    <link href="/2025/08/06/text/"/>
-    <url>/2025/08/06/text/</url>
-    
-    <content type="html"><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>这里是文章的正文内容。你可以使用Markdown语法来格式化文本，例如添加标题、段落、列表、图片等。</p><p>例如，添加一个无序列表：</p><ul><li>列表项1</li><li>列表项2</li><li>列表项3</li></ul><p>或者添加一个链接：<a href="https://www.example.com/">示例链接</a></p><p>代码为：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">测试文章</span>  <span class="hljs-comment"># 文章标题</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2025-08-05 16:17:07</span>  <span class="hljs-comment"># 发布日期和时间</span><br><span class="hljs-attr">author:</span> <span class="hljs-string">tyy</span>  <span class="hljs-comment"># 作者名称</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-comment">## Hello World</span><br><span class="hljs-string">这里是文章的正文内容。你可以使用Markdown语法来格式化文本，例如添加标题、段落、列表、图片等。</span><br><br><span class="hljs-string">例如，添加一个无序列表：</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">列表项1</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">列表项2</span><br><span class="hljs-bullet">-</span> <span class="hljs-string">列表项3</span><br><br><span class="hljs-string">或者添加一个链接：[示例链接](https://www.example.com)</span><br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
+    <title>blog code</title>
     <link href="/2025/08/05/hello-world/"/>
     <url>/2025/08/05/hello-world/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs axapta">npm install hexo -g <span class="hljs-meta">#安装Hexo</span><br>  npm update hexo -g <span class="hljs-meta">#升级</span><br>  hexo init <span class="hljs-meta">#初始化博客</span><br>  ​<br>  hexo n <span class="hljs-string">&quot;我的博客&quot;</span> == hexo <span class="hljs-keyword">new</span> <span class="hljs-string">&quot;我的博客&quot;</span> <span class="hljs-meta">#新建文章</span><br>  hexo g == hexo generate <span class="hljs-meta">#生成</span><br>  hexo s == hexo <span class="hljs-keyword">server</span> <span class="hljs-meta">#启动服务预览</span><br>  hexo d == hexo deploy <span class="hljs-meta">#部署</span><br>  ​<br>  hexo <span class="hljs-keyword">server</span> <span class="hljs-meta">#Hexo会监视文件变动并自动更新，无须重启服务器</span><br>  hexo <span class="hljs-keyword">server</span> -s <span class="hljs-meta">#静态模式</span><br>  hexo <span class="hljs-keyword">server</span> -p <span class="hljs-number">5000</span> <span class="hljs-meta">#更改端口</span><br>  hexo <span class="hljs-keyword">server</span> -i <span class="hljs-number">192.168</span><span class="hljs-number">.1</span><span class="hljs-number">.1</span> <span class="hljs-meta">#自定义 IP</span><br>  hexo clean <span class="hljs-meta">#清除缓存，若是网页正常情况下可以忽略这条命令</span><br></code></pre></td></tr></table></figure><h2 id="一键创建"><a href="#一键创建" class="headerlink" title="一键创建"></a>一键创建</h2><figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sas">hexo new 文章名<br>编辑<br>hexo cl <span class="hljs-variable">&amp;&amp;</span> hexo g <span class="hljs-variable">&amp;&amp;</span> hexo s <span class="hljs-variable">&amp;&amp;</span> hexo d<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
