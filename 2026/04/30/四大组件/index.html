@@ -1,0 +1,883 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="​	一个Android App由四大组件为核心构成。每个组件都可以选择是否导出（exported） Activity​	负责用户界面展示，一个屏幕页面对应一个Activity。（app的入口界面–&gt;MainActivity） 12345678&lt;activity          android:name&#x3D;&quot;com.demo.exportedcomponents.MainAct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四大组件">
+<meta property="og:url" content="https://yy-t1.github.io/2026/04/30/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="​	一个Android App由四大组件为核心构成。每个组件都可以选择是否导出（exported） Activity​	负责用户界面展示，一个屏幕页面对应一个Activity。（app的入口界面–&gt;MainActivity） 12345678&lt;activity          android:name&#x3D;&quot;com.demo.exportedcomponents.MainAct">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162632965.png">
+<meta property="og:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162719151.png">
+<meta property="og:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162757129.png">
+<meta property="og:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162831439.png">
+<meta property="og:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162855548.png">
+<meta property="article:published_time" content="2026-04-30T02:10:29.000Z">
+<meta property="article:modified_time" content="2026-04-30T08:31:17.223Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162632965.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>四大组件 - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="四大组件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-30 10:10" pubdate>
+          2026年4月30日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">四大组件</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>​	一个Android App由四大组件为核心构成。每个组件都可以选择是否导出（exported）</p>
+<h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><p>​	负责用户界面展示，一个屏幕页面对应一个Activity。（app的入口界面–&gt;MainActivity）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;activity<br>          android:name=<span class="hljs-string">&quot;com.demo.exportedcomponents.MainActivity&quot;</span><br>          android:exported=<span class="hljs-string">&quot;true&quot;</span>&gt;<br>          &lt;intent-filter&gt;<br>              &lt;action android:name=<span class="hljs-string">&quot;android.intent.action.MAIN&quot;</span>/&gt;<br>              &lt;category android:name=<span class="hljs-string">&quot;android.intent.category.LAUNCHER&quot;</span>/&gt;<br>          &lt;/intent-filter&gt;<br>      &lt;/activity&gt;<br></code></pre></td></tr></table></figure>
+
+<h3 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h3><h4 id="导出-Activity-未安全校验外部输入"><a href="#导出-Activity-未安全校验外部输入" class="headerlink" title="导出 Activity 未安全校验外部输入"></a>导出 Activity 未安全校验外部输入</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VulnDisplayActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Activity</span> &#123;   <br>    <span class="hljs-meta">@Override</span>   <br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> &#123;<br>        <span class="hljs-built_in">super</span>.onCreate(savedInstanceState);<br>        showDialog(getIntent());<br>    &#125;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">showDialog</span><span class="hljs-params">(Intent intent)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">title</span> <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;title&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;message&quot;</span>);<br>        <span class="hljs-keyword">if</span> (title == <span class="hljs-literal">null</span>) title = <span class="hljs-string">&quot;通知&quot;</span>;<br>        <span class="hljs-keyword">if</span> (message == <span class="hljs-literal">null</span>) message = <span class="hljs-string">&quot;暂无内容&quot;</span>;<br><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">AlertDialog</span>.Builder(<span class="hljs-built_in">this</span>)  <span class="hljs-comment">//创建系统弹窗，this表示当前Activity</span><br>            .setTitle(title)<br>            .setMessage(message)<br>            .setPositiveButton(<span class="hljs-string">&quot;确定&quot;</span>, (d, w) -&gt; finish())  <span class="hljs-comment">//添加一个“确定”按钮</span><br>            .setCancelable(<span class="hljs-literal">false</span>)  <span class="hljs-comment">//禁止返回键关闭</span><br>            .show();  <span class="hljs-comment">//真正把该弹窗显示（前面是配置）</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的Manifest声明</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;activity<br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;.VulnDisplayActivity&quot;</span><br>    android:<span class="hljs-attribute">exported</span>=<span class="hljs-string">&quot;true&quot;</span><br>    android:<span class="hljs-attribute">label</span>=<span class="hljs-string">&quot;系统通知&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>.VulnDisplayActivity是导出的，任何APP都可以调用它，而其也没有对应的权限检验以及内容检验，所以导致我们可以随意调用这个组件并且输入内容</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs stylus">通过 ADB 注入伪造的<span class="hljs-string">&quot;安全警告&quot;</span>弹窗：<br>adb shell am start -n com<span class="hljs-selector-class">.demo</span>.exportedcomponents/<span class="hljs-selector-class">.VulnDisplayActivity</span> \<br>    <span class="hljs-attr">--es</span> title <span class="hljs-string">&quot;安全警告&quot;</span> \<br>    <span class="hljs-attr">--es</span> message <span class="hljs-string">&quot;您的账户存在异常登录，请立即修改密码&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>成功显示</p>
+<p><img src="C:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162632965.png" srcset="/img/loading.gif" lazyload alt="image-20260430162632965"></p>
+<h4 id="Intent-重定向"><a href="#Intent-重定向" class="headerlink" title="Intent 重定向"></a>Intent 重定向</h4><p>即使Activity没有导出，但是一旦导出的Activity接收外部的Intent并且没有严格效验，那么就有可能从传入的恶意Intent打开内部未导出的Activity</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs scala">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VulnRedirectActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> void onCreate(<span class="hljs-type">Bundle</span> savedInstanceState) &#123;<br>        <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);<br><br>        <span class="hljs-comment">// 方式 1：从 extras 取出嵌套 Intent</span><br>        <span class="hljs-type">Intent</span> nested = getIntent().getParcelableExtra(<span class="hljs-string">&quot;next_intent&quot;</span>);<br>        <span class="hljs-keyword">if</span> (nested != <span class="hljs-literal">null</span>) &#123;<br>            startActivity(nested);  <span class="hljs-comment">// 漏洞：直接启动攻击者提供的 Intent</span><br>            finish();<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 方式 2：从字符串参数构造 Intent</span><br>        <span class="hljs-type">String</span> targetPkg = getIntent().getStringExtra(<span class="hljs-string">&quot;target_package&quot;</span>);<br>        <span class="hljs-type">String</span> targetCls = getIntent().getStringExtra(<span class="hljs-string">&quot;target_class&quot;</span>);<br>        <span class="hljs-keyword">if</span> (targetPkg != <span class="hljs-literal">null</span> &amp;&amp; targetCls != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-type">Intent</span> redirect = <span class="hljs-keyword">new</span> <span class="hljs-type">Intent</span>();<br>            redirect.setClassName(targetPkg, targetCls);<br>            startActivity(redirect);  <span class="hljs-comment">// 漏洞：根据外部输入构造 Intent 并启动</span><br>            finish();<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>adb通过.VulnRedirectActivity启动未export的组件</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">adb shell am start -n com<span class="hljs-selector-class">.demo</span>.exportedcomponents/<span class="hljs-selector-class">.VulnRedirectActivity</span> \<br>    <span class="hljs-attr">--es</span> target_package <span class="hljs-string">&quot;com.demo.exportedcomponents&quot;</span> \<br>    <span class="hljs-attr">--es</span> target_class <span class="hljs-string">&quot;com.demo.exportedcomponents.InternalSecretActivity&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162719151.png" srcset="/img/loading.gif" lazyload alt="image-20260430162719151"></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>​	负责后台服务，用于执行“后台任务”。</p>
+<p>分为两类：</p>
+<ul>
+<li>Started Service（启动式）：后台独立运行，不依赖调用者</li>
+<li>Bound Service（绑定式）：和调用者绑定在一起</li>
+</ul>
+<p>一旦该服务被外部App滥用，就可能导致危险</p>
+<h3 id="漏洞-1"><a href="#漏洞-1" class="headerlink" title="漏洞"></a>漏洞</h3><h4 id="未授权功能触发"><a href="#未授权功能触发" class="headerlink" title="未授权功能触发"></a>未授权功能触发</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VulnService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Service</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">onStartCommand</span><span class="hljs-params">(Intent intent, <span class="hljs-type">int</span> flags, <span class="hljs-type">int</span> startId)</span> &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">filename</span> <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;filename&quot;</span>);<br>        <span class="hljs-type">String</span> <span class="hljs-variable">content</span> <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;content&quot;</span>);<br><br>        <span class="hljs-keyword">if</span> (filename != <span class="hljs-literal">null</span> &amp;&amp; content != <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-comment">// 漏洞：无调用者校验，直接根据外部输入写文件</span><br>            <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(getFilesDir(), filename);<br>            <span class="hljs-type">FileWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileWriter</span>(file);<br>            writer.write(content);<br>            writer.close();<br>        &#125;<br>        stopSelf();<br>        <span class="hljs-keyword">return</span> START_NOT_STICKY;<br>    &#125;<br>&#125;<br><br>Manifest 中无任何权限保护：<br>&lt;service<br>    android:name=<span class="hljs-string">&quot;.VulnService&quot;</span><br>    android:exported=<span class="hljs-string">&quot;true&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>adb向应用沙箱写入任意文件</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim"># 触发写入<br>adb <span class="hljs-keyword">shell</span> <span class="hljs-keyword">am</span> startservice -n <span class="hljs-keyword">com</span>.demo.exportedcomponents/.VulnService \<br>    --es filename <span class="hljs-string">&quot;config.txt&quot;</span> \<br>    --es content <span class="hljs-string">&quot;malicious_data_injected_by_attacker&quot;</span><br><br># 验证写入结果<br>adb <span class="hljs-keyword">shell</span> run-<span class="hljs-keyword">as</span> <span class="hljs-keyword">com</span>.demo.exportedcomponents \<br>    <span class="hljs-keyword">cat</span> /data/data/<span class="hljs-keyword">com</span>.demo.exportedcomponents/<span class="hljs-keyword">files</span>/config.txt<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162757129.png" srcset="/img/loading.gif" lazyload alt="image-20260430162757129"></p>
+<h2 id="BroadcastReceiver"><a href="#BroadcastReceiver" class="headerlink" title="BroadcastReceiver"></a>BroadcastReceiver</h2><p>​	负责接收信息通知</p>
+<p>两种注册方式：</p>
+<ul>
+<li>静态注册：写在AndroidManifest.xml，系统永久记住，即使APp没打开也能接收</li>
+<li>动态注册：写在代码里，当前页面存活才能收到广播</li>
+</ul>
+<h3 id="漏洞-2"><a href="#漏洞-2" class="headerlink" title="漏洞"></a>漏洞</h3><p>大致可以分为：</p>
+<table>
+<thead>
+<tr>
+<th align="left">模式</th>
+<th align="left">方向</th>
+<th align="left">原理</th>
+<th align="left">危害</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">广播注入</td>
+<td align="left">攻击者到受害者</td>
+<td align="left">向导出的 Receiver 发送伪造广播</td>
+<td align="left">触发敏感逻辑</td>
+</tr>
+<tr>
+<td align="left">广播劫持</td>
+<td align="left">受害者到攻击者</td>
+<td align="left">注册高优先级 Receiver 拦截有序广播</td>
+<td align="left">数据窃取</td>
+</tr>
+<tr>
+<td align="left">隐式广播窃听</td>
+<td align="left">受害者到攻击者</td>
+<td align="left">监听未设置包名的隐式广播</td>
+<td align="left">信息泄露</td>
+</tr>
+</tbody></table>
+<h4 id="广播注入"><a href="#广播注入" class="headerlink" title="广播注入"></a>广播注入</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VulnReceiver</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">BroadcastReceiver</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onReceive</span><span class="hljs-params">(Context context, Intent intent)</span> &#123;<br>        <span class="hljs-comment">// 漏洞：直接信任外部广播中的数据</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">data</span> <span class="hljs-operator">=</span> intent.getStringExtra(<span class="hljs-string">&quot;log_data&quot;</span>);<br>        <span class="hljs-keyword">if</span> (data != <span class="hljs-literal">null</span>) &#123;<br>            Log.i(TAG, <span class="hljs-string">&quot;Received data: &quot;</span> + data);<br>            Toast.makeText(context,<br>                <span class="hljs-string">&quot;收到广播数据: &quot;</span> + data, Toast.LENGTH_LONG).show();<br>        &#125;<br>    &#125;<br>&#125;<br><br>Manifest 中声明了 intent-filter 且 exported=<span class="hljs-literal">true</span>：<br>&lt;receiver<br>    android:name=<span class="hljs-string">&quot;.VulnReceiver&quot;</span><br>    android:exported=<span class="hljs-string">&quot;true&quot;</span>&gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=<span class="hljs-string">&quot;com.demo.exportedcomponents.ACTION_LOG&quot;</span> /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/receiver&gt;<br></code></pre></td></tr></table></figure>
+
+<p>adb发送伪造广播：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">adb shell am broadcast -n com<span class="hljs-selector-class">.demo</span>.exportedcomponents/<span class="hljs-selector-class">.VulnReceiver</span> \<br>    -<span class="hljs-selector-tag">a</span> com<span class="hljs-selector-class">.demo</span><span class="hljs-selector-class">.exportedcomponents</span><span class="hljs-selector-class">.ACTION_LOG</span> \<br>    <span class="hljs-attr">--es</span> log_data <span class="hljs-string">&quot;injected_by_attacker&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>检验接收</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb logcat -s VulnReceiver</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162831439.png" srcset="/img/loading.gif" lazyload alt="image-20260430162831439"></p>
+<h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><p>​	提供数据共享。外部APP想访问内部APP的数据必须通过ContentProvider来实现。</p>
+<h3 id="漏洞-3"><a href="#漏洞-3" class="headerlink" title="漏洞"></a>漏洞</h3><h4 id="数据泄露"><a href="#数据泄露" class="headerlink" title="数据泄露"></a>数据泄露</h4><p>query() 无权限保护，直接返回敏感数据</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VulnProvider</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ContentProvider</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">AUTHORITY</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;com.demo.exportedcomponents.provider&quot;</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">FILES</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">USERS</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">UriMatcher</span> <span class="hljs-variable">matcher</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UriMatcher</span>(-<span class="hljs-number">1</span>);<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        matcher.addURI(AUTHORITY, <span class="hljs-string">&quot;users&quot;</span>, <span class="hljs-number">1</span>);<br>        matcher.addURI(AUTHORITY, <span class="hljs-string">&quot;files/*&quot;</span>, <span class="hljs-number">2</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span> <span class="hljs-comment">// android.content.ContentProvider</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">onCreate</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">File</span> <span class="hljs-variable">secret</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(getContext().getFilesDir(), <span class="hljs-string">&quot;secret_token.txt&quot;</span>);<br>            <span class="hljs-keyword">if</span> (!secret.exists()) &#123;<br>                <span class="hljs-type">FileWriter</span> <span class="hljs-variable">w</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileWriter</span>(secret);<br>                w.write(<span class="hljs-string">&quot;demo_secret_token_12345&quot;</span>);<br>                w.close();<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span> <span class="hljs-comment">// android.content.ContentProvider</span><br>    <span class="hljs-keyword">public</span> Cursor <span class="hljs-title function_">query</span><span class="hljs-params">(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder)</span> &#123;<br>        <span class="hljs-keyword">if</span> (matcher.match(uri) == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-type">MatrixCursor</span> <span class="hljs-variable">cursor</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MatrixCursor</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;username&quot;</span>, NotificationCompat.CATEGORY_EMAIL, <span class="hljs-string">&quot;phone&quot;</span>&#125;);<br>            cursor.addRow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-number">1</span>, <span class="hljs-string">&quot;zhang_san&quot;</span>, <span class="hljs-string">&quot;zhangsan@example.com&quot;</span>, <span class="hljs-string">&quot;138xxxx1234&quot;</span>&#125;);<br>            cursor.addRow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-number">2</span>, <span class="hljs-string">&quot;li_si&quot;</span>, <span class="hljs-string">&quot;lisi@example.com&quot;</span>, <span class="hljs-string">&quot;139xxxx5678&quot;</span>&#125;);<br>            cursor.addRow(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[]&#123;<span class="hljs-number">3</span>, <span class="hljs-string">&quot;wang_wu&quot;</span>, <span class="hljs-string">&quot;wangwu@example.com&quot;</span>, <span class="hljs-string">&quot;137xxxx9012&quot;</span>&#125;);<br>            <span class="hljs-keyword">return</span> cursor;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span> <span class="hljs-comment">// android.content.ContentProvider</span><br>    <span class="hljs-keyword">public</span> ParcelFileDescriptor <span class="hljs-title function_">openFile</span><span class="hljs-params">(Uri uri, String mode)</span> <span class="hljs-keyword">throws</span> FileNotFoundException &#123;<br>        <span class="hljs-keyword">if</span> (matcher.match(uri) == <span class="hljs-number">2</span>) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">filename</span> <span class="hljs-operator">=</span> uri.getLastPathSegment();<br>            <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(getContext().getFilesDir(), filename);<br>            <span class="hljs-keyword">return</span> ParcelFileDescriptor.open(file, <span class="hljs-number">268435456</span>);<br>        &#125;<br><br>        <br>        <br>&lt;provider<br>    android:name=<span class="hljs-string">&quot;.VulnProvider&quot;</span><br>    android:authorities=<span class="hljs-string">&quot;com.demo.exportedcomponents.provider&quot;</span><br>    android:exported=<span class="hljs-string">&quot;true&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>adb查询用户数据：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">adb shell <span class="hljs-attribute">content</span> query \<br>    <span class="hljs-attr">--uri</span> <span class="hljs-attribute">content</span>://com.demo.exportedcomponents.provider/users<br></code></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\tyy\AppData\Roaming\Typora\typora-user-images\image-20260430162855548.png" srcset="/img/loading.gif" lazyload alt="image-20260430162855548"></p>
+<h4 id="路劲遍历"><a href="#路劲遍历" class="headerlink" title="路劲遍历"></a>路劲遍历</h4><p>没有过滤路劲遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// openFile 未过滤路径遍历</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> ParcelFileDescriptor <span class="hljs-title function_">openFile</span><span class="hljs-params">(Uri uri, String mode)</span> &#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> uri.getLastPathSegment();  <span class="hljs-comment">// 攻击者可控</span><br>    <span class="hljs-type">File</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(getContext().getFilesDir(), path);<br>    <span class="hljs-comment">// 如果 path = &quot;../../shared_prefs/secret.xml&quot;</span><br>    <span class="hljs-comment">// 就能读到沙箱内其他文件</span><br>    <span class="hljs-keyword">return</span> ParcelFileDescriptor.open(file,<br>        ParcelFileDescriptor.MODE_READ_ONLY);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>adb读取文件</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs maxima">adb shell <span class="hljs-built_in">content</span> <span class="hljs-built_in">read</span> \<br>--uri <span class="hljs-built_in">content</span>://com.<span class="hljs-built_in">demo</span>.exportedcomponents.provider/files/secret_token.txt<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="导出机制"><a href="#导出机制" class="headerlink" title="导出机制"></a>导出机制</h2><h3 id="显示"><a href="#显示" class="headerlink" title="显示"></a>显示</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 显式导出 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.PaymentActivity&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br><br><span class="hljs-comment">&lt;!-- 显式不导出 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.InternalSettingsActivity&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="隐式"><a href="#隐式" class="headerlink" title="隐式"></a>隐式</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 没写 exported，但声明了 intent-filter，Android 12 之前自动导出 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.ShareActivity&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.action.SEND&quot;</span> /&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br>（在Android 12之后，未申明 exported会报错）<br></code></pre></td></tr></table></figure>
+
+<h2 id="权限保护机制"><a href="#权限保护机制" class="headerlink" title="权限保护机制"></a>权限保护机制</h2><p>在组件声明中指定权限</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;permission<br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;com.example.permission.ACCESS_SENSITIVE&quot;</span><br>    android:<span class="hljs-attribute">protectionLevel</span>=<span class="hljs-string">&quot;signature&quot;</span> /&gt;<br>&lt;service<br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;.SensitiveService&quot;</span><br>    android:<span class="hljs-attribute">exported</span>=<span class="hljs-string">&quot;true&quot;</span><br>    android:<span class="hljs-attribute">permission</span>=<span class="hljs-string">&quot;com.example.permission.ACCESS_SENSITIVE&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>调用方必须声明获得该权限，否则会抛出异常</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">调用方需要在自己的AndroidManifest.<span class="hljs-keyword">xml</span> <span class="hljs-title">中申明</span><br><span class="hljs-title">例如：</span><br><span class="hljs-title">&lt;uses-permission</span><br>    android:<span class="hljs-attr">name=</span><span class="hljs-string">&quot;com.example.permission.ACCESS_SENSITIVE&quot;</span> /&gt;<br><br>uses-permission可以看作是整个APP声明的权限<br></code></pre></td></tr></table></figure>
+
+<p>对于ContentProvide，还会有更加细腻的读写权限：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;provider<br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;.UserDataProvider&quot;</span><br>    android:<span class="hljs-attribute">exported</span>=<span class="hljs-string">&quot;true&quot;</span><br>    android:<span class="hljs-attribute">readPermission</span>=<span class="hljs-string">&quot;com.example.permission.READ_DATA&quot;</span><br>    android:<span class="hljs-attribute">writePermission</span>=<span class="hljs-string">&quot;com.example.permission.WRITE_DATA&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>该权限保护只是基础的权限保护，在代码层面可能还有更精确的效验</p>
+<h3 id="protectionLevel"><a href="#protectionLevel" class="headerlink" title="protectionLevel"></a>protectionLevel</h3><p>由于我们会自定义权限，其安全性取决于声明的保护级别protectionLevel（决定了授予条件）</p>
+<table>
+<thead>
+<tr>
+<th align="left">protectionLevel</th>
+<th align="left">授予条件</th>
+<th align="left">安全性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">安装时自动授予，无需用户确认</td>
+<td align="left">低，任何 App 声明即可获得</td>
+</tr>
+<tr>
+<td align="left">dangerous</td>
+<td align="left">需要用户运行时授权</td>
+<td align="left">中，用户可能盲目同意</td>
+</tr>
+<tr>
+<td align="left">signature</td>
+<td align="left">必须与声明权限的 App 使用相同证书签名</td>
+<td align="left">高，第三方 App 无法获得</td>
+</tr>
+<tr>
+<td align="left">signatureOrSystem</td>
+<td align="left">相同签名或系统预装 App</td>
+<td align="left">高</td>
+</tr>
+</tbody></table>
+<p>例如上面的</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;permission<br>    android:<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;com.example.permission.ACCESS_SENSITIVE&quot;</span><br>    android:<span class="hljs-attribute">protectionLevel</span>=<span class="hljs-string">&quot;signature&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>就说明该权限保护级别是signature，必须与声明权限的 App 使用相同证书签名才能声明该权限</p>
+<h3 id="自定义权限抢注"><a href="#自定义权限抢注" class="headerlink" title="自定义权限抢注"></a>自定义权限抢注</h3><p>权限的 protectionLevel 由先安装的 App 定义。</p>
+<p>也就是说恶意APP先安装声明了该权限为normal，如果后安装的正常APP再次声明为正常的signature，那么该权限不会被覆盖，而是称为恶意APP声明的权限。</p>
+<p>（Android 12+ 会在导致同名权限冲突而失败）</p>
+<h2 id="厂商定制ROM"><a href="#厂商定制ROM" class="headerlink" title="厂商定制ROM"></a>厂商定制ROM</h2><p>​	厂商定制Android ROM通常会自定义服务，而其自定义服务通常通过<code>ServiceManager.addService()</code>注册到系统管理服务，不受Manifest exported 属性约束，任何App都可以通过<code>ServiceManager.getService(&quot;service_name&quot;)</code>来调用，所以调用该服务没有通过<code>checkCallingPermission()</code> 或 <code>checkCallingUid()</code>的话就会变成可利用漏洞</p>
+<h2 id="版本更新"><a href="#版本更新" class="headerlink" title="版本更新"></a>版本更新</h2><h3 id="Android-12"><a href="#Android-12" class="headerlink" title="Android 12"></a>Android 12</h3><p>所有包含 intent-filter 的组件必须显式声明 android:exported 的值，否则无法安装</p>
+<h3 id="Android-13"><a href="#Android-13" class="headerlink" title="Android 13+"></a>Android 13+</h3><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/4814">https://forum.butian.net/share/4814</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>四大组件</div>
+      <div>https://yy-t1.github.io/2026/04/30/四大组件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/29/Android%E8%AE%A4%E8%AF%86/" title="Android认识">
+                        <span class="hidden-mobile">Android认识</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
