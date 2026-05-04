@@ -1,0 +1,868 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="（不是很懂，待学习） Binder：Android里的IPC（跨进程通信）机制，让不同进程之间可以通信。    角色 说明 典型实例    Client 发起调用的一方 普通 App   Server 提供服务的一方 system_server 中的系统服务   ServiceManager 服务注册表，负责服务的注册和查找 servicemanager 进程   Binder 驱动 内核模块，负">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binder">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/02/Binder/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="（不是很懂，待学习） Binder：Android里的IPC（跨进程通信）机制，让不同进程之间可以通信。    角色 说明 典型实例    Client 发起调用的一方 普通 App   Server 提供服务的一方 system_server 中的系统服务   ServiceManager 服务注册表，负责服务的注册和查找 servicemanager 进程   Binder 驱动 内核模块，负">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-02T12:12:39.000Z">
+<meta property="article:modified_time" content="2026-05-03T13:20:05.208Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Binder - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Binder"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-02 20:12" pubdate>
+          2026年5月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Binder</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>（不是很懂，待学习）</p>
+<p>Binder：Android里的IPC（跨进程通信）机制，让不同进程之间可以通信。</p>
+<table>
+<thead>
+<tr>
+<th align="left">角色</th>
+<th align="left">说明</th>
+<th align="left">典型实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Client</td>
+<td align="left">发起调用的一方</td>
+<td align="left">普通 App</td>
+</tr>
+<tr>
+<td align="left">Server</td>
+<td align="left">提供服务的一方</td>
+<td align="left">system_server 中的系统服务</td>
+</tr>
+<tr>
+<td align="left">ServiceManager</td>
+<td align="left">服务注册表，负责服务的注册和查找</td>
+<td align="left">servicemanager 进程</td>
+</tr>
+<tr>
+<td align="left">Binder 驱动</td>
+<td align="left">内核模块，负责跨进程数据传输</td>
+<td align="left">&#x2F;dev&#x2F;binder</td>
+</tr>
+</tbody></table>
+<p>AIDL（Android Interface Definition Language）：用来定义IPC（跨进程通信）接口的语言。（自动生成Binder通信代码）</p>
+<p>Proxy在客户端：把本地调用伪造成远程调用</p>
+<p>Stub在服务端：接收远程请求，真正执行方法</p>
+<p>transaction code：在Binder中，方法名不直接传输，而是传编号（transaction code），这个code是系统自动生成的</p>
+<p>例如：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino">一个简单的 AIDL 接口：<br><span class="hljs-comment">// IDeviceManager.aidl</span><br>interface IDeviceManager &#123;<br>    <span class="hljs-function"><span class="hljs-type">String</span> <span class="hljs-title">getDeviceId</span><span class="hljs-params">()</span></span>;          <span class="hljs-comment">// transaction code = 1</span><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setDeviceName</span><span class="hljs-params">(<span class="hljs-type">String</span> n)</span></span>;  <span class="hljs-comment">// transaction code = 2</span><br>    <span class="hljs-function"><span class="hljs-type">boolean</span> <span class="hljs-title">resetDevice</span><span class="hljs-params">()</span></span>;         <span class="hljs-comment">// transaction code = 3</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>Parcel：数据序列化</p>
+<p>Binder 传输的数据通过 Parcel（包裹）对象序列化。Parcel 是一个二进制缓冲区，数据按顺序写入和读取：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 客户端发送（Proxy 自动生成的代码）</span><br>Parcel <span class="hljs-keyword">data</span> = Parcel.obtain();<br><span class="hljs-keyword">data</span>.writeInterfaceToken(<span class="hljs-string">&quot;com.example.IDeviceManager&quot;</span>);  <span class="hljs-comment">// 接口描述符</span><br><span class="hljs-keyword">data</span>.writeString(<span class="hljs-string">&quot;new_device_name&quot;</span>);                      <span class="hljs-comment">// 方法参数</span><br>mRemote.transact(<span class="hljs-number">2</span>, <span class="hljs-keyword">data</span>, reply, <span class="hljs-number">0</span>);                      <span class="hljs-comment">// transaction code = 2</span><br><br><span class="hljs-comment">// 服务端接收（Stub 自动生成的代码）</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> boolean onTransact(int code, Parcel <span class="hljs-keyword">data</span>, Parcel reply, int flags) &#123;<br>    switch (code) &#123;<br>        case <span class="hljs-number">2</span>: &#123;  <span class="hljs-comment">// setDeviceName</span><br>            <span class="hljs-keyword">data</span>.enforceInterface(<span class="hljs-string">&quot;com.example.IDeviceManager&quot;</span>);<br>            String name = <span class="hljs-keyword">data</span>.readString();<br>            <span class="hljs-keyword">this</span>.setDeviceName(name);<br>            reply.writeNoException();<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.onTransact(code, <span class="hljs-keyword">data</span>, reply, flags);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h2><p>AOSP原生服务：</p>
+<p>Android 系统自带大量 Binder 服务，运行在 system_server 进程中。通过 <code>service list</code> 可以查看当前设备上所有注册的服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb shell service list<br><br>输出：<br>Found 287 services:<br>0  sip: [android.net.sip.ISipService]<br>1  phone: [com.android.internal.telephony.ITelephony]<br>2  isms: [com.android.internal.telephony.ISms]<br>...<br>50 activity: [android.app.IActivityManager]<br>51 package: [android.content.pm.IPackageManager]<br>52 clipboard: [android.content.IClipboard]<br>...<br></code></pre></td></tr></table></figure>
+
+<p>方括号中的是 AIDL 接口名，前面的字符串是服务名，也就是 <code>getService()</code> 的参数。</p>
+<p>厂商自定义服务：</p>
+<p>厂商定制 ROM 会在 AOSP（Android Open Source Project，Android 开源项目）基础上添加自己的系统服务。这些服务通常以厂商前缀命名：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">adb <span class="hljs-keyword">shell</span> service <span class="hljs-keyword">list</span> | <span class="hljs-keyword">grep</span> -i <span class="hljs-string">&quot;miui\|xiaomi&quot;</span><br><br><br>输出：<br>miui.mqsas.IMQSNative<br>miui.security.ISecurityManager  <br>xiaomi.IGameBoosterService<br></code></pre></td></tr></table></figure>
+
+<p>这些服务和 AOSP 原生服务一样运行在 system_server 中，拥有系统级权限。但它们不在 AOSP 的代码审查范围内，安全质量参差不齐。</p>
+<p>服务注册：</p>
+<p>通常在 system_server 启动过程中完成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// SystemServer.java 中的典型注册方式</span><br>ServiceManager.addService(<span class="hljs-string">&quot;device_manager&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">DeviceManagerService</span>(context));<br></code></pre></td></tr></table></figure>
+
+<p>注册后，任何进程都可以通过 ServiceManager 获取该服务的 Binder 代理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">IBinder</span> <span class="hljs-variable">binder</span> <span class="hljs-operator">=</span> ServiceManager.getService(<span class="hljs-string">&quot;device_manager&quot;</span>);<br><span class="hljs-type">IDeviceManager</span> <span class="hljs-variable">manager</span> <span class="hljs-operator">=</span> IDeviceManager.Stub.asInterface(binder);<br>manager.getDeviceId();  <span class="hljs-comment">// 跨进程调用</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="权限检查"><a href="#权限检查" class="headerlink" title="权限检查"></a>权限检查</h2><p>Binder 驱动在传递调用请求时，会在内核层面记录调用者的 UID 和 PID。服务端通过以下 API 获取：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> <span class="hljs-variable">callingUid</span> <span class="hljs-operator">=</span> Binder.getCallingUid();   <span class="hljs-comment">// 调用者的 UID</span><br><span class="hljs-type">int</span> <span class="hljs-variable">callingPid</span> <span class="hljs-operator">=</span> Binder.getCallingPid();   <span class="hljs-comment">// 调用者的 PID</span><br></code></pre></td></tr></table></figure>
+
+<p>常见检查方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 方式 1：检查调用者是否持有特定 Android 权限</span><br>context.enforceCallingPermission(<br>    <span class="hljs-string">&quot;android.permission.MANAGE_USERS&quot;</span>,<br>    <span class="hljs-string">&quot;Caller must hold MANAGE_USERS permission&quot;</span><br>);<br><br><span class="hljs-comment">// 方式 2：检查 UID 范围</span><br><span class="hljs-type">int</span> <span class="hljs-variable">uid</span> <span class="hljs-operator">=</span> Binder.getCallingUid();<br><span class="hljs-keyword">if</span> (uid &gt;= Process.FIRST_APPLICATION_UID) &#123;  <span class="hljs-comment">// &gt;= 10000 是第三方 App</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecurityException</span>(<span class="hljs-string">&quot;System only&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">// 方式 3：检查是否是特定的系统 App</span><br><span class="hljs-type">int</span> <span class="hljs-variable">uid</span> <span class="hljs-operator">=</span> Binder.getCallingUid();<br>String[] packages = context.getPackageManager().getPackagesForUid(uid);<br><span class="hljs-keyword">if</span> (!Arrays.asList(packages).contains(<span class="hljs-string">&quot;com.android.settings&quot;</span>)) &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SecurityException</span>(<span class="hljs-string">&quot;Only Settings app allowed&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">// 方式 4：检查调用者签名</span><br><span class="hljs-type">PackageInfo</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> pm.getPackageInfo(callingPackage, PackageManager.GET_SIGNATURES);<br><span class="hljs-comment">// 比对签名是否是平台签名</span><br></code></pre></td></tr></table></figure>
+
+<p>如果一个系统服务没有做任何权限检查，那么任何第三方APP都可以调用这个方法导致权限提升</p>
+<h2 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h2><h3 id="未授权方法调用"><a href="#未授权方法调用" class="headerlink" title="未授权方法调用"></a>未授权方法调用</h3><p>服务注册到 ServiceManager 后，所有 App 都能获取其代理对象。如果某个方法内部没有权限检查，就是一个可利用的攻击点。</p>
+<p>基本测试：</p>
+<ol>
+<li><code>adb shell service list</code>发现服务</li>
+<li>反汇编搜索xx.Stub</li>
+<li>进入对应的Service.java</li>
+<li>再进行审计查看是否有权限检查</li>
+</ol>
+<p>三种攻击方式：</p>
+<p><strong>service call模糊测试</strong>：</p>
+<p>（直接向 Binder 服务发送 transact()）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 调用 clipboard 服务的第 1 个方法</span><br>adb shell service call clipboard 1<br><br><span class="hljs-comment"># 调用某个厂商服务的方法</span><br>adb shell service call miui.security 1<br></code></pre></td></tr></table></figure>
+
+<p>如果返回了正常数据而不是 SecurityException，说明该方法可能缺少权限检查。</p>
+<p> <strong>Java 反射代理调用</strong>：</p>
+<p>很多服务是隐藏服务等，不能直接<code>new SecurityManager()</code>调用，所以就如同这样自己动手拿Binder。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 通过反射获取 ServiceManager（隐藏 API，需要反射访问）</span><br><span class="hljs-type">IBinder</span> <span class="hljs-variable">binder</span> <span class="hljs-operator">=</span> (IBinder) Class.forName(<span class="hljs-string">&quot;android.os.ServiceManager&quot;</span>) <span class="hljs-comment">//系统类</span><br>    .getMethod(<span class="hljs-string">&quot;getService&quot;</span>, String.class) <span class="hljs-comment">//获取方法</span><br>    .invoke(<span class="hljs-literal">null</span>, <span class="hljs-string">&quot;target_service&quot;</span>);<br><br><span class="hljs-comment">// 获取 AIDL 接口</span><br>Class&lt;?&gt; stubClass = Class.forName(<span class="hljs-string">&quot;com.vendor.ITargetService$Stub&quot;</span>);<br><span class="hljs-type">Object</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> stubClass.getMethod(<span class="hljs-string">&quot;asInterface&quot;</span>, IBinder.class)<br>    .invoke(<span class="hljs-literal">null</span>, binder);<br><br><span class="hljs-comment">// 调用目标方法</span><br><span class="hljs-type">Method</span> <span class="hljs-variable">method</span> <span class="hljs-operator">=</span> service.getClass().getMethod(<span class="hljs-string">&quot;sensitiveMethod&quot;</span>, String.class);<br><span class="hljs-type">Object</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> method.invoke(service, <span class="hljs-string">&quot;parameter&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+
+
+<p> <strong>原生 Parcel 构造</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Parcel</span> <span class="hljs-variable">data</span> <span class="hljs-operator">=</span> Parcel.obtain();<br><span class="hljs-type">Parcel</span> <span class="hljs-variable">reply</span> <span class="hljs-operator">=</span> Parcel.obtain();<br><span class="hljs-keyword">try</span> &#123;<br>    data.writeInterfaceToken(<span class="hljs-string">&quot;android.content.IClipboard&quot;</span>);<br>    data.writeString(<span class="hljs-string">&quot;com.test.app&quot;</span>);<br>    binder.transact(<span class="hljs-number">2</span>, data, reply, <span class="hljs-number">0</span>);  <span class="hljs-comment">// code 2 = getPrimaryClip</span><br>    reply.readException();<br>    <span class="hljs-comment">// 读取返回数据...</span><br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>    data.recycle();<br>    reply.recycle();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="transaction-code-枚举"><a href="#transaction-code-枚举" class="headerlink" title="transaction code 枚举"></a>transaction code 枚举</h3><p>没有 AIDL 文件，通过枚举 transaction code 来探测服务暴露了哪些方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">seq</span> 1 20); <span class="hljs-keyword">do</span><br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--- code <span class="hljs-variable">$i</span> ---&quot;</span><br>    adb shell service call target_service <span class="hljs-variable">$i</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<p>返回值的含义：</p>
+<table>
+<thead>
+<tr>
+<th align="left">返回</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>Result: Parcel(...)</code> 有数据</td>
+<td align="left">方法存在且执行成功</td>
+</tr>
+<tr>
+<td align="left"><code>Result: Parcel(00000000 ...)</code> 全零</td>
+<td align="left">方法存在，返回空或 void</td>
+</tr>
+<tr>
+<td align="left">异常信息</td>
+<td align="left">方法存在但权限不足或参数错误</td>
+</tr>
+<tr>
+<td align="left"><code>Failed transaction</code></td>
+<td align="left">该 transaction code 不存在</td>
+</tr>
+</tbody></table>
+<h3 id="Binder代理泄露"><a href="#Binder代理泄露" class="headerlink" title="Binder代理泄露"></a>Binder代理泄露</h3><p>有些场景下，系统服务会通过回调把内部 Binder 对象传递出来。如果这个 Binder 对象本不应该暴露给第三方 App，就构成了代理泄露。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 系统服务内部</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">registerCallback</span><span class="hljs-params">(ICallback callback)</span> &#123;<br>    <span class="hljs-comment">// 把内部管理器的 Binder 引用通过回调传出去</span><br>    callback.onReady(mInternalManager.asBinder());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>攻击者注册回调后，就获得了 <code>mInternalManager</code> 的 Binder 代理，可以直接调用它的方法，绕过了正常的访问路径。</p>
+<h3 id="Parcel-反序列化漏洞"><a href="#Parcel-反序列化漏洞" class="headerlink" title="Parcel 反序列化漏洞"></a>Parcel 反序列化漏洞</h3><p>Binder 传输的数据通过 Parcel 序列化。如果服务端在反序列化时处理不当，可能导致安全问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">onTransact</span><span class="hljs-params">(<span class="hljs-type">int</span> code, Parcel data, Parcel reply, <span class="hljs-type">int</span> flags)</span> &#123;<br>    <span class="hljs-type">Bundle</span> <span class="hljs-variable">bundle</span> <span class="hljs-operator">=</span> data.readBundle();<br>    <span class="hljs-comment">// 此时 Bundle 内部数据还没有被完全解析</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> bundle.getString(<span class="hljs-string">&quot;key&quot;</span>);<br>    <span class="hljs-comment">// 这里才触发反序列化</span><br>    <span class="hljs-comment">// 如果 Bundle 中包含恶意构造的 Parcelable 对象，</span><br>    <span class="hljs-comment">// 反序列化过程可能触发非预期的行为</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="dumpsys-信息泄露"><a href="#dumpsys-信息泄露" class="headerlink" title="dumpsys 信息泄露"></a>dumpsys 信息泄露</h3><p><code>dumpsys</code> 命令可以获取系统服务的内部状态信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看某个服务的 dump 信息</span><br>adb shell dumpsys &lt;服务名&gt;<br><br><span class="hljs-comment"># 例：查看 activity 服务的信息</span><br>adb shell dumpsys activity activities<br><br><span class="hljs-comment"># 例：查看 package 服务中某个包的信息</span><br>adb shell dumpsys package com.target.app<br></code></pre></td></tr></table></figure>
+
+<p>不是所有服务都支持 dump，dump 输出的内容由服务端的 <code>dump()</code> 方法决定。有些服务的 dump 会输出 token、session 信息、内部状态等敏感数据，这本身也可能是一个信息泄露点。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/4831">https://forum.butian.net/share/4831</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Binder</div>
+      <div>https://yy-t1.github.io/2026/05/02/Binder/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年5月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/05/03/contentprovide/" title="contentprovide">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">contentprovide</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/30/Intent/" title="Intent">
+                        <span class="hidden-mobile">Intent</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

