@@ -19,23 +19,25 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="抓包本质：观察APP与服务器之间传输的数据 抓包主要分为四大类    方法 原理 难度 HTTPS    代理抓包 中间人代理 ★ 可   VPN 抓包 本地 VPN 截获 ★★ 可   Root 抓包 底层 tcpdump ★★★ 原始流量   Hook 抓包 Hook API 拿明文 ★★★★ 最强   http：明文传输，抓到的包就是可直接读取的明文 https（HTTP + TLS）：抓到">
+    <meta name="description" content="​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。 ​	自己会的太少了，也希望佬们看到能指点指点 ​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删） 挖掘前置1.APP是否能正常运行选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限 我选择的是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android抓包">
-<meta property="og:url" content="https://yy-t1.github.io/2026/05/04/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E6%8A%93%E5%8C%85/index.html">
+<meta property="og:title" content="记第一次APP漏洞挖掘">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="抓包本质：观察APP与服务器之间传输的数据 抓包主要分为四大类    方法 原理 难度 HTTPS    代理抓包 中间人代理 ★ 可   VPN 抓包 本地 VPN 截获 ★★ 可   Root 抓包 底层 tcpdump ★★★ 原始流量   Hook 抓包 Hook API 拿明文 ★★★★ 最强   http：明文传输，抓到的包就是可直接读取的明文 https（HTTP + TLS）：抓到">
+<meta property="og:description" content="​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。 ​	自己会的太少了，也希望佬们看到能指点指点 ​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删） 挖掘前置1.APP是否能正常运行选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限 我选择的是">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-05-04T03:57:13.000Z">
-<meta property="article:modified_time" content="2026-05-04T05:37:26.259Z">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20260504161033039.png">
+<meta property="article:published_time" content="2026-05-04T06:11:45.000Z">
+<meta property="article:modified_time" content="2026-05-04T11:31:34.985Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20260504161033039.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Android抓包 - bsahfm</title>
+  <title>记第一次APP漏洞挖掘 - bsahfm</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Android抓包"></span>
+            <span id="subtitle" data-typed-text="记第一次APP漏洞挖掘"></span>
           
         </div>
 
@@ -225,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-04 11:57" pubdate>
-          2026年5月4日 中午
+        <time datetime="2026-05-04 14:11" pubdate>
+          2026年5月4日 下午
         </time>
       </span>
     
@@ -237,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          657 字
+          703 字
         
       </span>
     
@@ -294,83 +296,40 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Android抓包</h1>
+            <h1 id="seo-header">记第一次APP漏洞挖掘</h1>
             
             
               <div class="markdown-body">
                 
-                <p>抓包本质：观察APP与服务器之间传输的数据</p>
-<p>抓包主要分为四大类</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>原理</th>
-<th>难度</th>
-<th>HTTPS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>代理抓包</td>
-<td>中间人代理</td>
-<td>★</td>
-<td>可</td>
-</tr>
-<tr>
-<td>VPN 抓包</td>
-<td>本地 VPN 截获</td>
-<td>★★</td>
-<td>可</td>
-</tr>
-<tr>
-<td>Root 抓包</td>
-<td>底层 tcpdump</td>
-<td>★★★</td>
-<td>原始流量</td>
-</tr>
-<tr>
-<td>Hook 抓包</td>
-<td>Hook API 拿明文</td>
-<td>★★★★</td>
-<td>最强</td>
-</tr>
-</tbody></table>
-<p>http：明文传输，抓到的包就是可直接读取的明文</p>
-<p>https（HTTP + TLS）：抓到的是密文，无法直接读取。</p>
-<p>https能防止抓包偷看通信内容，但是前提是没有主动信任攻击者的证书。</p>
-<p>而https强度可以分为三种</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">安全强度：<br>未校验 &lt; 单向证书认证（SSL Pinning） &lt; 双向证书认证（mTLS）<br></code></pre></td></tr></table></figure>
+                <p>​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。</p>
+<p>​	自己会的太少了，也希望佬们看到能指点指点</p>
+<p>​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删）</p>
+<h2 id="挖掘前置"><a href="#挖掘前置" class="headerlink" title="挖掘前置"></a>挖掘前置</h2><h3 id="1-APP是否能正常运行"><a href="#1-APP是否能正常运行" class="headerlink" title="1.APP是否能正常运行"></a>1.APP是否能正常运行</h3><p>选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限</p>
+<p>我选择的是虚拟机Mumu模拟器，目前我用起来最顺手的，Android Studio运行很多APP不成功。</p>
+<p>雷电模拟器那个adb好难连，它的具体端口我找不到，当时我将雷电和Android Studio都下载了，可能两者产生冲突还是怎么样，总之不太会用</p>
+<p><strong>在Mumu模拟器能正常运行该APP即可</strong></p>
+<p>（某些APP对虚拟检测严格可能就需要进行去虚拟化或者采用真机测试）</p>
+<p>其共享文件在：<code>D:\Documents\MuMu共享文件夹</code>，也比较方便进行操作。</p>
+<h3 id="2-判断有没有加壳"><a href="#2-判断有没有加壳" class="headerlink" title="2.判断有没有加壳"></a>2.判断有没有加壳</h3><p>加壳了的话直接反汇编看不了源代码，没啥用，需要先脱壳。</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs angelscript">我这里用的APKID：<br>apkid xx.apk<br><span class="hljs-string"></span><br><span class="hljs-string"></span><br><span class="hljs-string">[+]</span> APKiD <span class="hljs-number">3.1</span><span class="hljs-number">.0</span> :: <span class="hljs-keyword">from</span> RedNaga :: rednaga.io<br><span class="hljs-string">[*]</span> xx.apk<br> |-&gt; packer : SecNeo.B<br></code></pre></td></tr></table></figure>
 
+<p>所以这里存在 SecNeo.B（梆梆加固）</p>
+<p>那么就需要脱壳了</p>
+<p>我这里用的是BlackDex32，直接安装在Mumu模拟器然后选择该APP即可脱壳</p>
+<h3 id="3-jadx反汇编"><a href="#3-jadx反汇编" class="headerlink" title="3.jadx反汇编"></a>3.jadx反汇编</h3><p>脱壳后会得到一些列class.dex</p>
+<p>可以直接将这些class.dex拉入jadx分析，也可以将原来apk里的class改为脱壳后的再拉近jadx进行分析</p>
+<h3 id="4-使用mobsf简单扫描一下该apk文件"><a href="#4-使用mobsf简单扫描一下该apk文件" class="headerlink" title="4.使用mobsf简单扫描一下该apk文件"></a>4.使用mobsf简单扫描一下该apk文件</h3><p>（我也不知道有没有用）</p>
+<h2 id="漏洞搜索与利用"><a href="#漏洞搜索与利用" class="headerlink" title="漏洞搜索与利用"></a>漏洞搜索与利用</h2><h3 id="1-简单用drozer测四大组件"><a href="#1-简单用drozer测四大组件" class="headerlink" title="1.简单用drozer测四大组件"></a>1.简单用drozer测四大组件</h3><p>Mumu需要下载<code>drozer serve</code>r并开启</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs routeros">手机开启端口<br>adb forward tcp:31415 tcp:31415<br><br>dz-env（我自己设置的打开虚拟环境的drozer）<br><br>drozer<span class="hljs-built_in"> console </span>connect（前提是手机端打开了drozer-agent）<br><br>列出所有的包名<br><span class="hljs-built_in">run</span> app.package.list<br><br>查询包名的攻击面<br><span class="hljs-built_in">run</span> app.package.attacksurface com.mwr.example.sieve<br><br>查看 exported Activity（-u表示只看exported的)<br><span class="hljs-built_in">run</span> app.activity.<span class="hljs-built_in">info</span> -a 包名 -u<br><br>查看 Provider（高危）<br><span class="hljs-built_in">run</span> app.provider.<span class="hljs-built_in">info</span> -a 包名 -u<br><br>查看Receiver<br><span class="hljs-built_in">run</span> app.broadcast.<span class="hljs-built_in">info</span> -a 包名 -u<br><br>查看Service<br><span class="hljs-built_in">run</span> app.service.<span class="hljs-built_in">info</span> -a 包名 -u<br></code></pre></td></tr></table></figure>
 
+<img src="/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20260504161033039.png" srcset="/img/loading.gif" lazyload class="" title="image-20260504161033039">
 
-<h2 id="未额外进行证书效验"><a href="#未额外进行证书效验" class="headerlink" title="未额外进行证书效验"></a>未额外进行证书效验</h2><p>APP → 系统证书库 → 验证服务器证书 → 建立 HTTPS</p>
-<p>（所以只要证书是合法CA签发就行）</p>
-<p>装证书就能抓到包</p>
-<h3 id="Android-7-之前"><a href="#Android-7-之前" class="headerlink" title="Android 7+之前"></a>Android 7+之前</h3><p>直接配置用户证书就能抓包</p>
-<h3 id="Android-7-之后"><a href="#Android-7-之后" class="headerlink" title="Android 7+之后"></a>Android 7+之后</h3><p>不再信任用户配置的证书。</p>
-<p>存在两种思路：</p>
-<p>1.将用户证书移到系统目录</p>
-<p>2.配置系统强制信任用户证书</p>
-<h2 id="单向证书认证"><a href="#单向证书认证" class="headerlink" title="单向证书认证"></a>单向证书认证</h2><p>客户端校验服务器证书–SSL Pinning</p>
-<p>由上述可知，系统证书并非绝对可信，所以出现SSL。</p>
-<h3 id="SSL-Pinning详解"><a href="#SSL-Pinning详解" class="headerlink" title="SSL Pinning详解"></a>SSL Pinning详解</h3><p>将服务器证书“写死”在APP内，不再信任系统证书。</p>
-<p>有两种方法</p>
-<h4 id="Certificate-Pinning（证书锁定）"><a href="#Certificate-Pinning（证书锁定）" class="headerlink" title="Certificate Pinning（证书锁定）"></a>Certificate Pinning（证书锁定）</h4><p>直接把服务器证书（server.crt)打包进APK，然后代码里只信任这个证书。</p>
-<p>ps:但是证书会过期，如果APP不进行更新那么证书到期就会导致APP无法联网</p>
-<p>以及对方服务器可能更新等等也会导致出现问题</p>
-<h4 id="Public-Key-Pinning（主流）"><a href="#Public-Key-Pinning（主流）" class="headerlink" title="Public Key Pinning（主流）"></a>Public Key Pinning（主流）</h4><p>只绑定<strong>SPKI Hash</strong>，只要证书里的这个不变，那么APP就信任该服务器</p>
-<p>（也就是将公钥指纹（SPKI Hash））写死进APP</p>
-<p>Android官方实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java">network_security_config.xml：<br>&lt;network-security-config&gt;<br>    &lt;domain-config&gt;<br><br>        &lt;domain includeSubdomains=<span class="hljs-string">&quot;true&quot;</span>&gt;  <span class="hljs-comment">//包含子域名</span><br>            api.test.com            <span class="hljs-comment">//只对该域名启用pinning</span><br>        &lt;/domain&gt;<br><br>        &lt;pin-set expiration=<span class="hljs-string">&quot;2026-12-31&quot;</span>&gt;<br><br>            &lt;pin digest=<span class="hljs-string">&quot;SHA-256&quot;</span>&gt;   <span class="hljs-comment">//有效期</span><br>                主 Pin（主公钥）<br>            &lt;/pin&gt;<br><br>            &lt;pin digest=<span class="hljs-string">&quot;SHA-256&quot;</span>&gt;<br>                Backup Pin（备用公钥）<br>            &lt;/pin&gt;<br><br>        &lt;/pin-set&gt;<br><br>    &lt;/domain-config&gt;<br>&lt;/network-security-config&gt;<br><br></code></pre></td></tr></table></figure>
+<h4 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h4><p><code>run app.provider.info -a 包名 -u</code></p>
+<p>先看看哪些可导出</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus">自动扫描：<br>扫描并列出App中所有对外暴露、可以被外部应用访问的数据接口<br>run scanner<span class="hljs-selector-class">.provider</span><span class="hljs-selector-class">.finduris</span> -<span class="hljs-selector-tag">a</span> com<span class="hljs-selector-class">.xx</span><span class="hljs-selector-class">.android</span><br><br>自动化测试SQL注入点<br>run scanner<span class="hljs-selector-class">.provider</span><span class="hljs-selector-class">.injection</span> -<span class="hljs-selector-tag">a</span> com<span class="hljs-selector-class">.xx</span><span class="hljs-selector-class">.android</span><br><br>自动化测试目录遍历<br>run scanner<span class="hljs-selector-class">.provider</span><span class="hljs-selector-class">.traversal</span> -<span class="hljs-selector-tag">a</span> com<span class="hljs-selector-class">.xx</span>.android<br></code></pre></td></tr></table></figure>
 
-<h3 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h3><p>（还没遇到，遇到再学，不然无法实操记不住）</p>
-<h2 id="双向证书认证（mTLS）"><a href="#双向证书认证（mTLS）" class="headerlink" title="双向证书认证（mTLS）"></a>双向证书认证（mTLS）</h2><p>客户端验证服务器+服务器验证客户端（双方都要出示证书）</p>
-<h2 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h2><p>（同理）</p>
-<h2 id="代理抓包"><a href="#代理抓包" class="headerlink" title="代理抓包"></a>代理抓包</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">APP</span><br> ↓<br>代理服务器（你电脑）<br> ↓<br>真正服务器<br></code></pre></td></tr></table></figure>
-
-<p>将电脑变成中间人，使得APP流量通过本机电脑</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-283483.htm#msg_header_h2_1">https://bbs.kanxue.com/thread-283483.htm#msg_header_h2_1</a></p>
-<p><a target="_blank" rel="noopener" href="https://shunix.com/ssl-pinning/">https://shunix.com/ssl-pinning/</a></p>
+<p>全没扫到</p>
+<p>接下来就按常见相关漏洞一个个代码审计排查导出组件</p>
 
                 
               </div>
@@ -394,7 +353,7 @@
   
     <span>></span>
     
-  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
   
   
 
@@ -416,8 +375,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Android抓包</div>
-      <div>https://yy-t1.github.io/2026/05/04/Android/Android 基础/Android抓包/</div>
+      <div>记第一次APP漏洞挖掘</div>
+      <div>https://yy-t1.github.io/2026/05/04/记第一次APP漏洞挖掘/</div>
     </div>
     <div class="license-meta">
       
@@ -461,9 +420,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="记第一次APP漏洞挖掘">
+                      <a href="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" title="pwn_bug视频总结">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">记第一次APP漏洞挖掘</span>
+                        <span class="hidden-mobile">pwn_bug视频总结</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +430,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/04/Android/Android%20APP/UI%E6%AC%BA%E9%AA%97%E4%B8%8E%E9%92%93%E9%B1%BC/" title="UI欺骗与钓鱼">
-                        <span class="hidden-mobile">UI欺骗与钓鱼</span>
+                      <a href="/2026/05/04/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E6%8A%93%E5%8C%85/" title="Android抓包">
+                        <span class="hidden-mobile">Android抓包</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
