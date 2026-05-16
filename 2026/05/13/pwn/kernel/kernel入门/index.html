@@ -22,19 +22,19 @@
     <meta name="description" content="​	利用Linux内核中的漏洞，从普通用户态提升到内核态，最终拿到root权限设置控制整个系统。 基础内核kernel：操作系统最核心的部分。 在操作系统课程中也有提到，用户程序不能直接操作硬件（无权限），所以需要依靠内核来完成 其核心任务分为一下五方面：  内存管理 设备驱动管理 进程管理 文件系统管理 系统调用与安全  分级保护环(Ring环)是一种将计算机不同的资源划分至不同权限的模型。（目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kernel入门">
-<meta property="og:url" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/index.html">
 <meta property="og:site_name" content="bsahfm">
 <meta property="og:description" content="​	利用Linux内核中的漏洞，从普通用户态提升到内核态，最终拿到root权限设置控制整个系统。 基础内核kernel：操作系统最核心的部分。 在操作系统课程中也有提到，用户程序不能直接操作硬件（无权限），所以需要依靠内核来完成 其核心任务分为一下五方面：  内存管理 设备驱动管理 进程管理 文件系统管理 系统调用与安全  分级保护环(Ring环)是一种将计算机不同的资源划分至不同权限的模型。（目">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514175525336.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514182423311.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514175018734.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514175525336.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514182423311.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514175018734.png">
 <meta property="article:published_time" content="2026-05-13T02:12:59.000Z">
-<meta property="article:modified_time" content="2026-05-14T11:18:11.399Z">
+<meta property="article:modified_time" content="2026-05-16T06:00:18.875Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -253,7 +253,7 @@
         
         
         
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -316,7 +316,7 @@
 <li>系统调用与安全</li>
 </ol>
 <h3 id="分级保护环-Ring环"><a href="#分级保护环-Ring环" class="headerlink" title="分级保护环(Ring环)"></a>分级保护环(Ring环)</h3><p>是一种将计算机不同的资源划分至不同权限的模型。（目的是进行权限隔离）</p>
-<img src="/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png" srcset="/img/loading.gif" lazyload class="" title="image-20260513103052533">
+<img src="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png" srcset="/img/loading.gif" lazyload class="" title="image-20260513103052533">
 
 
 
@@ -362,7 +362,7 @@
 <h4 id="内核态（Ring0）—-用户态（Ring3）"><a href="#内核态（Ring0）—-用户态（Ring3）" class="headerlink" title="内核态（Ring0）—&gt;用户态（Ring3）"></a>内核态（Ring0）—&gt;用户态（Ring3）</h4><p>使用特权返回指令。</p>
 <p>（返回之前会恢复一系列寄存器）</p>
 <h2 id="环境模拟"><a href="#环境模拟" class="headerlink" title="环境模拟"></a>环境模拟</h2><p>真实的kernel里限制太多了，我们用于学习kernel pwn的小程序可能因为各种条件与kernel保护机制实现不起来，所以我们得自己用qemu模拟一下小的内核环境来测试。</p>
-<img src="/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514175525336.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514175525336">
+<img src="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514175525336.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514175525336">
 
 <p>其实用qemu模拟kernel环境总共就需要三样东西：</p>
 <p>1.rootfs.cpio.gz：打包好的文件系统，作为模拟的内核环境的文件系统</p>
@@ -382,6 +382,7 @@
 <p>直接在终端.&#x2F;run.sh即可</p>
 <h3 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h3><p>通常情况下，我们还需要使用gdb调试我们的exp</p>
 <p>这时候就需要更改run.sh启动脚本，加上<code>-s -S</code>开启调试接口</p>
+<p>（改进：<code>-gdb tcp::12345 \</code> ）</p>
 <figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs smali">运行的是bzImage，但是调试利用包含完整调试符号的vmlinux<br>gdb vmlinux<br><br>target remote<span class="hljs-keyword"> :</span> 1234<br><br>动态加载模块符号，不然全是指令很难调试<span class="hljs-built_in"></span><br><span class="hljs-built_in">add-symbol-file </span>/home/tyy/桌面/fake_kernel/rootfs/vuln_mod.ko 0xffffffffa0000000<br>（cat /proc/modules查看该模块的地址）<br><br>我测试的vuln_write的具体地址<br>b *0xffffffffa0000070<br>（objdump -t vuln_mod.ko | grep vuln_write）<br></code></pre></td></tr></table></figure>
 
 <p>然后正常打断点调试即可</p>
@@ -392,10 +393,10 @@
 
 <p>这里一开始用的copy_from_user,但是过于安全（具体为啥我也还不知道）反正就是用这个不能成功栈溢出，所以改为memcpy了</p>
 <h3 id="载入驱动"><a href="#载入驱动" class="headerlink" title="载入驱动"></a>载入驱动</h3><p>在我们模拟的系统中，是只存在一些基础的指令的</p>
-<img src="/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514182423311.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514182423311">
+<img src="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514182423311.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514182423311">
 
 <p>所以在qemu模拟系统里面直接写这些程序并编译都是相对麻烦的，所以就需要先在本机都将驱动（目标程序）与exp都写好编译好，都放入文件系统再打包进入成rootfs.cpio.gz比较方便</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">一键打包<br><span class="hljs-built_in">cd</span> rootfs<br>find . | cpio -o --format=newc | gzip &gt; ../rootfs.cpio.gz<br><span class="hljs-built_in">cd</span> ..<br><br>载入vuln_mod.ko驱动<br>insmod vuln_mod.ko（248）<br><br>创建设备文件使得内核模块能被用户态程序访问<br><span class="hljs-built_in">mknod</span> /dev/vuln_device c 248 0<br><span class="hljs-built_in">chmod</span> 666 /dev/vuln_device<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">一键打包<br><span class="hljs-built_in">cd</span> rootfs<br>find . | cpio -o --format=newc | gzip &gt; ../rootfs.cpio<br><span class="hljs-built_in">cd</span> ..<br><br>载入vuln_mod.ko驱动<br>insmod vuln_mod.ko（248）<br><br>创建设备文件使得内核模块能被用户态程序访问<br><span class="hljs-built_in">mknod</span> /dev/vuln_device c 248 0<br><span class="hljs-built_in">chmod</span> 666 /dev/vuln_device<br><br>（改进创建）<br><span class="hljs-built_in">mknod</span> -m 666 /dev/holstein c `grep holstein /proc/devices | awk <span class="hljs-string">&#x27;&#123;print $1;&#125;&#x27;</span>` 0<br></code></pre></td></tr></table></figure>
 
 <p>这里还得留意，我们写的是vuln_mod.c，编译成.ko文件需要依靠Makefile</p>
 <p>Makefile：</p>
@@ -420,7 +421,7 @@
 
 
 
-<img src="/2026/05/13/kernel%E5%85%A5%E9%97%A8/image-20260514175018734.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514175018734">
+<img src="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514175018734.png" srcset="/img/loading.gif" lazyload class="" title="image-20260514175018734">
 
 <p>成功提权。</p>
 <h2 id="内核态函数（收集整理）"><a href="#内核态函数（收集整理）" class="headerlink" title="内核态函数（收集整理）"></a>内核态函数（收集整理）</h2><p>内核态无法使用用户态的函数，其内核有着自己定义的函数。</p>
@@ -472,7 +473,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>kernel入门</div>
-      <div>https://yy-t1.github.io/2026/05/13/kernel入门/</div>
+      <div>https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel入门/</div>
     </div>
     <div class="license-meta">
       
@@ -516,11 +517,17 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="kernel保护机制">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">kernel保护机制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" title="MIPS栈溢出">
+                      <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" title="MIPS栈溢出">
                         <span class="hidden-mobile">MIPS栈溢出</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

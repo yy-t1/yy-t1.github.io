@@ -19,15 +19,15 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="抓包本质：观察APP与服务器之间传输的数据 抓包主要分为四大类    方法 原理 难度 HTTPS    代理抓包 中间人代理 ★ 可   VPN 抓包 本地 VPN 截获 ★★ 可   Root 抓包 底层 tcpdump ★★★ 原始流量   Hook 抓包 Hook API 拿明文 ★★★★ 最强   http：明文传输，抓到的包就是可直接读取的明文 https（HTTP + TLS）：抓到">
+    <meta name="description" content="SMEP&#x2F;SMAPSMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。 SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。 KASLR&#x2F;FGKASLRKASLR：内核基地址随机。 FGKASLR：每个函数的内存地址都被独立随机化。 KASLR实现机制其是依靠kaslr.c里的一个kernel_randomize_m">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android抓包">
-<meta property="og:url" content="https://yy-t1.github.io/2026/05/04/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E6%8A%93%E5%8C%85/index.html">
+<meta property="og:title" content="kernel保护机制">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="抓包本质：观察APP与服务器之间传输的数据 抓包主要分为四大类    方法 原理 难度 HTTPS    代理抓包 中间人代理 ★ 可   VPN 抓包 本地 VPN 截获 ★★ 可   Root 抓包 底层 tcpdump ★★★ 原始流量   Hook 抓包 Hook API 拿明文 ★★★★ 最强   http：明文传输，抓到的包就是可直接读取的明文 https（HTTP + TLS）：抓到">
+<meta property="og:description" content="SMEP&#x2F;SMAPSMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。 SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。 KASLR&#x2F;FGKASLRKASLR：内核基地址随机。 FGKASLR：每个函数的内存地址都被独立随机化。 KASLR实现机制其是依靠kaslr.c里的一个kernel_randomize_m">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-05-04T03:57:13.000Z">
-<meta property="article:modified_time" content="2026-05-04T05:37:26.259Z">
+<meta property="article:published_time" content="2026-05-14T15:25:22.000Z">
+<meta property="article:modified_time" content="2026-05-16T05:29:56.533Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -35,7 +35,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Android抓包 - bsahfm</title>
+  <title>kernel保护机制 - bsahfm</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Android抓包"></span>
+            <span id="subtitle" data-typed-text="kernel保护机制"></span>
           
         </div>
 
@@ -225,8 +225,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-05-04 11:57" pubdate>
-          2026年5月4日 中午
+        <time datetime="2026-05-14 23:25" pubdate>
+          2026年5月14日 晚上
         </time>
       </span>
     
@@ -237,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          657 字
+          128 字
         
       </span>
     
@@ -248,7 +248,7 @@
         
         
         
-          6 分钟
+          2 分钟
         
       </span>
     
@@ -294,83 +294,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Android抓包</h1>
+            <h1 id="seo-header">kernel保护机制</h1>
             
             
               <div class="markdown-body">
                 
-                <p>抓包本质：观察APP与服务器之间传输的数据</p>
-<p>抓包主要分为四大类</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>原理</th>
-<th>难度</th>
-<th>HTTPS</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>代理抓包</td>
-<td>中间人代理</td>
-<td>★</td>
-<td>可</td>
-</tr>
-<tr>
-<td>VPN 抓包</td>
-<td>本地 VPN 截获</td>
-<td>★★</td>
-<td>可</td>
-</tr>
-<tr>
-<td>Root 抓包</td>
-<td>底层 tcpdump</td>
-<td>★★★</td>
-<td>原始流量</td>
-</tr>
-<tr>
-<td>Hook 抓包</td>
-<td>Hook API 拿明文</td>
-<td>★★★★</td>
-<td>最强</td>
-</tr>
-</tbody></table>
-<p>http：明文传输，抓到的包就是可直接读取的明文</p>
-<p>https（HTTP + TLS）：抓到的是密文，无法直接读取。</p>
-<p>https能防止抓包偷看通信内容，但是前提是没有主动信任攻击者的证书。</p>
-<p>而https强度可以分为三种</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs">安全强度：<br>未校验 &lt; 单向证书认证（SSL Pinning） &lt; 双向证书认证（mTLS）<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="未额外进行证书效验"><a href="#未额外进行证书效验" class="headerlink" title="未额外进行证书效验"></a>未额外进行证书效验</h2><p>APP → 系统证书库 → 验证服务器证书 → 建立 HTTPS</p>
-<p>（所以只要证书是合法CA签发就行）</p>
-<p>装证书就能抓到包</p>
-<h3 id="Android-7-之前"><a href="#Android-7-之前" class="headerlink" title="Android 7+之前"></a>Android 7+之前</h3><p>直接配置用户证书就能抓包</p>
-<h3 id="Android-7-之后"><a href="#Android-7-之后" class="headerlink" title="Android 7+之后"></a>Android 7+之后</h3><p>不再信任用户配置的证书。</p>
-<p>存在两种思路：</p>
-<p>1.将用户证书移到系统目录</p>
-<p>2.配置系统强制信任用户证书</p>
-<h2 id="单向证书认证"><a href="#单向证书认证" class="headerlink" title="单向证书认证"></a>单向证书认证</h2><p>客户端校验服务器证书–SSL Pinning</p>
-<p>由上述可知，系统证书并非绝对可信，所以出现SSL。</p>
-<h3 id="SSL-Pinning详解"><a href="#SSL-Pinning详解" class="headerlink" title="SSL Pinning详解"></a>SSL Pinning详解</h3><p>将服务器证书“写死”在APP内，不再信任系统证书。</p>
-<p>有两种方法</p>
-<h4 id="Certificate-Pinning（证书锁定）"><a href="#Certificate-Pinning（证书锁定）" class="headerlink" title="Certificate Pinning（证书锁定）"></a>Certificate Pinning（证书锁定）</h4><p>直接把服务器证书（server.crt)打包进APK，然后代码里只信任这个证书。</p>
-<p>ps:但是证书会过期，如果APP不进行更新那么证书到期就会导致APP无法联网</p>
-<p>以及对方服务器可能更新等等也会导致出现问题</p>
-<h4 id="Public-Key-Pinning（主流）"><a href="#Public-Key-Pinning（主流）" class="headerlink" title="Public Key Pinning（主流）"></a>Public Key Pinning（主流）</h4><p>只绑定<strong>SPKI Hash</strong>，只要证书里的这个不变，那么APP就信任该服务器</p>
-<p>（也就是将公钥指纹（SPKI Hash））写死进APP</p>
-<p>Android官方实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java">network_security_config.xml：<br>&lt;network-security-config&gt;<br>    &lt;domain-config&gt;<br><br>        &lt;domain includeSubdomains=<span class="hljs-string">&quot;true&quot;</span>&gt;  <span class="hljs-comment">//包含子域名</span><br>            api.test.com            <span class="hljs-comment">//只对该域名启用pinning</span><br>        &lt;/domain&gt;<br><br>        &lt;pin-set expiration=<span class="hljs-string">&quot;2026-12-31&quot;</span>&gt;<br><br>            &lt;pin digest=<span class="hljs-string">&quot;SHA-256&quot;</span>&gt;   <span class="hljs-comment">//有效期</span><br>                主 Pin（主公钥）<br>            &lt;/pin&gt;<br><br>            &lt;pin digest=<span class="hljs-string">&quot;SHA-256&quot;</span>&gt;<br>                Backup Pin（备用公钥）<br>            &lt;/pin&gt;<br><br>        &lt;/pin-set&gt;<br><br>    &lt;/domain-config&gt;<br>&lt;/network-security-config&gt;<br><br></code></pre></td></tr></table></figure>
-
-<h3 id="绕过"><a href="#绕过" class="headerlink" title="绕过"></a>绕过</h3><p>（还没遇到，遇到再学，不然无法实操记不住）</p>
-<h2 id="双向证书认证（mTLS）"><a href="#双向证书认证（mTLS）" class="headerlink" title="双向证书认证（mTLS）"></a>双向证书认证（mTLS）</h2><p>客户端验证服务器+服务器验证客户端（双方都要出示证书）</p>
-<h2 id="绕过-1"><a href="#绕过-1" class="headerlink" title="绕过"></a>绕过</h2><p>（同理）</p>
-<h2 id="代理抓包"><a href="#代理抓包" class="headerlink" title="代理抓包"></a>代理抓包</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">APP</span><br> ↓<br>代理服务器（你电脑）<br> ↓<br>真正服务器<br></code></pre></td></tr></table></figure>
-
-<p>将电脑变成中间人，使得APP流量通过本机电脑</p>
-<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="noopener" href="https://bbs.kanxue.com/thread-283483.htm#msg_header_h2_1">https://bbs.kanxue.com/thread-283483.htm#msg_header_h2_1</a></p>
-<p><a target="_blank" rel="noopener" href="https://shunix.com/ssl-pinning/">https://shunix.com/ssl-pinning/</a></p>
+                <h2 id="SMEP-SMAP"><a href="#SMEP-SMAP" class="headerlink" title="SMEP&#x2F;SMAP"></a>SMEP&#x2F;SMAP</h2><p>SMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。</p>
+<p>SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。</p>
+<h2 id="KASLR-FGKASLR"><a href="#KASLR-FGKASLR" class="headerlink" title="KASLR&#x2F;FGKASLR"></a>KASLR&#x2F;FGKASLR</h2><p>KASLR：内核基地址随机。</p>
+<p>FGKASLR：每个函数的内存地址都被独立随机化。</p>
+<h3 id="KASLR实现机制"><a href="#KASLR实现机制" class="headerlink" title="KASLR实现机制"></a>KASLR实现机制</h3><p>其是依靠kaslr.c里的一个<a target="_blank" rel="noopener" href="https://elixir.bootlin.com/linux/v5.10.7/source/arch/x86/mm/kaslr.c#L64"><code>kernel_randomize_memory</code></a>来实现的。</p>
+<p>内核会分配一个1GB的地址空间，范围从0xffffffff80000000到0xffffffffc0000000，基地址从中选择，有0x3f0个可能。</p>
+<h2 id="KPTI"><a href="#KPTI" class="headerlink" title="KPTI"></a>KPTI</h2><p>页表隔离</p>
+<h2 id="KADR"><a href="#KADR" class="headerlink" title="KADR"></a>KADR</h2><p>内核地址显示设置</p>
 
                 
               </div>
@@ -389,12 +325,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
   
   
     <span>></span>
     
-  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
   
   
 
@@ -416,8 +352,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Android抓包</div>
-      <div>https://yy-t1.github.io/2026/05/04/Android/Android 基础/Android抓包/</div>
+      <div>kernel保护机制</div>
+      <div>https://yy-t1.github.io/2026/05/14/pwn/kernel/kernel保护机制/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +365,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年5月4日</div>
+          <div>2026年5月14日</div>
         </div>
       
       
@@ -461,9 +397,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="记第一次APP漏洞挖掘">
+                      <a href="/2026/05/15/pwn/kernel/%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BA/" title="基础的栈溢出">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">记第一次APP漏洞挖掘</span>
+                        <span class="hidden-mobile">基础的栈溢出</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +407,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/04/Android/Android%20APP/UI%E6%AC%BA%E9%AA%97%E4%B8%8E%E9%92%93%E9%B1%BC/" title="UI欺骗与钓鱼">
-                        <span class="hidden-mobile">UI欺骗与钓鱼</span>
+                      <a href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" title="kernel入门">
+                        <span class="hidden-mobile">kernel入门</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

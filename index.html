@@ -244,13 +244,135 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/05/13/kernel%E5%85%A5%E9%97%A8/" target="_self">
+        <a href="/2026/05/15/pwn/kernel/%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+          基础的栈溢出
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/pwn/kernel/%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+        <div>
+          以以下自定义的holstein模块为例： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 18:29" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+          kernel保护机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          SMEP&#x2F;SMAPSMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。 SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。 KASLR&#x2F;FGKASLRKASLR：内核基地址随机。 FGKASLR：每个函数的内存地址都被独立随机化。 KASLR实现机制其是依靠kaslr.c里的一个kernel_randomize_m
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-14 23:25" pubdate>
+              2026-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
           kernel入门
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/13/kernel%E5%85%A5%E9%97%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
         <div>
           ​	利用Linux内核中的漏洞，从普通用户态提升到内核态，最终拿到root权限设置控制整个系统。 基础内核kernel：操作系统最核心的部分。 在操作系统课程中也有提到，用户程序不能直接操作硬件（无权限），所以需要依靠内核来完成 其核心任务分为一下五方面：  内存管理 设备驱动管理 进程管理 文件系统管理 系统调用与安全  分级保护环(Ring环)是一种将计算机不同的资源划分至不同权限的模型。（目
         </div>
@@ -305,13 +427,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+        <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
           MIPS栈溢出
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
         <div>
           ​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字
         </div>
@@ -366,13 +488,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
+        <a href="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
           pwn_bug视频总结
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
         <div>
           ​	总结实操一下pwn_bug师傅的视频（b站）。只是为了学习总结，侵权必删。 这里也贴一下该师傅的视频链接： 【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 https://b23.tv/KeqObCW 前置fofa上搜索一下设备型号进行资产探测，判断是否有寻找该设备利用的价值。 （注意路由器ip地址会变的问题）     获取并分析固件直接上搜索引擎搜索寻找     解压缩得到相应b
         </div>
@@ -427,13 +549,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
+        <a href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
           记第一次APP漏洞挖掘
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
         <div>
           ​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。 ​	自己会的太少了，也希望佬们看到能指点指点 ​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删） 挖掘前置1.APP是否能正常运行选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限 我选择的是
         </div>
@@ -689,128 +811,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2026-05-03 21:20" pubdate>
               2026-05-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/02/Android/Android%20APP/Binder/" target="_self">
-          Binder
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/02/Android/Android%20APP/Binder/" target="_self">
-        <div>
-          （不是很懂，待学习） Binder：Android里的IPC（跨进程通信）机制，让不同进程之间可以通信。    角色 说明 典型实例    Client 发起调用的一方 普通 App   Server 提供服务的一方 system_server 中的系统服务   ServiceManager 服务注册表，负责服务的注册和查找 servicemanager 进程   Binder 驱动 内核模块，负
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-02 20:12" pubdate>
-              2026-05-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/30/Android/Android%20APP/Intent/" target="_self">
-          Intent
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/30/Android/Android%20APP/Intent/" target="_self">
-        <div>
-          ​	组件之间互相调用与通信，都是通过Intent（意图）来实现的。一个组件可以通过Intent来做不同的事情，可以接收与发送不同的Intent。 Intent也分为两类： 123456789// 显式 Intent：明确指定目标Intent intent = new Intent();intent.setClassName(&quot;com.target.app&quot;, &quot;com
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-30 17:16" pubdate>
-              2026-04-30
             </time>
           </div>
         

