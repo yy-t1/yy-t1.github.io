@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514182423311.png">
 <meta property="og:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260514175018734.png">
 <meta property="article:published_time" content="2026-05-13T02:12:59.000Z">
-<meta property="article:modified_time" content="2026-05-16T06:00:18.875Z">
+<meta property="article:modified_time" content="2026-05-19T07:13:55.695Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yy-t1.github.io/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/image-20260513103052533.png">
@@ -383,7 +383,7 @@
 <h3 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h3><p>通常情况下，我们还需要使用gdb调试我们的exp</p>
 <p>这时候就需要更改run.sh启动脚本，加上<code>-s -S</code>开启调试接口</p>
 <p>（改进：<code>-gdb tcp::12345 \</code> ）</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs smali">运行的是bzImage，但是调试利用包含完整调试符号的vmlinux<br>gdb vmlinux<br><br>target remote<span class="hljs-keyword"> :</span> 1234<br><br>动态加载模块符号，不然全是指令很难调试<span class="hljs-built_in"></span><br><span class="hljs-built_in">add-symbol-file </span>/home/tyy/桌面/fake_kernel/rootfs/vuln_mod.ko 0xffffffffa0000000<br>（cat /proc/modules查看该模块的地址）<br><br>我测试的vuln_write的具体地址<br>b *0xffffffffa0000070<br>（objdump -t vuln_mod.ko | grep vuln_write）<br></code></pre></td></tr></table></figure>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs smali">运行的是bzImage，但是调试利用包含完整调试符号的vmlinux<br>gdb vmlinux<br><br>target remote<span class="hljs-keyword"> :</span> 1234<br><br>动态加载模块符号，不然全是指令很难调试<span class="hljs-built_in"></span><br><span class="hljs-built_in">add-symbol-file </span>/home/tyy/桌面/fake_kernel/rootfs/vuln_mod.ko 0xffffffffc03c1000<br>（cat /proc/modules查看该模块的地址）<br><br>我测试的vuln_write的具体地址<br>b *0xffffffffa0000070<br>（objdump -t vuln_mod.ko | grep vuln_write）<br></code></pre></td></tr></table></figure>
 
 <p>然后正常打断点调试即可</p>
 <h2 id="基础的kernel-pwn"><a href="#基础的kernel-pwn" class="headerlink" title="基础的kernel pwn"></a>基础的kernel pwn</h2><p>代码来自Gemini。</p>
