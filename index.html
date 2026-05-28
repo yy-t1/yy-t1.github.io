@@ -244,6 +244,67 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/05/28/Webserver/" target="_self">
+          Webserver
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/28/Webserver/" target="_self">
+        <div>
+          感觉在当前在IOT的漏洞挖掘中，基本是对httpd等webserver进行挖掘，然后在逆向时，对于其中的很多不太懂，逆向过程会很慢，所以先学习一下webserver。 （以某个真实的Iot设备为例） webserver大多数Iot设备都会内置Web Server以提供web服务（也有例外） webserver核心：在设备或主机上的网络服务程序。 负责：  监听 HTTP&#x2F;HTTPS 端口
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-28 11:00" pubdate>
+              2026-05-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/lot/" class="category-chain-item">lot</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2026/05/25/CVE-2026-24115/" target="_self">
           CVE-2026-24115
         </a>
@@ -252,7 +313,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/05/25/CVE-2026-24115/" target="_self">
         <div>
-          尝试复现的第一个CVE。 查看CVE信息****  搭建环境AI自动搭建获取固件(直接上网找就行) 搭建环境真的很烦，所以之前手动搭了一半，想起来AI当下貌似可以替我们干这些活，于是下载codex尝试了一下。 花了我接近200刀的额度和3个多小时的时间才勉强搭建了一个可访问的httpd服务，但是也没有完整的模拟环境。（感觉环境模拟真的是很大的问题，真实的不能打，自己没马内买真设备，模拟的话花费的时
+          尝试复现的第一个CVE。 （并非），还是先跟着论坛上的文章去复现好一点，我想自主找一个CVE复现，先是环境手工配很麻烦，后面Ai配出来了，后续需要分析程序执行流，控制自己的输入能稳定达到crash这一步，按道理在IDA打断点一步步控制即可。 ​	看着自己思路挺清晰的，但是干了很久（特别是环境），挫败感也很强，后续有空再来看看吧，对这个有点烦躁了，而且我看论坛有对于tenda其他CVE复现的环境搭建
         </div>
       </a>
 
@@ -394,135 +455,6 @@
             </time>
           </div>
         
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/17/%E5%9F%BA%E7%A1%80%E7%9A%84%E5%A0%86%E6%BA%A2%E5%87%BA/" target="_self">
-          基础的堆溢出
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/17/%E5%9F%BA%E7%A1%80%E7%9A%84%E5%A0%86%E6%BA%A2%E5%87%BA/" target="_self">
-        <div>
-          ​	内核的堆管理机制与用户态的大不相同，在了解堆管理机制之前，得先知道内核的内存管理机制。 堆喷射（Heap Spraying）在用户态的堆溢出通常是控制下一个chunk的pre_inuse，fd等等头信息，但是在kernel里，堆上紧挨的是下一个对象（object），如何让下一个对象变成我们可利用破坏的部分呢？这就可以依靠堆喷射。 具体实现：  寻找喷射载体 (The Spray Object)
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-17 14:03" pubdate>
-              2026-05-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/16/CVE-2026-31431/" target="_self">
-          CVE-2026-31431（Copy Fail）
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/16/CVE-2026-31431/" target="_self">
-        <div>
-          受影响版本Linux kernel：4.14 —&gt; 6.19.12（未打补丁） 利用思路前置知识页缓存Linux设置“页缓存”机制–&gt;用于解决硬盘读写速度慢的问题。 当系统需要读取硬盘上的某个文件（比如一个可执行程序）时，内核会把它临时复制一份放在内存里。下一次再用这个文件时，直接从内存里读，速度飞快。 algif_aead 模块负责高强度的密码学加密&#x2F;解密运算。 algif
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-16 16:47" pubdate>
-              2026-05-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/kernel/cve/" class="category-chain-item">cve</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
         
         
       </div>
@@ -817,6 +749,67 @@
     <span>></span>
     
   <a href="/categories/pwn/loT/" class="category-chain-item">loT</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
+          记第一次APP漏洞挖掘
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
+        <div>
+          ​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。 ​	自己会的太少了，也希望佬们看到能指点指点 ​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删） 挖掘前置1.APP是否能正常运行选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限 我选择的是
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-04 14:11" pubdate>
+              2026-05-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
   
   
 
