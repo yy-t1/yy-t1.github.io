@@ -244,6 +244,118 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/05/30/CVE-2024-41473/" target="_self">
+          CVE-2024-41473
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/30/CVE-2024-41473/" target="_self">
+        <div>
+          一个简单的命令注入 （在环境搭建时，curl 能拿到页面但是浏览器访问不了，不用管，curl能访问到就说明httpd 已经在回 HTTP 响应了）   真就一个命令拼接就好 exp： 12345678910111213141516import requestsbase_url = &quot;http://192.168.0.1:80&quot;qos_url = base_url + &quot
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-30 13:16" pubdate>
+              2026-05-30
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/pwn/">#pwn</a>
+            
+              <a href="/tags/Iot/">#Iot</a>
+            
+              <a href="/tags/CVE/">#CVE</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/28/%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" target="_self">
+          Tenda A15固件模拟与漏洞复现
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/28/%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" target="_self">
+        <div>
+          果然看师傅们的文章就是好，这篇完美解决之前我第一次想复现tenda CVE时遇到的环境问题。 环境搭建binwalk -Me US_A15V1.0RTL_V15.13.07.13_multi_TD01.bin file bin/httpd   MIPS 32位 小端   我用的qemu-mipsel 123cp $(which qemu-mipsel-static) .sudo chroot .
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-28 15:30" pubdate>
+              2026-05-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/Iot/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="category-chain-item">漏洞复现</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2026/05/28/Webserver/" target="_self">
           Webserver
         </a>
@@ -455,6 +567,34 @@
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
         
         
       </div>
@@ -705,133 +845,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
-          pwn_bug视频总结
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/07/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
-        <div>
-          ​	总结实操一下pwn_bug师傅的视频（b站）。只是为了学习总结，侵权必删。 这里也贴一下该师傅的视频链接： 【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 https://b23.tv/KeqObCW 前置fofa上搜索一下设备型号进行资产探测，判断是否有寻找该设备利用的价值。 （注意路由器ip地址会变的问题）     获取并分析固件直接上搜索引擎搜索寻找     解压缩得到相应b
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-07 21:44" pubdate>
-              2026-05-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
-          记第一次APP漏洞挖掘
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/Android/Android%20APP/%E8%AE%B0%E7%AC%AC%E4%B8%80%E6%AC%A1APP%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/" target="_self">
-        <div>
-          ​	第一次在补天找合法资产挖洞，本来想针对某车平台的APP的，但是其对虚拟手机检测较为严格，我手上暂时没有用于挖洞的空闲真机，于是找了个不是很严格的APP进行挖掘。 ​	自己会的太少了，也希望佬们看到能指点指点 ​	（会对该app严格进行保密，只是为了整理自己的思路，侵权联系必删） 挖掘前置1.APP是否能正常运行选择真机当然是最好的平台进行测试，但是可能需要一系列配置获得root权限 我选择的是
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-04 14:11" pubdate>
-              2026-05-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
