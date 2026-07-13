@@ -11,6 +11,8 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
+    <link rel="canonical" href="https://yy-t1.github.io"/>
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -244,15 +246,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/06/10/hongri1/" target="_self">
-          hongri1
+        <a href="/2026/07/12/BroncoCTF/" target="_self">
+          BroncoCTF
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/10/hongri1/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/12/BroncoCTF/" target="_self">
         <div>
-          （全是复现复读参考链接的） 初始只有一个IP 信息收集12nmap：nmap 192.168.242.42  -sV -A  -Pn --unprivileged     开放端口如下: 12345678910111213141580/tcp   open  http         Apache httpd 2.4.39 ((Win64) OpenSSL/1.1.1b mod_fcgid/2.3
+          1.Proper Pwning2.Crab Trap分析  禁用exec的沙盒，没给程序的盲注。 思路先dump下来远程程序，看看实质内容   就是输入shellcode并执行（0x200字节） 然后再直接orw即可 expdump.py123456789101112131415161718192021222324252627282930313233343536373839404142434445
         </div>
       </a>
 
@@ -260,8 +262,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-10 09:15" pubdate>
-              2026-06-10
+            <time datetime="2026-07-12 15:59" pubdate>
+              2026-07-12
             </time>
           </div>
         
@@ -276,12 +278,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/web/" class="category-chain-item">web</a>
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
   
   
     <span>></span>
     
-  <a href="/categories/web/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
   
   
 
@@ -305,13 +307,440 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/06/06/sqlmap/" target="_self">
+        <a href="/2026/07/11/glibc%E5%A0%86/" target="_self">
+          glibc堆
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/11/glibc%E5%A0%86/" target="_self">
+        <div>
+          堆管理器tcacheglibc2.26 后进先出（LIFO）单链表 数据结构每个线程有 64 个 tcache bin，分别对应 chunk size 从 0x20 到 0x410（16 字节对齐）： 123456789101112// glibc 源码简化版#define TCACHE_MAX_BINS 64typedef struct tcache_entry &#123;    struct
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-11 21:06" pubdate>
+              2026-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/07/11/%E6%A6%95%E7%9B%BE%E6%9D%AF/" target="_self">
+          榕盾杯
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/11/%E6%A6%95%E7%9B%BE%E6%9D%AF/" target="_self">
+        <div>
+          1.ROP逆向add（）  show（）  分析由于show可以显示数据，add可以写入数据 用show泄露栈上的libc地址，得到基地址并取得system等等的gadget 合理控制n9的数值就可以任意写入那9个数据的栈之前的位置，通过布置栈上的返回地址以及之后的栈链从而达到getshell目的   exp123456789101112131415161718192021222324252627
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-11 19:44" pubdate>
+              2026-07-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/07/09/ciscn/" target="_self">
+          2026-ciscn半决赛（复现）
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/09/ciscn/" target="_self">
+        <div>
+          好久没打ctf了，刚好都忘了，blog也啥都没写，之前写语雀上的，重新记一下吧 catchmelibc–&gt;2.27     patch 文件手动123patchelf --set-interpreter ./ld-linux-x86-64.so.2 binarypatchelf --replace-needed libc.so.6 libc-2.31.so binary  xclibchtt
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-09 18:04" pubdate>
+              2026-07-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/24/InjuredAndroid/" target="_self">
+          InjuredAndroid
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/24/InjuredAndroid/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-24 22:11" pubdate>
+              2026-06-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/16/CVE-2023-20938/" target="_self">
+          CVE-2023-20938
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/CVE-2023-20938/" target="_self">
+        <div>
+          知识前置binder_transaction如果直接 12345App A ↓发送FD=3 ↓App B  进程A的FD与进程B的FD完全不一样，所以需要binder_transaction 12345678910static void binder_transaction(...)&#123;  ...  // Iterate through all Binder objects in the
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-16 19:17" pubdate>
+              2026-06-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Binder/" class="category-chain-item">Binder</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/16/Binder%E6%BC%8F%E6%B4%9E/" target="_self">
+          Binder漏洞
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/Binder%E6%BC%8F%E6%B4%9E/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-16 19:09" pubdate>
+              2026-06-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Binder/" class="category-chain-item">Binder</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/16/Android/Android%20%E5%9F%BA%E7%A1%80/Binder%E5%9F%BA%E7%A1%80/" target="_self">
+          Binder基础
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/Android/Android%20%E5%9F%BA%E7%A1%80/Binder%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          一个面向 Android 本机进程通信的、高性能、可鉴权、可传对象的 RPC 机制。 Binder本质在做：“跨进程调用”伪装成“本地对象方法调用”  知识前置进程空间一个进程空间分为：  用户空间：数据不可共享 内核空间：数据可共享  （所有进程共用1个内核空间） 在进程内，用户空间与内核空间交互需要依靠系统调用 12copy_from_user（）：将用户空间的数据拷贝到内核空间copy_to
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-16 16:19" pubdate>
+              2026-06-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/06/%E5%B7%A5%E5%85%B7/sqlmap/" target="_self">
           sqlmap
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/06/sqlmap/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/06/%E5%B7%A5%E5%85%B7/sqlmap/" target="_self">
         <div>
           自动化sql注入 get型12345678910111213141516171819202122-u：指定注入的URL   sqlmap -u URL--dbs：爆出所有数据库 sqlmap -u URL --dbs--dbms：指定数据库类型 sqlmap -u URL --dbms=mysql--users：查看数据库的所有用户 sqlmap -u URL --users--current-u
         </div>
@@ -359,13 +788,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/06/02/pikachu/" target="_self">
+        <a href="/2026/06/02/web/%E9%9D%B6%E5%9C%BA/pikachu/" target="_self">
           pikachu
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/02/pikachu/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/02/web/%E9%9D%B6%E5%9C%BA/pikachu/" target="_self">
         <div>
           https://www.cnblogs.com/henry666/p/16947270.html https://blog.csdn.net/weixin_42575797/article/details/127607982 暴力破解1、基于表单的暴力破解  每次输入账号密码没有任何限制，那直接暴力即可 （根据长度判断是否爆破成功）   2、基于前端的验证码绕过(On client)  现在有了验
         </div>
@@ -414,442 +843,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/02/Fuzzing-test/" target="_self">
-          Fuzzing_test
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/02/Fuzzing-test/" target="_self">
-        <div>
-          github上的项目： https://github.com/antonio-morales/Fuzzing101/tree/main 1.Xpdf使用尝试    这是历史的3.02版本。 12345678910111213141516171819202122232425262728293031323334直接下载源码：wget https://dl.xpdfreader.com/old/xpdf
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-02 21:56" pubdate>
-              2026-06-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%BC%8F%E6%B4%9E/" class="category-chain-item">二进制漏洞</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/01/AFL/" target="_self">
-          AFL++
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/01/AFL/" target="_self">
-        <div>
-          AFL++ 是一个 覆盖率引导灰盒 fuzzer。 LLVMAFL++ 需要 LLVM 来在程序编译时自动插入“监控代码”，从而知道模糊测试输入触发了哪些代码路径 123456789101112131415161718传统编译流程:源代码 ↓GCC ↓可执行文件LLVM 也是编译器框架：源代码 ↓Clang(LLVM) ↓LLVM IR ↓机器码 ↓可执行文件  (Clang &#x3D; LLV
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-01 19:40" pubdate>
-              2026-06-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%BC%8F%E6%B4%9E/" class="category-chain-item">二进制漏洞</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/30/CVE-2026-7036/" target="_self">
-          CVE-2026-7036
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/30/CVE-2026-7036/" target="_self">
-        <div>
-          白名单绕过导致的未授权访问  R7WebsSecurityHandler负责对HTPP请求访问的鉴权，但是其源码里先进行了白名单判断，且没有对后续完整路径进行规范，导致的未授权访问。   一旦符合就return 0返回了 抓个包将路径进行伪造即可访问未授权的页面 12345678910GET /public/../system_upgrade.asp HTTP/1.1Host: 192.168.1
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-30 19:36" pubdate>
-              2026-05-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/CVE/" class="category-chain-item">CVE</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/30/CVE-2024-41473/" target="_self">
-          CVE-2024-41473
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/30/CVE-2024-41473/" target="_self">
-        <div>
-          一个简单的命令注入 （在环境搭建时，curl 能拿到页面但是浏览器访问不了，不用管，curl能访问到就说明httpd 已经在回 HTTP 响应了）   真就一个命令拼接就好 exp： 12345678910111213141516import requestsbase_url = &quot;http://192.168.0.1:80&quot;qos_url = base_url + &quot
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-30 13:16" pubdate>
-              2026-05-30
-            </time>
-          </div>
-        
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/pwn/">#pwn</a>
-            
-              <a href="/tags/Iot/">#Iot</a>
-            
-              <a href="/tags/CVE/">#CVE</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/28/%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" target="_self">
-          Tenda A15固件模拟与漏洞复现
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/28/%E5%9B%BA%E4%BB%B6%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" target="_self">
-        <div>
-          果然看师傅们的文章就是好，这篇完美解决之前我第一次想复现tenda CVE时遇到的环境问题。 环境搭建binwalk -Me US_A15V1.0RTL_V15.13.07.13_multi_TD01.bin file bin/httpd   MIPS 32位 小端   我用的qemu-mipsel 123cp $(which qemu-mipsel-static) .sudo chroot .
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-28 15:30" pubdate>
-              2026-05-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="category-chain-item">漏洞复现</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/28/Webserver/" target="_self">
-          Webserver
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/28/Webserver/" target="_self">
-        <div>
-          感觉在当前在IOT的漏洞挖掘中，基本是对httpd等webserver进行挖掘，然后在逆向时，对于其中的很多不太懂，逆向过程会很慢，所以先学习一下webserver。 （以某个真实的Iot设备为例） webserver大多数Iot设备都会内置Web Server以提供web服务（也有例外） webserver核心：在设备或主机上的网络服务程序。 负责：  监听 HTTP&#x2F;HTTPS 端口
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-28 11:00" pubdate>
-              2026-05-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/25/CVE-2026-24115/" target="_self">
-          CVE-2026-24115
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/25/CVE-2026-24115/" target="_self">
-        <div>
-          尝试复现的第一个CVE。 （并非），还是先跟着论坛上的文章去复现好一点，我想自主找一个CVE复现，先是环境手工配很麻烦，后面Ai配出来了，后续需要分析程序执行流，控制自己的输入能稳定达到crash这一步，按道理在IDA打断点一步步控制即可。 ​	看着自己思路挺清晰的，但是干了很久（特别是环境），挫败感也很强，后续有空再来看看吧，对这个有点烦躁了，而且我看论坛有对于tenda其他CVE复现的环境搭建
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-25 20:08" pubdate>
-              2026-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/Iot/CVE/" class="category-chain-item">CVE</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

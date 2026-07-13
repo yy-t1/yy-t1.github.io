@@ -11,6 +11,8 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
+    <link rel="canonical" href="https://yy-t1.github.io/page/3/"/>
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -237,6 +239,372 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+          kernel保护机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/14/pwn/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          SMEP&#x2F;SMAPSMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。 SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。 KASLR&#x2F;FGKASLRKASLR：内核基地址随机。 FGKASLR：每个函数的内存地址都被独立随机化。 KASLR实现机制其是依靠kaslr.c里的一个kernel_randomize_m
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-14 23:25" pubdate>
+              2026-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
+          kernel入门
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/13/pwn/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
+        <div>
+          ​	利用Linux内核中的漏洞，从普通用户态提升到内核态，最终拿到root权限设置控制整个系统。 基础内核kernel：操作系统最核心的部分。 在操作系统课程中也有提到，用户程序不能直接操作硬件（无权限），所以需要依靠内核来完成 其核心任务分为一下五方面：  内存管理 设备驱动管理 进程管理 文件系统管理 系统调用与安全  分级保护环(Ring环)是一种将计算机不同的资源划分至不同权限的模型。（目
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-13 10:12" pubdate>
+              2026-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+          MIPS栈溢出
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+        <div>
+          ​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-12 13:51" pubdate>
+              2026-05-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/07/pwn/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
+          pwn_bug视频总结
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/07/pwn/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
+        <div>
+          ​	总结实操一下pwn_bug师傅的视频（b站）。只是为了学习总结，侵权必删。 这里也贴一下该师傅的视频链接： 【二进制安全 摄像头0day漏洞挖掘入门第一课-哔哩哔哩】 https://b23.tv/KeqObCW 前置fofa上搜索一下设备型号进行资产探测，判断是否有寻找该设备利用的价值。 （注意路由器ip地址会变的问题）     获取并分析固件直接上搜索引擎搜索寻找     解压缩得到相应b
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-07 21:44" pubdate>
+              2026-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/04/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E6%8A%93%E5%8C%85/" target="_self">
+          Android抓包
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E6%8A%93%E5%8C%85/" target="_self">
+        <div>
+          抓包本质：观察APP与服务器之间传输的数据 抓包主要分为四大类    方法 原理 难度 HTTPS    代理抓包 中间人代理 ★ 可   VPN 抓包 本地 VPN 截获 ★★ 可   Root 抓包 底层 tcpdump ★★★ 原始流量   Hook 抓包 Hook API 拿明文 ★★★★ 最强   http：明文传输，抓到的包就是可直接读取的明文 https（HTTP + TLS）：抓到
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-04 11:57" pubdate>
+              2026-05-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/04/Android/Android%20APP/UI%E6%AC%BA%E9%AA%97%E4%B8%8E%E9%92%93%E9%B1%BC/" target="_self">
+          UI欺骗与钓鱼
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/04/Android/Android%20APP/UI%E6%AC%BA%E9%AA%97%E4%B8%8E%E9%92%93%E9%B1%BC/" target="_self">
+        <div>
+          核心思路： 在用户面前显示一个伪造的界面，让用户以为自己在和合法 App 交互，实际上输入的密码、点击的按钮都被攻击者截获了 导出组件的 UI 注入如果一个导出的 Activity 从 Intent extras 中读取字符串直接显示到 UI 上，攻击者可以注入任意内容。 AlertDialog 注入很多 App 用 AlertDialog（Android 提供的标准弹窗组件）显示提示信息。如果弹
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-04 00:14" pubdate>
+              2026-05-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -482,187 +850,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/30/Android/Android%20APP/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" target="_self">
-          四大组件
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/30/Android/Android%20APP/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" target="_self">
-        <div>
-          ​	一个Android App由四大组件为核心构成。每个组件都可以选择是否导出（exported） Activity​	负责用户界面展示，一个屏幕页面对应一个Activity。（app的入口界面–&gt;MainActivity） 12345678&lt;activity          android:name=&quot;com.demo.exportedcomponents.MainAct
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-30 10:10" pubdate>
-              2026-04-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/29/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E8%AE%A4%E8%AF%86/" target="_self">
-          Android认识
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/29/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E8%AE%A4%E8%AF%86/" target="_self">
-        <div>
-          ​	Android是一个完整的操作系统，底层基于Linux内核（基于Linux内核的移动操作系统软件栈），从下到上可以大致分为以下5层 ​	整体利用过程可以看作：应用通过 Framework 调用系统能力，系统能力通过 Native + HAL 操作硬件，最终由 Linux 内核控制真实设备 （其实不太懂，后续慢慢补充，先知道有这几部分） Linux Kernel（Linux 内核层）Androi
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-29 21:26" pubdate>
-              2026-04-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/05/%E5%B7%A5%E5%85%B7/blog%20code/" target="_self">
-          blog code
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/05/%E5%B7%A5%E5%85%B7/blog%20code/" target="_self">
-        <div>
-          1234567891011121314npm install hexo -g #安装Hexonpm update hexo -g #升级hexo init #初始化博客​hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章hexo g == hexo generate #生成hexo s == hexo server #启动服务预览h
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-05 15:48" pubdate>
-              2025-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/06/16/Android/Android 基础/Binder基础/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一个面向 Android 本机进程通信的、高性能、可鉴权、可传对象的 RPC 机制。 Binder本质在做：“跨进程调用”伪装成“本地对象方法调用”  知识前置进程空间一个进程空间分为：  用户空间：数据不可共享 内核空间：数据可共享  （所有进程共用1个内核空间） 在进程内，用户空间与内核空间交互需要依靠系统调用 12copy_from_user（）：将用户空间的数据拷贝到内核空间copy_to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binder基础">
+<meta property="og:url" content="https://yy-t1.github.io/2026/06/16/Android/Android%20%E5%9F%BA%E7%A1%80/Binder%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="一个面向 Android 本机进程通信的、高性能、可鉴权、可传对象的 RPC 机制。 Binder本质在做：“跨进程调用”伪装成“本地对象方法调用”  知识前置进程空间一个进程空间分为：  用户空间：数据不可共享 内核空间：数据可共享  （所有进程共用1个内核空间） 在进程内，用户空间与内核空间交互需要依靠系统调用 12copy_from_user（）：将用户空间的数据拷贝到内核空间copy_to">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616171912997.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616172543999.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616173453864.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616173636471.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616173726524.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616173837219.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616182243276.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616182428215.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616182718537.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616183326733.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616190632583.png">
+<meta property="og:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616190759447.png">
+<meta property="article:published_time" content="2026-06-16T08:19:13.000Z">
+<meta property="article:modified_time" content="2026-06-16T11:08:01.563Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yy-t1.github.io/Binder%E5%9F%BA%E7%A1%80/image-20260616171912997.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Binder基础 - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Binder基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-16 16:19" pubdate>
+          2026年6月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Binder基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>一个面向 Android 本机进程通信的、高性能、可鉴权、可传对象的 RPC 机制。</p>
+<p>Binder本质在做：“跨进程调用”伪装成“本地对象方法调用”</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616171912997.png" srcset="/img/loading.gif" lazyload alt="image-20260616171912997"></p>
+<h2 id="知识前置"><a href="#知识前置" class="headerlink" title="知识前置"></a>知识前置</h2><h3 id="进程空间"><a href="#进程空间" class="headerlink" title="进程空间"></a>进程空间</h3><p>一个进程空间分为：</p>
+<ul>
+<li>用户空间：数据不可共享</li>
+<li>内核空间：数据可共享</li>
+</ul>
+<p>（所有进程共用1个内核空间）</p>
+<p>在进程内，用户空间与内核空间交互需要依靠系统调用</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">copy<span class="hljs-emphasis">_from_user（）：将用户空间的数据拷贝到内核空间</span><br><span class="hljs-emphasis">copy_to_</span>user（）：将内核空间的数据拷贝到用户空间<br></code></pre></td></tr></table></figure>
+
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616172543999.png" srcset="/img/loading.gif" lazyload alt="image-20260616172543999"></p>
+<h3 id="跨进程通信（IPC）"><a href="#跨进程通信（IPC）" class="headerlink" title="跨进程通信（IPC）"></a>跨进程通信（IPC）</h3><p>一个进程不能直接操作或者访问另一个进程，即<code>Android</code>的进程是<strong>相互独立、隔离的</strong>。</p>
+<p>但是进程之间需要进行数据交互与通信，所以需要依靠IPC</p>
+<h3 id="内存映射"><a href="#内存映射" class="headerlink" title="内存映射"></a>内存映射</h3><p>相当于将用户空间一段内存区域映射到内核空间</p>
+<p>映射成功后，用户对这段内存区域的修改可以直接反映到内核空间，内核空间对这段区域的修改也直接反映用户空间</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616173453864.png" srcset="/img/loading.gif" lazyload alt="image-20260616173453864"></p>
+<h2 id="Binder跨进程通信机制"><a href="#Binder跨进程通信机制" class="headerlink" title="Binder跨进程通信机制"></a>Binder跨进程通信机制</h2><p>基于 <code>Client - Server</code> 模式</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616173636471.png" srcset="/img/loading.gif" lazyload alt="image-20260616173636471"></p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616173726524.png" srcset="/img/loading.gif" lazyload alt="image-20260616173726524"></p>
+<h3 id="Binder驱动"><a href="#Binder驱动" class="headerlink" title="Binder驱动"></a>Binder驱动</h3><p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616173837219.png" srcset="/img/loading.gif" lazyload alt="image-20260616173837219"></p>
+<p>核心原理：内存映射</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616182243276.png" srcset="/img/loading.gif" lazyload alt="image-20260616182243276"></p>
+<p>具体步骤：</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616182428215.png" srcset="/img/loading.gif" lazyload alt="image-20260616182428215"></p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616182718537.png" srcset="/img/loading.gif" lazyload alt="image-20260616182718537"></p>
+<h3 id="具体实现原理"><a href="#具体实现原理" class="headerlink" title="具体实现原理"></a>具体实现原理</h3><h4 id="1-注册服务"><a href="#1-注册服务" class="headerlink" title="1.注册服务"></a>1.注册服务</h4><p><code>Server</code>进程通过<code>Binder</code>驱动 向 <code>Service Manager</code>进程注册服务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><code class="hljs java">    <br>    <span class="hljs-type">Binder</span> <span class="hljs-variable">binder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stub</span>();<br>    <span class="hljs-comment">// 步骤1：创建Binder对象 -&gt;&gt;分析1</span><br><br>    <span class="hljs-comment">// 步骤2：创建 IInterface 接口类 的匿名类</span><br>    <span class="hljs-comment">// 创建前，需要预先定义 继承了IInterface 接口的接口 --&gt;分析3</span><br>    <span class="hljs-type">IInterface</span> <span class="hljs-variable">plus</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IPlus</span>()&#123;<br><br>          <span class="hljs-comment">// 确定Client进程需要调用的方法</span><br>          <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span> &#123;<br>               <span class="hljs-keyword">return</span> a+b;<br>         &#125;<br><br>          <span class="hljs-comment">// 实现IInterface接口中唯一的方法</span><br>          <span class="hljs-keyword">public</span> IBinder asBinder（）&#123; <br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span> ;<br>           &#125;<br>&#125;;<br>          <span class="hljs-comment">// 步骤3</span><br>          binder.attachInterface(plus，<span class="hljs-string">&quot;add two int&quot;</span>);<br>         <span class="hljs-comment">// 1. 将（add two int，plus）作为（key,value）对存入到Binder对象中的一个Map&lt;String,IInterface&gt;对象中</span><br>         <span class="hljs-comment">// 2. 之后，Binder对象 可根据add two int通过queryLocalIInterface（）获得对应IInterface对象（即plus）的引用，可依靠该引用完成对请求方法的调用</span><br>        <span class="hljs-comment">// 分析完毕，跳出</span><br><br><br>&lt;-- 分析<span class="hljs-number">1</span>：Stub类 --&gt;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Stub</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Binder</span> &#123;<br>    <span class="hljs-comment">// 继承自Binder类 -&gt;&gt;分析2</span><br><br>          <span class="hljs-comment">// 复写onTransact（）</span><br>          <span class="hljs-meta">@Override</span><br>          <span class="hljs-type">boolean</span> <span class="hljs-title function_">onTransact</span><span class="hljs-params">(<span class="hljs-type">int</span> code, Parcel data, Parcel reply, <span class="hljs-type">int</span> flags)</span>&#123;<br>          <span class="hljs-comment">// 具体逻辑等到步骤3再具体讲解，此处先跳过</span><br>          <span class="hljs-keyword">switch</span> (code) &#123; <br>                <span class="hljs-keyword">case</span> Stub.add： &#123; <br><br>                       data.enforceInterface(<span class="hljs-string">&quot;add two int&quot;</span>); <br><br>                       <span class="hljs-type">int</span>  <span class="hljs-variable">arg0</span>  <span class="hljs-operator">=</span> data.readInt();<br>                       <span class="hljs-type">int</span>  <span class="hljs-variable">arg1</span>  <span class="hljs-operator">=</span> data.readInt();<br><br>                       <span class="hljs-type">int</span>  <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.queryLocalIInterface(<span class="hljs-string">&quot;add two int&quot;</span>) .add( arg0,  arg1); <br><br>                        reply.writeInt(result); <br><br>                        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <br>                  &#125;<br>           &#125; <br>      <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.onTransact(code, data, reply, flags); <br><br>&#125;<br><span class="hljs-comment">// 回到上面的步骤1，继续看步骤2</span><br><br>&lt;-- 分析<span class="hljs-number">2</span>：Binder 类 --&gt;<br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Binder</span> implement IBinder&#123;<br>    <span class="hljs-comment">// Binder机制在Android中的实现主要依靠的是Binder类，其实现了IBinder接口</span><br>    <span class="hljs-comment">// IBinder接口：定义了远程操作对象的基本接口，代表了一种跨进程传输的能力</span><br>    <span class="hljs-comment">// 系统会为每个实现了IBinder接口的对象提供跨进程传输能力</span><br>    <span class="hljs-comment">// 即Binder类对象具备了跨进程传输的能力</span><br><br>        <span class="hljs-keyword">void</span> <span class="hljs-title function_">attachInterface</span><span class="hljs-params">(IInterface plus, String descriptor)</span>；<br>        <span class="hljs-comment">// 作用：</span><br>          <span class="hljs-comment">// 1. 将（descriptor，plus）作为（key,value）对存入到Binder对象中的一个Map&lt;String,IInterface&gt;对象中</span><br>          <span class="hljs-comment">// 2. 之后，Binder对象 可根据descriptor通过queryLocalIInterface（）获得对应IInterface对象（即plus）的引用，可依靠该引用完成对请求方法的调用</span><br><br>        IInterface <span class="hljs-title function_">queryLocalInterface</span><span class="hljs-params">(Stringdescriptor)</span> ；<br>        <span class="hljs-comment">// 作用：根据 参数 descriptor 查找相应的IInterface对象（即plus引用）</span><br><br>        <span class="hljs-type">boolean</span> <span class="hljs-title function_">onTransact</span><span class="hljs-params">(<span class="hljs-type">int</span> code, Parcel data, Parcel reply, <span class="hljs-type">int</span> flags)</span>；<br>        <span class="hljs-comment">// 定义：继承自IBinder接口的</span><br>        <span class="hljs-comment">// 作用：执行Client进程所请求的目标方法（子类需要复写）</span><br>        <span class="hljs-comment">// 参数说明：</span><br>        <span class="hljs-comment">// code：Client进程请求方法标识符。即Server进程根据该标识确定所请求的目标方法</span><br>        <span class="hljs-comment">// data：目标方法的参数。（Client进程传进来的，此处就是整数a和b）</span><br>        <span class="hljs-comment">// reply：目标方法执行后的结果（返回给Client进程）</span><br>         <span class="hljs-comment">// 注：运行在Server进程的Binder线程池中；当Client进程发起远程请求时，远程请求会要求系统底层执行回调该方法</span><br><br>        <span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BinderProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">IBinder</span> &#123;<br>         <span class="hljs-comment">// 即Server进程创建的Binder对象的代理对象类</span><br>         <span class="hljs-comment">// 该类属于Binder的内部类</span><br>        &#125;<br>        <span class="hljs-comment">// 回到分析1原处</span><br>&#125;<br><br>&lt;-- 分析<span class="hljs-number">3</span>：IInterface接口实现类 --&gt;<br><br> <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IPlus</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">IInterface</span> &#123;<br>          <span class="hljs-comment">// 继承自IInterface接口-&gt;&gt;分析4</span><br>          <span class="hljs-comment">// 定义需要实现的接口方法，即Client进程需要调用的方法</span><br>         <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">add</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>;<br><span class="hljs-comment">// 返回步骤2</span><br>&#125;<br><br>&lt;-- 分析<span class="hljs-number">4</span>：IInterface接口类 --&gt;<br><span class="hljs-comment">// 进程间通信定义的通用接口</span><br><span class="hljs-comment">// 通过定义接口，然后再服务端实现接口、客户端调用接口，就可实现跨进程通信。</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">IInterface</span><br>&#123;<br>    <span class="hljs-comment">// 只有一个方法：返回当前接口关联的 Binder 对象。</span><br>    <span class="hljs-keyword">public</span> IBinder <span class="hljs-title function_">asBinder</span><span class="hljs-params">()</span>;<br>&#125;<br>  <span class="hljs-comment">// 回到分析3原处</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>注册服务后，<code>Binder</code>驱动持有 <code>Server</code>进程创建的<code>Binder</code>实体</strong></p>
+<h4 id="2-获取服务"><a href="#2-获取服务" class="headerlink" title="2.获取服务"></a>2.获取服务</h4><p><code>Client</code>进程 使用 某个 <code>service</code>前（此处是 <strong>相加函数</strong>），须 通过<code>Binder</code>驱动 向 <code>ServiceManager</code>进程 获取相应的<code>Service</code>信息</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616183326733.png" srcset="/img/loading.gif" lazyload alt="image-20260616183326733"></p>
+<h4 id="3-使用服务"><a href="#3-使用服务" class="headerlink" title="3.使用服务"></a>3.使用服务</h4><p><strong>1： <code>Client</code>进程 将参数（整数a和b）发送到<code>Server</code>进程</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs armasm"><span class="hljs-comment">// 1. Client进程 将需要传送的数据写入到Parcel对象中</span><br><span class="hljs-comment">// data = 数据 = 目标方法的参数（Client进程传进来的，此处就是整数a和b） + IInterface接口对象的标识符descriptor</span><br>  android.os.Parcel <span class="hljs-meta">data</span> = android.os.Parcel.obtain()<span class="hljs-comment">;</span><br>  <span class="hljs-meta">data</span>.writeInt(a)<span class="hljs-comment">; </span><br>  <span class="hljs-meta">data</span>.writeInt(b)<span class="hljs-comment">; </span><br><br>  <span class="hljs-meta">data</span>.writeInterfaceToken(<span class="hljs-string">&quot;add two int&quot;</span>)<span class="hljs-comment">;；</span><br>  <span class="hljs-comment">// 方法对象标识符让Server进程在Binder对象中根据&quot;add two int&quot;通过queryLocalIInterface（）查找相应的IInterface对象（即Server创建的plus），Client进程需要调用的相加方法就在该对象中</span><br><br>  android.os.Parcel reply = android.os.Parcel.obtain()<span class="hljs-comment">;</span><br>  <span class="hljs-comment">// reply：目标方法执行后的结果（此处是相加后的结果）</span><br><br><span class="hljs-comment">// 2. 通过 调用代理对象的transact（） 将 上述数据发送到Binder驱动</span><br>  binderproxy.transact(Stub.add, <span class="hljs-meta">data</span>, reply, <span class="hljs-number">0</span>)<br>  <span class="hljs-comment">// 参数说明：</span><br>    <span class="hljs-comment">// 1. Stub.add：目标方法的标识符（Client进程 和 Server进程 自身约定，可为任意）</span><br>    <span class="hljs-comment">// 2. data ：上述的Parcel对象</span><br>    <span class="hljs-comment">// 3. reply：返回结果</span><br>    <span class="hljs-comment">// 0：可不管</span><br><br><span class="hljs-comment">// 注：在发送数据后，Client进程的该线程会暂时被挂起</span><br><span class="hljs-comment">// 所以，若Server进程执行的耗时操作，请不要使用主线程，以防止ANR</span><br><br><br><span class="hljs-comment">// 3. Binder驱动根据 代理对象 找到对应的真身Binder对象所在的Server 进程（系统自动执行）</span><br><span class="hljs-comment">// 4. Binder驱动把 数据 发送到Server 进程中，并通知Server 进程执行解包（系统自动执行）</span><br><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>2：<code>Server</code>进程根据<code>Client</code>进要求 调用 目标方法（即加法函数）</strong></p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs aspectj"><span class="hljs-comment">// 1. 收到Binder驱动通知后，Server 进程通过回调Binder对象onTransact（）进行数据解包 &amp; 调用目标方法</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stub</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Binder</span> </span>&#123;<br><br>          <span class="hljs-comment">// 复写onTransact（）</span><br>          <span class="hljs-meta">@Override</span><br>          <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">onTransact</span><span class="hljs-params">(<span class="hljs-keyword">int</span> code, Parcel data, Parcel reply, <span class="hljs-keyword">int</span> flags)</span></span>&#123;<br>          <span class="hljs-comment">// code即在transact（）中约定的目标方法的标识符</span><br><br>          <span class="hljs-keyword">switch</span> (code) &#123; <br>                <span class="hljs-keyword">case</span> Stub.add： &#123; <br>                  <span class="hljs-comment">// a. 解包Parcel中的数据</span><br>                       data.enforceInterface(<span class="hljs-string">&quot;add two int&quot;</span>); <br>                        <span class="hljs-comment">// a1. 解析目标方法对象的标识符</span><br><br>                       <span class="hljs-keyword">int</span>  arg0  = data.readInt();<br>                       <span class="hljs-keyword">int</span>  arg1  = data.readInt();<br>                       <span class="hljs-comment">// a2. 获得目标方法的参数</span><br>                      <br>                       <span class="hljs-comment">// b. 根据&quot;add two int&quot;通过queryLocalIInterface（）获取相应的IInterface对象（即Server创建的plus）的引用，通过该对象引用调用方法</span><br>                       <span class="hljs-keyword">int</span>  result = <span class="hljs-keyword">this</span>.queryLocalIInterface(<span class="hljs-string">&quot;add two int&quot;</span>) .add( arg0,  arg1); <br>                      <br>                        <span class="hljs-comment">// c. 将计算结果写入到reply</span><br>                        reply.writeInt(result); <br>                        <br>                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; <br>                  &#125;<br>           &#125; <br>      <span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.<span class="hljs-title">onTransact</span><span class="hljs-params">(code, data, reply, flags)</span></span>; <br>      <span class="hljs-comment">// 2. 将结算结果返回 到Binder驱动</span><br><br><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>3：<code>Server</code>进程 将目标方法的结果（即加法后的结果）返回给<code>Client</code>进程</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs armasm">  <span class="hljs-comment">// 1. Binder驱动根据 代理对象 沿原路 将结果返回 并通知Client进程获取返回结果</span><br>  <span class="hljs-comment">// 2. 通过代理对象 接收结果（之前被挂起的线程被唤醒）</span><br><br>    binderproxy.transact(Stub.ADD, <span class="hljs-meta">data</span>, reply, <span class="hljs-number">0</span>)；<br>    reply.readException()<span class="hljs-comment">;；</span><br>    result = reply.readInt()；<br>          &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="使用Binder进行RPC调用"><a href="#使用Binder进行RPC调用" class="headerlink" title="使用Binder进行RPC调用"></a>使用Binder进行RPC调用</h2><h3 id="初始化Binder"><a href="#初始化Binder" class="headerlink" title="初始化Binder"></a>初始化Binder</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arduino">每个客户端首先获取openBinder 设备，然后使用返回的文件描述符创建内存映射：<br><span class="hljs-type">int</span> fd = <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;/dev/binder&quot;</span>, O_RDWR, <span class="hljs-number">0</span>);<br><span class="hljs-type">void</span> *map = <span class="hljs-built_in">mmap</span>(<span class="hljs-literal">NULL</span>, <span class="hljs-number">4096</span>, PROT_READ, MAP_PRIVATE, ctx-&gt;fd, <span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+
+<p>这部分内存用于存储传入事务数据</p>
+<p>（驱动写，用户只读）</p>
+<h3 id="发送和接收事务"><a href="#发送和接收事务" class="headerlink" title="发送和接收事务"></a>发送和接收事务</h3><p>客户端不直接调用系统调用，而是通过向 Binder 驱动程序发送 ioctl 请求</p>
+<p>ioctl 请求的参数是一个<code>struct binder_write_read</code>对象：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">struct binder_write_read bwr = &#123;<br>    <span class="hljs-string">.write_size</span> = <span class="hljs-string">...</span>,<br>    <span class="hljs-string">.write_buffer</span> = <span class="hljs-string">...</span>,<br>    <span class="hljs-string">.read_size</span> = <span class="hljs-string">...</span>,<br>    <span class="hljs-string">.read_buffer</span> = <span class="hljs-string">...</span><br>&#125;;<br><span class="hljs-string">//</span>发送缓冲区<br><span class="hljs-string">//</span>接收缓冲区<br><br>ioctl<span class="hljs-params">(fd, BINDER_WRITE_READ, &amp;bwr)</span>;<br></code></pre></td></tr></table></figure>
+
+<p>一次ioctl可以同时完成write和read</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">write_buffer</span><br>   ↓<br>发送给驱动<br><br>read_buffer<br>   ↓<br>驱动返回给你<br></code></pre></td></tr></table></figure>
+
+<h3 id="与其他进行进行联系"><a href="#与其他进行进行联系" class="headerlink" title="与其他进行进行联系"></a>与其他进行进行联系</h3><p>Binder 使用 Node 和 Ref 等对象来管理进程之间的通信通道。</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616190632583.png" srcset="/img/loading.gif" lazyload alt="image-20260616190632583"></p>
+<p>ServiceManager：所有服务启动时都会讲自己的Node注册给它</p>
+<p><img src="/../../Binder%E5%9F%BA%E7%A1%80/image-20260616190759447.png" srcset="/img/loading.gif" lazyload alt="image-20260616190759447"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/carson_ho/article/details/73560642">https://blog.csdn.net/carson_ho/article/details/73560642</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/719fc4758813">https://www.jianshu.com/p/719fc4758813</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/myloveasuka/article/details/148957812">https://blog.csdn.net/myloveasuka/article/details/148957812</a></p>
+<p><a target="_blank" rel="noopener" href="https://androidoffsec.withgoogle.com/posts/attacking-android-binder-analysis-and-exploitation-of-cve-2023-20938/#binder-device-driver-devbinder">https://androidoffsec.withgoogle.com/posts/attacking-android-binder-analysis-and-exploitation-of-cve-2023-20938/#binder-device-driver-devbinder</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Binder基础</div>
+      <div>https://yy-t1.github.io/2026/06/16/Android/Android 基础/Binder基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/06/16/Binder%E6%BC%8F%E6%B4%9E/" title="Binder漏洞">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Binder漏洞</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/06/%E5%B7%A5%E5%85%B7/sqlmap/" title="sqlmap">
+                        <span class="hidden-mobile">sqlmap</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
