@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
-    <link rel="canonical" href="https://yy-t1.github.io/2026/06/24/Android/靶场/InjuredAndroid/"/>
+    <link rel="canonical" href="https://yy-t1.github.io/2026/07/22/工具/nmap/"/>
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -21,15 +21,15 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="bsahfm的个人博客">
+    <meta name="description" content="Nmap 常用参数使用指南nmap 是用于网络资产发现、端口扫描和服务识别的工具。仅应在自己拥有或已获明确授权的网络与主机上使用。 基本语法1nmap [选项] &lt;目标&gt;  目标可以是单个 IP、域名、CIDR 网段或 IP 范围： 1234nmap 192.168.1.10nmap example.comnmap 192.168.1.0&#x2F;24nmap 192.168.1.1-100">
 <meta property="og:type" content="article">
-<meta property="og:title" content="InjuredAndroid">
-<meta property="og:url" content="https://yy-t1.github.io/2026/06/24/Android/%E9%9D%B6%E5%9C%BA/InjuredAndroid/index.html">
+<meta property="og:title" content="nmap">
+<meta property="og:url" content="https://yy-t1.github.io/2026/07/22/%E5%B7%A5%E5%85%B7/nmap/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="bsahfm的个人博客">
+<meta property="og:description" content="Nmap 常用参数使用指南nmap 是用于网络资产发现、端口扫描和服务识别的工具。仅应在自己拥有或已获明确授权的网络与主机上使用。 基本语法1nmap [选项] &lt;目标&gt;  目标可以是单个 IP、域名、CIDR 网段或 IP 范围： 1234nmap 192.168.1.10nmap example.comnmap 192.168.1.0&#x2F;24nmap 192.168.1.1-100">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-06-24T14:11:25.000Z">
-<meta property="article:modified_time" content="2026-06-24T14:20:44.360Z">
+<meta property="article:published_time" content="2026-07-22T09:08:29.000Z">
+<meta property="article:modified_time" content="2026-07-22T09:08:56.627Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -39,7 +39,7 @@
   
         <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
   
-  <title>InjuredAndroid - bsahfm</title>
+  <title>nmap - bsahfm</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="InjuredAndroid"></span>
+            <span id="subtitle" data-typed-text="nmap"></span>
           
         </div>
 
@@ -229,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-06-24 22:11" pubdate>
-          2026年6月24日 晚上
+        <time datetime="2026-07-22 17:08" pubdate>
+          2026年7月22日 下午
         </time>
       </span>
     
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          970 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -298,12 +298,90 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">InjuredAndroid</h1>
+            <h1 id="seo-header">nmap</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="Nmap-常用参数使用指南"><a href="#Nmap-常用参数使用指南" class="headerlink" title="Nmap 常用参数使用指南"></a>Nmap 常用参数使用指南</h1><p><code>nmap</code> 是用于网络资产发现、端口扫描和服务识别的工具。仅应在自己拥有或已获明确授权的网络与主机上使用。</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">nmap [选项] <span class="hljs-tag">&lt;<span class="hljs-name">目标</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>目标可以是单个 IP、域名、CIDR 网段或 IP 范围：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.10</span><br><span class="hljs-attribute">nmap</span> example.com<br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.0</span>/<span class="hljs-number">24</span><br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.1</span>-<span class="hljs-number">100</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="常用扫描类型"><a href="#常用扫描类型" class="headerlink" title="常用扫描类型"></a>常用扫描类型</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-sS</code></td>
+<td>TCP SYN 扫描，常用且效率较高，通常需管理员权限</td>
+<td><code>nmap -sS 192.168.1.10</code></td>
+</tr>
+<tr>
+<td><code>-sT</code></td>
+<td>TCP Connect 扫描，不需要原始套接字权限</td>
+<td><code>nmap -sT 192.168.1.10</code></td>
+</tr>
+<tr>
+<td><code>-sU</code></td>
+<td>UDP 端口扫描，速度通常较慢</td>
+<td><code>nmap -sU 192.168.1.10</code></td>
+</tr>
+<tr>
+<td><code>-sn</code></td>
+<td>主机发现，不做端口扫描</td>
+<td><code>nmap -sn 192.168.1.0/24</code></td>
+</tr>
+<tr>
+<td><code>-sV</code></td>
+<td>识别开放端口上的服务和版本</td>
+<td><code>nmap -sV 192.168.1.10</code></td>
+</tr>
+<tr>
+<td><code>-O</code></td>
+<td>尝试识别目标操作系统</td>
+<td><code>nmap -O 192.168.1.10</code></td>
+</tr>
+<tr>
+<td><code>-A</code></td>
+<td>启用较全面的探测，包括版本、系统识别、脚本和路由跟踪</td>
+<td><code>nmap -A 192.168.1.10</code></td>
+</tr>
+</tbody></table>
+<h2 id="指定端口"><a href="#指定端口" class="headerlink" title="指定端口"></a>指定端口</h2><p>默认情况下，Nmap 会扫描常见的 1000 个 TCP 端口。可以通过 <code>-p</code> 控制范围：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 扫描一个端口</span><br><span class="hljs-attribute">nmap</span> -p <span class="hljs-number">80</span> <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 扫描多个端口</span><br><span class="hljs-attribute">nmap</span> -p <span class="hljs-number">22</span>,<span class="hljs-number">80</span>,<span class="hljs-number">443</span> <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 扫描连续端口</span><br><span class="hljs-attribute">nmap</span> -p <span class="hljs-number">1</span>-<span class="hljs-number">1024</span> <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 扫描全部 TCP 端口</span><br><span class="hljs-attribute">nmap</span> -p- <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 扫描最常见的 100 个端口</span><br><span class="hljs-attribute">nmap</span> --top-ports <span class="hljs-number">100</span> <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><p>在扫描端口前，Nmap 默认会先判断主机是否在线。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 仅发现局域网中存活的主机</span><br><span class="hljs-attribute">nmap</span> -sn <span class="hljs-number">192.168.1.0</span>/<span class="hljs-number">24</span><br><br><span class="hljs-comment"># 跳过主机发现，直接尝试扫描</span><br><span class="hljs-attribute">nmap</span> -Pn <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<p><code>-Pn</code> 适合目标禁用了 ICMP 回应、但你确认其可能在线的场景；对大网段使用会明显增加扫描时间。</p>
+<h2 id="输出与结果保存"><a href="#输出与结果保存" class="headerlink" title="输出与结果保存"></a>输出与结果保存</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 普通输出保存到文件</span><br><span class="hljs-attribute">nmap</span> -<span class="hljs-literal">oN</span> result.txt <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># XML 格式，便于其他工具解析</span><br><span class="hljs-attribute">nmap</span> -oX result.xml <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 同时生成多种常用格式</span><br><span class="hljs-attribute">nmap</span> -oA scan-result <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<p><code>-oA scan-result</code> 会生成 <code>.nmap</code>、<code>.xml</code> 和 <code>.gnmap</code> 三种文件。</p>
+<h2 id="扫描速度与超时"><a href="#扫描速度与超时" class="headerlink" title="扫描速度与超时"></a>扫描速度与超时</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 使用预设时序，T3 为默认，T4 常用于稳定的内网</span><br><span class="hljs-attribute">nmap</span> -T4 <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 控制单个主机最长扫描时间</span><br><span class="hljs-attribute">nmap</span> --host-timeout <span class="hljs-number">2</span>m <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 限制并行探测速率</span><br><span class="hljs-attribute">nmap</span> --max-rate <span class="hljs-number">100</span> <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<p>常用时序范围为 <code>-T0</code> 至 <code>-T5</code>。一般建议从默认设置或 <code>-T3</code> 开始；授权内网环境可酌情使用 <code>-T4</code>。过快扫描容易造成误报、漏报或影响设备稳定性。</p>
+<h2 id="NSE-脚本"><a href="#NSE-脚本" class="headerlink" title="NSE 脚本"></a>NSE 脚本</h2><p>Nmap Scripting Engine（NSE）可用于安全检查和服务信息收集。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 使用默认脚本</span><br><span class="hljs-attribute">nmap</span> -sC <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 指定类别脚本</span><br><span class="hljs-attribute">nmap</span> --script safe <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 对 Web 服务执行 HTTP 信息收集脚本</span><br><span class="hljs-attribute">nmap</span> --script http-title,http-headers -p <span class="hljs-number">80</span>,<span class="hljs-number">443</span> <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<p>优先使用 <code>safe</code> 类别或以信息收集为目的的脚本。运行可能改变目标状态、造成负载或具有利用性质的脚本前，必须取得明确授权。</p>
+<h2 id="推荐命令示例"><a href="#推荐命令示例" class="headerlink" title="推荐命令示例"></a>推荐命令示例</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># 快速查看单台主机的常见开放端口</span><br><span class="hljs-attribute">nmap</span> -T3 <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 检查服务版本与常见脚本信息</span><br><span class="hljs-attribute">nmap</span> -sV -sC -p <span class="hljs-number">22</span>,<span class="hljs-number">80</span>,<span class="hljs-number">443</span> <span class="hljs-number">192.168.1.10</span><br><br><span class="hljs-comment"># 扫描内网网段中的在线主机</span><br><span class="hljs-attribute">nmap</span> -sn <span class="hljs-number">192.168.1.0</span>/<span class="hljs-number">24</span><br><br><span class="hljs-comment"># 对授权主机进行完整 TCP 端口和服务识别</span><br><span class="hljs-attribute">nmap</span> -sS -sV -p- -T3 -oA host-scan <span class="hljs-number">192.168.1.10</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="阅读结果"><a href="#阅读结果" class="headerlink" title="阅读结果"></a>阅读结果</h2><p>常见端口状态：</p>
+<ul>
+<li><code>open</code>：端口开放，存在可访问的服务。</li>
+<li><code>closed</code>：主机可达，但该端口没有服务监听。</li>
+<li><code>filtered</code>：Nmap 无法判断端口状态，常见原因是防火墙或访问控制。</li>
+<li><code>open|filtered</code>：无法区分端口是开放还是被过滤。</li>
+<li><code>closed|filtered</code>：常见于部分 UDP 扫描结果，无法明确判断。</li>
+</ul>
+<p>实际工作中，建议先用 <code>-sn</code> 确认资产范围，再针对目标使用 <code>-sV</code>、指定端口范围及 <code>-oA</code> 保存结果，避免直接对大范围网络执行高强度扫描。</p>
+
                 
               </div>
             
@@ -321,15 +399,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/Android/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
-  
-  
-
   
 
       </span>
@@ -348,8 +419,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>InjuredAndroid</div>
-      <div>https://yy-t1.github.io/2026/06/24/Android/靶场/InjuredAndroid/</div>
+      <div>nmap</div>
+      <div>https://yy-t1.github.io/2026/07/22/工具/nmap/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +432,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年6月24日</div>
+          <div>2026年7月22日</div>
         </div>
       
       
@@ -393,18 +464,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/09/pwn/%E6%AF%94%E8%B5%9B/ciscn/" title="2026-ciscn半决赛（复现）">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2026-ciscn半决赛（复现）</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/06/18/Android/Android%20JNI/JNI/" title="JNI">
-                        <span class="hidden-mobile">JNI</span>
+                      <a href="/2026/07/22/web/%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A8/" title="浏览器">
+                        <span class="hidden-mobile">浏览器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

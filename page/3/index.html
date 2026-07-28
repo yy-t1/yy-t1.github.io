@@ -248,6 +248,74 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/05/30/pwn/Iot/CVE/CVE-2026-7036/" target="_self">
+          CVE-2026-7036
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/30/pwn/Iot/CVE/CVE-2026-7036/" target="_self">
+        <div>
+          白名单绕过导致的未授权访问  R7WebsSecurityHandler负责对HTPP请求访问的鉴权，但是其源码里先进行了白名单判断，且没有对后续完整路径进行规范，导致的未授权访问。   一旦符合就return 0返回了 抓个包将路径进行伪造即可访问未授权的页面 12345678910GET /public/../system_upgrade.asp HTTP/1.1Host: 192.168.1
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-30 19:36" pubdate>
+              2026-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/Iot/" class="category-chain-item">Iot</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/Iot/CVE/" class="category-chain-item">CVE</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2026/05/30/pwn/Iot/CVE/CVE-2024-41473/" target="_self">
           CVE-2024-41473
         </a>
@@ -812,72 +880,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
-          MIPS栈溢出
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
-        <div>
-          ​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-12 13:51" pubdate>
-              2026-05-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
