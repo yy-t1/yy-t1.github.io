@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/06/02/pwn/实战/实战基础/Fuzzing-test/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="github上的项目： https:&#x2F;&#x2F;github.com&#x2F;antonio-morales&#x2F;Fuzzing101&#x2F;tree&#x2F;main 1.Xpdf使用尝试    这是历史的3.02版本。 12345678910111213141516171819202122232425262728293031323334直接下载源码：wget https:&#x2F;&#x2F;dl.xpdfreader.com&#x2F;old&#x2F;xpdf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fuzzing_test">
+<meta property="og:url" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="github上的项目： https:&#x2F;&#x2F;github.com&#x2F;antonio-morales&#x2F;Fuzzing101&#x2F;tree&#x2F;main 1.Xpdf使用尝试    这是历史的3.02版本。 12345678910111213141516171819202122232425262728293031323334直接下载源码：wget https:&#x2F;&#x2F;dl.xpdfreader.com&#x2F;old&#x2F;xpdf">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611102820129.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611105117818.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611111729969.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611112110825.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611113409257.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611162603521.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611164943602.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611172328896.png">
+<meta property="og:image" content="https://yy-t1.github.io/Fuzzing-test/image-20260618212650081.png">
+<meta property="og:image" content="https://yy-t1.github.io/Fuzzing-test/image-20260623152438384.png">
+<meta property="article:published_time" content="2026-06-02T13:56:01.000Z">
+<meta property="article:modified_time" content="2026-08-07T18:06:04.462Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yy-t1.github.io/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611102820129.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+        <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
+  
+  <title>Fuzzing_test - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Fuzzing_test"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-06-02 21:56" pubdate>
+          2026年6月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Fuzzing_test</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>github上的项目：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/antonio-morales/Fuzzing101/tree/main">https://github.com/antonio-morales/Fuzzing101/tree/main</a></p>
+<h2 id="1-Xpdf"><a href="#1-Xpdf" class="headerlink" title="1.Xpdf"></a>1.Xpdf</h2><h3 id="使用尝试"><a href="#使用尝试" class="headerlink" title="使用尝试"></a>使用尝试</h3><img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611102820129.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611102820129">
+
+
+
+<p>这是历史的3.02版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs bash">直接下载源码：<br>wget https://dl.xpdfreader.com/old/xpdf-3.02.tar.gz<br><br><span class="hljs-built_in">cd</span> xpdf-3.02<br><br>./configure --prefix=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/Desktop/fuzz/xpdf/xpdf-3.02&quot;</span><br>./configure负责：<br>检查系统环境<br>检查编译器（gcc/g++）<br>检查依赖库<br>生成 Makefile<br>--prefix=指定安装目录<br><br>编译安装<br>make<br>make install<br><br>下载pdf示例：<br><span class="hljs-built_in">mkdir</span> pdf_examples &amp;&amp; <span class="hljs-built_in">cd</span> pdf_examples<br><br>可以查看有哪些可执行程序<br><span class="hljs-built_in">cd</span> xpdf<br><span class="hljs-built_in">ls</span><br><br>添加 -h可以查看用法<br>pdfimages<br>pdfinfo<br>pdffonts<br>pdftoppm<br>pdftops<br>pdftotext<br>xpdf<br><br><br></code></pre></td></tr></table></figure>
+
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611105117818.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611105117818">
+
+<p>正常使用尝试，可以正常使用。</p>
+<p>那么就可以着手开始使用fuzz++进行编译</p>
+<h3 id="fuzz-编译"><a href="#fuzz-编译" class="headerlink" title="fuzz++编译"></a>fuzz++编译</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs bash">先清理之前编译好的文件<br>make clean<br><br>选择llvm编译器:<br>llvm-config --version<br><span class="hljs-built_in">ls</span> /usr/bin/llvm-config*<br><br><span class="hljs-built_in">export</span> LLVM_CONFIG=<span class="hljs-string">&quot;llvm-config&quot;</span><br><br>临时指定 C 编译器和 C++ 编译器为 AFL++ 的编译器；<br><span class="hljs-built_in">which</span> afl-clang-fast<br><span class="hljs-built_in">which</span> afl-clang-fast++<br><br>CC=afl-clang-fast \<br>CXX=afl-clang-fast++ \<br>./configure --prefix=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/Desktop/fuzz/xpdf/xpdf-3.02/excu&quot;</span><br>make<br>make install<br><br>编译好就可以执行了<br>afl-fuzz -i /home/tyy/桌面/fuzz/xpdf/pdf_examples/ \<br>         -o /home/tyy/桌面/fuzz/xpdf/out \<br>         -s 123 \<br>         -- \<br>         /home/tyy/桌面/fuzz/xpdf/xpdf-3.02/excu/bin/pdftotext \<br>         @@ \<br>         /home/tyy/桌面/fuzz/xpdf/output<br></code></pre></td></tr></table></figure>
+
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611111729969.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611111729969">
+
+
+
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611112110825.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611112110825">
+
+<p>AFL++无法获得崩溃信息，被系统截获了</p>
+<p>让系统不处理崩溃即可</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo su<br>echo core &gt;<span class="hljs-regexp">/proc/</span>sys<span class="hljs-regexp">/kernel/</span>core_pattern<br><span class="hljs-keyword">exit</span><br></code></pre></td></tr></table></figure>
+
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611113409257.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611113409257">
+
+<h3 id="gdb调试"><a href="#gdb调试" class="headerlink" title="gdb调试"></a>gdb调试</h3><p>（没耐心了，等下一个再复习)</p>
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611162603521.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611162603521">
+
+
+
+<h2 id="2-libexif"><a href="#2-libexif" class="headerlink" title="2.libexif"></a>2.libexif</h2><h3 id="使用尝试-1"><a href="#使用尝试-1" class="headerlink" title="使用尝试"></a>使用尝试</h3><p>这次下载下来没有configure文件，只有configure.ac</p>
+<p>所以先要生成configure</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs routeros">cd libexif-libexif-0_6_14-release<br><br>安装依赖<br>sudo apt-<span class="hljs-built_in">get</span> install autopoint libtool gettext libpopt-dev<br><br>生成configure文件<br>autoreconf -fvi<br><br>关闭动态库<br>./configure <span class="hljs-attribute">--enable-shared</span>=<span class="hljs-literal">no</span> <span class="hljs-attribute">--prefix</span>=<span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libexif/libexif-0_6_14-release&quot;</span><br><br>make<br>make install<br><br><span class="hljs-built_in">find</span> . -name <span class="hljs-string">&quot;libexif.a&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>编译空余初步了解一下：</p>
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611164943602.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611164943602">
+
+<p>是一个开源库，而不是什么二进制程序</p>
+<p>这里考察的就是对开源库的fuzz。</p>
+<p>既然是库函数，所以就需要能调用这个库函数的程序</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs swift">先获得一些<span class="hljs-type">EXIF样本</span><br>wget https:<span class="hljs-comment">//github.com/ianare/exif-samples/archive/refs/heads/master.zip</span><br>unzip master.zip<br><br>这里使用的是exif<br>wget https:<span class="hljs-comment">//github.com/libexif/exif/archive/refs/tags/exif-0_6_15-release.tar.gz</span><br>tar <span class="hljs-operator">-</span>xzvf exif<span class="hljs-operator">-</span><span class="hljs-number">0_6_15</span><span class="hljs-operator">-</span>release.tar.gz<br><br>cd exif<span class="hljs-operator">-</span>exif<span class="hljs-operator">-</span><span class="hljs-number">0_6_15</span><span class="hljs-operator">-</span>release<span class="hljs-operator">/</span><br>autoreconf <span class="hljs-operator">-</span>fvi<br><br>（pkg<span class="hljs-operator">-</span>config）告诉编译器怎么链接库<br><span class="hljs-operator">./</span>configure <span class="hljs-operator">--</span>enable<span class="hljs-operator">-</span>shared<span class="hljs-operator">=</span>no <span class="hljs-operator">--</span><span class="hljs-keyword">prefix</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libexif/libexif-0_6_14-release/install&quot;</span> <span class="hljs-type">PKG_CONFIG_PATH</span><span class="hljs-operator">=/</span>home<span class="hljs-regexp">/tyy/</span>桌面<span class="hljs-regexp">/fuzz/</span>libexif<span class="hljs-regexp">/libexif-0_6_14-release/</span>lib<span class="hljs-operator">/</span>pkgconfig<br><br>make<br>make install<br><br><span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libexif/</span>libexif<span class="hljs-operator">-</span><span class="hljs-number">0_6_14</span><span class="hljs-operator">-</span>release<span class="hljs-regexp">/install/</span>bin<span class="hljs-regexp">/exif /</span>home<span class="hljs-regexp">/tyy/</span>桌面<span class="hljs-regexp">/fuzz/</span>libexif<span class="hljs-regexp">/libexif-0_6_14-release/</span>example<span class="hljs-regexp">/exif-samples-master/</span>jpg<span class="hljs-operator">/</span><span class="hljs-type">Canon_40D_photoshop_import</span>.jpg<br></code></pre></td></tr></table></figure>
+
+<img src="/2026/06/02/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/Fuzzing-test/image-20260611172328896.png" srcset="/img/loading.gif" lazyload class="" title="image-20260611172328896">
+
+<p>依旧尝试使用</p>
+<h3 id="fuzz编译"><a href="#fuzz编译" class="headerlink" title="fuzz编译"></a>fuzz编译</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros">make clean<br><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">LLVM_CONFIG</span>=<span class="hljs-string">&quot;llvm-config&quot;</span><br><br><span class="hljs-attribute">CC</span>=afl-clang-lto ./configure <span class="hljs-attribute">--enable-shared</span>=<span class="hljs-literal">no</span> <span class="hljs-attribute">--prefix</span>=<span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libexif/libexif-0_6_14-release/install&quot;</span> <br><br>make<br>make install<br><br><br><br>cd exif-exif-0_6_15-release<br>make clean<br><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">LLVM_CONFIG</span>=<span class="hljs-string">&quot;llvm-config-19&quot;</span><br><br><span class="hljs-attribute">CC</span>=afl-clang-lto ./configure <span class="hljs-attribute">--enable-shared</span>=<span class="hljs-literal">no</span> <span class="hljs-attribute">--prefix</span>=<span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libexif/libexif-0_6_14-release/install&quot;</span> <span class="hljs-attribute">PKG_CONFIG_PATH</span>=/home/tyy/桌面/fuzz/libexif/libexif-0_6_14-release/lib/pkgconfig<br><br>make<br>make install<br></code></pre></td></tr></table></figure>
+
+<p>开测：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">afl-fuzz -i <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libexif/</span>libexif-<span class="hljs-number">0</span>_6_14-release<span class="hljs-regexp">/example/</span>exif-samples-master/jpg \<br>         -o <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libexif/</span>libexif-<span class="hljs-number">0</span>_6_14-release/out \<br>         -s <span class="hljs-number">123</span> \<br>         -- \<br>         <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libexif/</span>libexif-<span class="hljs-number">0</span>_6_14-release<span class="hljs-regexp">/install/</span>bin/exif \<br>         @@ \<br>         <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libexif/</span>libexif-<span class="hljs-number">0</span>_6_14-release/output<br></code></pre></td></tr></table></figure>
+
+<h2 id="3-TCPdump"><a href="#3-TCPdump" class="headerlink" title="3.TCPdump"></a>3.TCPdump</h2><h3 id="关键"><a href="#关键" class="headerlink" title="关键"></a>关键</h3><p>Asan–内存错误检测工具</p>
+<h3 id="fuzz"><a href="#fuzz" class="headerlink" title="fuzz"></a>fuzz</h3><p>旧版的没编译成功，直接换新版的尝试</p>
+<p>TCPdump还需要使用libpcap</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">tcpdump</span><br>   ↓ 调用<br>libpcap<br>   ↓ 调用<br>Linux内核抓包接口(AF_PACKET/BPF等)<br>   ↓<br>网卡<br></code></pre></td></tr></table></figure>
+
+<p>操作和之前一样，只是在make前加上AFL_USE_ASAN&#x3D;1即可</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">afl-fuzz -m none -i <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/tcpdump/</span>tcpdump<span class="hljs-regexp">/tests -o /</span>home<span class="hljs-regexp">/tyy/</span>桌面<span class="hljs-regexp">/fuzz/</span>tcpdump<span class="hljs-regexp">/out -- /</span>home<span class="hljs-regexp">/tyy/</span>桌面<span class="hljs-regexp">/fuzz/</span>tcpdump<span class="hljs-regexp">/install_b/</span>bin/tcpdump -vvvvXX -ee -nn -r @@<br></code></pre></td></tr></table></figure>
+
+<p>新版的不知道能不能fuzz到，让它fuzz一会吧，扫不到就算了。</p>
+<p><img src="/../../Fuzzing-test/image-20260618212650081.png" srcset="/img/loading.gif" lazyload alt="image-20260618212650081"></p>
+<p>fuzz不了一点</p>
+<p>fuzz了几天了依旧没crash。</p>
+<h2 id="4-libtiff"><a href="#4-libtiff" class="headerlink" title="4.libtiff"></a>4.libtiff</h2><h3 id="关键-1"><a href="#关键-1" class="headerlink" title="关键"></a>关键</h3><p>LCOV</p>
+<p>可以测试代码覆盖率</p>
+<h3 id="fuzz-1"><a href="#fuzz-1" class="headerlink" title="fuzz"></a>fuzz</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">wget https:<span class="hljs-string">//download.osgeo.org/libtiff/tiff-4.0.4.tar.gz</span><br>tar -xzvf tiff-4.0.4.tar.gz<br><br><span class="hljs-keyword">cd</span> tiff-4.0.4/<br><span class="hljs-string">./configure</span> <span class="hljs-params">--prefix=</span><span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libctiff/install&quot;</span> <span class="hljs-params">--disable-shared</span><br>make<br>make install<br><br>测试使用<br><span class="hljs-string">./install/bin/tiffinfo</span> -D -j -c -r -s -w <span class="hljs-string">/home/tyy/</span>桌面<span class="hljs-string">/fuzz/libctiff/tiff-4.0.4/test/images/palette-1c-1b.tiff</span><br></code></pre></td></tr></table></figure>
+
+<p>locv</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">sudo apt install lcov<br><br>新构建 libTIFF<br>rm install+make clean<br><br>CFLAGS=<span class="hljs-string">&quot;--coverage&quot;</span> LDFLAGS=<span class="hljs-string">&quot;--coverage&quot;</span> <span class="hljs-string">./configure</span> <span class="hljs-params">--prefix=</span><span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libctiff/install&quot;</span> <span class="hljs-params">--disable-shared</span><br>make<br>make install<br><br>收集代码覆盖率数据<br><span class="hljs-keyword">cd</span> tiff-4.0.4<br>lcov <span class="hljs-params">--zerocounters</span> <span class="hljs-params">--directory</span> <span class="hljs-string">./</span><br>lcov <span class="hljs-params">--capture</span> <span class="hljs-params">--initial</span> <span class="hljs-params">--directory</span> <span class="hljs-string">./</span> <span class="hljs-params">--output-file</span> app.info<br><span class="hljs-string">/home/tyy/</span>桌面<span class="hljs-string">/fuzz/libctiff/install/bin/tiffinfo</span> -D -j -c -r -s -w <span class="hljs-string">/home/tyy/</span>桌面<span class="hljs-string">/fuzz/libctiff/tiff-4.0.4/test/images/palette-1c-1b.tiff</span><br>lcov <span class="hljs-params">--no-checksum</span> <span class="hljs-params">--directory</span> <span class="hljs-string">./</span> <span class="hljs-params">--capture</span> <span class="hljs-params">--output-file</span> app2.info<br><br>以HTML格式输出<br>genhtml \<br>    <span class="hljs-params">--legend</span> \<br>    <span class="hljs-params">--output-directory</span> <span class="hljs-string">./html-coverage</span> \<br>    <span class="hljs-string">./app2.info</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/../../Fuzzing-test/image-20260623152438384.png" srcset="/img/loading.gif" lazyload alt="image-20260623152438384"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs swift">rm install<span class="hljs-operator">+</span>make clean<br><br>export <span class="hljs-type">LLVM_CONFIG</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;llvm-config&quot;</span><br><span class="hljs-type">CC</span><span class="hljs-operator">=</span>afl<span class="hljs-operator">-</span>clang<span class="hljs-operator">-</span>lto <span class="hljs-operator">./</span>configure <span class="hljs-operator">--</span><span class="hljs-keyword">prefix</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;/home/tyy/桌面/fuzz/libctiff/install&quot;</span> <span class="hljs-operator">--</span>disable<span class="hljs-operator">-</span>shared<br><span class="hljs-type">AFL_USE_ASAN</span><span class="hljs-operator">=</span><span class="hljs-number">1</span> make <span class="hljs-operator">-</span>j4<br><span class="hljs-type">AFL_USE_ASAN</span><span class="hljs-operator">=</span><span class="hljs-number">1</span> make install<br><br>afl<span class="hljs-operator">-</span>fuzz <span class="hljs-operator">-</span>m none <span class="hljs-operator">-</span>i <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libctiff/</span>test<span class="hljs-regexp">/images/</span> <span class="hljs-operator">-</span>o <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libctiff/</span>out<span class="hljs-operator">/</span> <span class="hljs-operator">-</span>s <span class="hljs-number">123</span> <span class="hljs-operator">--</span> <span class="hljs-regexp">/home/</span>tyy<span class="hljs-regexp">/桌面/</span>fuzz<span class="hljs-regexp">/libctiff/</span>install<span class="hljs-regexp">/bin/</span>tiffinfo <span class="hljs-operator">-</span><span class="hljs-type">D</span> <span class="hljs-operator">-</span>j <span class="hljs-operator">-</span>c <span class="hljs-operator">-</span>r <span class="hljs-operator">-</span>s <span class="hljs-operator">-</span>w @@<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-LibXML2"><a href="#5-LibXML2" class="headerlink" title="5.LibXML2"></a>5.LibXML2</h2><h3 id="关键-2"><a href="#关键-2" class="headerlink" title="关键"></a>关键</h3><p>这一关主要学会创建自定义字典</p>
+<p>样本优先会从自定义字典里的Token进行插入与拼接</p>
+<h3 id="fuzz-2"><a href="#fuzz-2" class="headerlink" title="fuzz"></a>fuzz</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">https:<span class="hljs-string">//github.com/GNOME/libxml2/releases/tag/v2.9.4</span><br><br>CC=afl-clang-lto CXX=afl-clang-lto++ CFLAGS=<span class="hljs-string">&quot;-fsanitize=address&quot;</span> CXXFLAGS=<span class="hljs-string">&quot;-fsanitize=address&quot;</span> LDFLAGS=<span class="hljs-string">&quot;-fsanitize=address&quot;</span> <span class="hljs-string">./configure</span> <span class="hljs-params">--prefix=</span><span class="hljs-string">&quot;/home/tyy/桌面/fuzz/LibXML2/install&quot;</span> <span class="hljs-params">--disable-shared</span> <span class="hljs-params">--without-debug</span> <span class="hljs-params">--without-ftp</span> <span class="hljs-params">--without-http</span> <span class="hljs-params">--without-legacy</span> <span class="hljs-params">--without-python</span> LIBS=&#x27;-ldl&#x27;<br>make -j$<span class="hljs-params">(nproc)</span><br>make install<br><br>种子<br>mkdir afl_in &amp;&amp; <span class="hljs-keyword">cd</span> afl_in<br>wget https:<span class="hljs-string">//raw.githubusercontent.com/antonio-morales/Fuzzing101/main/Exercise</span>%205/SampleInput.xml<br><span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br><br>字典<br>mkdir dictionaries &amp;&amp; <span class="hljs-keyword">cd</span> dictionaries<br>wget https:<span class="hljs-string">//raw.githubusercontent.com/AFLplusplus/AFLplusplus/stable/dictionaries/xml.dict</span><br><span class="hljs-keyword">cd</span> <span class="hljs-string">..</span><br><br>afl-fuzz -m none -i <span class="hljs-string">./afl_in</span> -o afl_out -s 123 -x <span class="hljs-string">./dictionaries/xml.dict</span> -D -M master -- <span class="hljs-string">./install/bin/xmllint</span> <span class="hljs-params">--memory</span> <span class="hljs-params">--noenc</span> <span class="hljs-params">--nocdata</span> <span class="hljs-params">--dtdattr</span> <span class="hljs-params">--loaddtd</span> <span class="hljs-params">--valid</span> <span class="hljs-params">--xinclude</span> @@<br><br> <span class="hljs-string">./install/bin/xmllint</span> <span class="hljs-params">--memory</span> <span class="hljs-params">--noenc</span> <span class="hljs-params">--nocdata</span> <span class="hljs-params">--dtdattr</span> <span class="hljs-params">--loaddtd</span> <span class="hljs-params">--valid</span> <span class="hljs-params">--xinclude</span> &#x27;<span class="hljs-string">./afl_out/default/crashes/id</span><span class="hljs-function">:000000</span>,sig<span class="hljs-function">:06</span>,src<span class="hljs-function">:003963</span>,time<span class="hljs-function">:12456489</span>,op<span class="hljs-function">:havoc</span>,rep<span class="hljs-function">:4</span>&#x27;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="6-GIMP"><a href="#6-GIMP" class="headerlink" title="6.GIMP"></a>6.GIMP</h2><h3 id="关键-3"><a href="#关键-3" class="headerlink" title="关键"></a>关键</h3><p>主要讲解AFL持久模式</p>
+<p>核心思想：正常 fuzz 时，AFL 每测一个样本都要 <code>fork/exec</code> 一次目标程序；持久模式则是让同一个进程在一个循环里反复处理很多次输入，这样会快很多。</p>
+<p>核心结构：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable"><span class="hljs-keyword">while</span></span> (<span class="hljs-function"><span class="hljs-title">__AFL_LOOP</span>(<span class="hljs-number">1000</span>)) &#123; ... &#125;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>因为该程序：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">main</span><br>└─ <span class="hljs-variable">app_run</span> / 命令行处理<br>   └─ <span class="hljs-function"><span class="hljs-title">file_open_from_command_line</span>()</span><br>      └─ <span class="hljs-function"><span class="hljs-title">file_open_image</span>()</span><br>         └─ 根据文件类型选择对应 <span class="hljs-variable">loader</span><br>            └─ <span class="hljs-function"><span class="hljs-title">xcf_load_invoker</span>()</span><br>               └─ 真正的 <span class="hljs-variable">XCF</span> 解析代码<br></code></pre></td></tr></table></figure>
+
+<p>所以可以进行两个插入点</p>
+<ol>
+<li>file_open_from_command_line()插入</li>
+<li>xcf_load_invoker()具体fuzz逻辑插入</li>
+</ol>
+<h3 id="fuzz-3"><a href="#fuzz-3" class="headerlink" title="fuzz"></a>fuzz</h3><p>GIMP下载链接失效</p>
+<p>直接用LibXML2</p>
+<p>fuzz_xml_persistent.c</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdint.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;libxml/parser.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;libxml/tree.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;libxml/xinclude.h&gt;</span></span><br><br>__AFL_FUZZ_INIT();<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span> </span>&#123;<br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> __AFL_HAVE_MANUAL_CONTROL</span><br>  __AFL_INIT();<br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br>  <span class="hljs-built_in">xmlInitParser</span>();<br><br>  <span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> *buf = __AFL_FUZZ_TESTCASE_BUF;<br><br>  <span class="hljs-keyword">while</span> (__AFL_LOOP(<span class="hljs-number">1000</span>)) &#123;<br>    <span class="hljs-type">int</span> len = __AFL_FUZZ_TESTCASE_LEN;<br>    <span class="hljs-keyword">if</span> (len &lt;= <span class="hljs-number">0</span>) &#123;<br>      <span class="hljs-keyword">continue</span>;<br>    &#125;<br><br>    <span class="hljs-type">int</span> opts = XML_PARSE_NOCDATA |<br>               XML_PARSE_DTDATTR |<br>               XML_PARSE_DTDLOAD |<br>               XML_PARSE_DTDVALID;<br><br>    xmlDocPtr doc = <span class="hljs-built_in">xmlReadMemory</span>((<span class="hljs-type">const</span> <span class="hljs-type">char</span> *)buf, len, <span class="hljs-string">&quot;afl.xml&quot;</span>, <span class="hljs-literal">NULL</span>, opts);<br>    <span class="hljs-keyword">if</span> (doc != <span class="hljs-literal">NULL</span>) &#123;<br>      <span class="hljs-built_in">xmlXIncludeProcessFlags</span>(doc, opts);<br>      <span class="hljs-built_in">xmlFreeDoc</span>(doc);<br>    &#125;<br>  &#125;<br><br>  <span class="hljs-built_in">xmlCleanupParser</span>();<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">afl-clang-lto -fsanitize=address -g -O1 \<br>  fuzz_xml_persistent.c -o fuzz_xml_persistent \<br>  $(xml2-config <span class="hljs-comment">--cflags --libs)</span><br>  <br> afl-fuzz -m <span class="hljs-keyword">none</span> -i afl_in -o afl_out -x dictionaries/<span class="hljs-type">xml</span>.dict <span class="hljs-comment">-- \</span><br>  ./fuzz_xml_persistent<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E5%AE%9E%E6%88%98/" class="category-chain-item">实战</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/" class="category-chain-item">实战基础</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Fuzzing_test</div>
+      <div>https://yy-t1.github.io/2026/06/02/pwn/实战/实战基础/Fuzzing-test/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年6月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/06/02/web/%E9%9D%B6%E5%9C%BA/pikachu/" title="pikachu">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">pikachu</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/06/01/pwn/%E5%AE%9E%E6%88%98/%E5%AE%9E%E6%88%98%E5%9F%BA%E7%A1%80/AFL/" title="AFL++">
+                        <span class="hidden-mobile">AFL++</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
