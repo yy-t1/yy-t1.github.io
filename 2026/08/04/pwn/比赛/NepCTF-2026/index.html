@@ -43,8 +43,9 @@
 <meta property="og:image" content="https://yy-t1.github.io/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260808010939048.png">
 <meta property="og:image" content="https://yy-t1.github.io/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260808011150698.png">
 <meta property="og:image" content="https://yy-t1.github.io/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260808011438627.png">
+<meta property="og:image" content="https://yy-t1.github.io/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260808032528729.png">
 <meta property="article:published_time" content="2026-08-03T19:26:50.000Z">
-<meta property="article:modified_time" content="2026-08-07T18:09:59.468Z">
+<meta property="article:modified_time" content="2026-08-08T03:51:27.161Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yy-t1.github.io/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260804033348946.png">
@@ -257,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          2k 字
         
       </span>
     
@@ -268,7 +269,7 @@
         
         
         
-          16 分钟
+          17 分钟
         
       </span>
     
@@ -548,6 +549,12 @@
 <p>使得</p>
 <figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs 1c">printf<br> <span class="hljs-string">|</span><br> v<br>table[&#x27;X&#x27;]<br> <span class="hljs-string">|</span><br> v<br>system<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
 
+<h3 id="IDA逆向-2"><a href="#IDA逆向-2" class="headerlink" title="IDA逆向"></a>IDA逆向</h3><p>这类题做的少了</p>
+<img src="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/image-20260808032528729.png" srcset="/img/loading.gif" lazyload class="" title="image-20260808032528729">
+
+<p>整体分析下来就是，程序创造父子进程与两个通道（进行父子间通信）</p>
+<p>只要父进程读取到了子进程发生的那六个字节就能成功读取出flag</p>
+<p>子进程的read_pcd是存在漏洞的函数</p>
 
                 
               </div>
