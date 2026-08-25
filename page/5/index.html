@@ -248,6 +248,346 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/05/18/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
+          kernel内存管理机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/18/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          物理内存（RAM）内核并不把物理内存简单看作一整块单一空间，而是将其划分为三级：  节点 (Nodes - pg_data_t) 区域 (Zones - struct zone) 页 (Pages - struct page)  节点一组 CPU 本地访问最快的那片物理内存。 现代服务器通常都是NUMA（Non-Uniform Memory Access，非一致性内存访问） 架构。（每个 CPU
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-18 19:29" pubdate>
+              2026-05-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/15/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+          基础的栈溢出
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/15/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/%E5%9F%BA%E7%A1%80%E7%9A%84%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+        <div>
+          以以下自定义的holstein模块为例： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-15 18:29" pubdate>
+              2026-05-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/14/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+          kernel保护机制
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/14/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" target="_self">
+        <div>
+          SMEP&#x2F;SMAPSMEP：禁止内核（Ring 0）去执行用户空间（Ring 3）的代码。 SMAP：禁止内核（Ring 0）直接访问（读&#x2F;写）用户空间（Ring 3）的数据。 KASLR&#x2F;FGKASLRKASLR：内核基地址随机。 FGKASLR：每个函数的内存地址都被独立随机化。 KASLR实现机制其是依靠kaslr.c里的一个kernel_randomize_m
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-14 23:25" pubdate>
+              2026-05-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/13/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
+          kernel入门
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/13/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/kernel%E5%85%A5%E9%97%A8/" target="_self">
+        <div>
+          ​	利用Linux内核中的漏洞，从普通用户态提升到内核态，最终拿到root权限设置控制整个系统。 基础内核kernel：操作系统最核心的部分。 在操作系统课程中也有提到，用户程序不能直接操作硬件（无权限），所以需要依靠内核来完成 其核心任务分为一下五方面：  内存管理 设备驱动管理 进程管理 文件系统管理 系统调用与安全  分级保护环(Ring环)是一种将计算机不同的资源划分至不同权限的模型。（目
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-13 10:12" pubdate>
+              2026-05-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/kernel/" class="category-chain-item">kernel</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E6%A0%88/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+          MIPS栈溢出
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E6%A0%88/MIPS%E6%A0%88%E6%BA%A2%E5%87%BA/" target="_self">
+        <div>
+          ​	CPU指令集架构有多种，例如：ARM，x86，MIPS。由于其成本低等等特性，固件设备里通常会以MIPS架构为主。 ​	MIPS分为大小端序（字节数据怎么进入内存的），以及32，64位（CPU一次能处理数据大小） 12345678910111213端序：以0x12345678为例子小端序内存地址从低到高：78 56 34 12大端序内存地址由高到低：12 34 56 78位数：32位只能放4字
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-05-12 13:51" pubdate>
+              2026-05-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/%E6%A0%88/" class="category-chain-item">栈</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2026/05/07/pwn/pwn%E5%9F%BA%E7%A1%80/Iot/pwn-bug%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/" target="_self">
           pwn_bug视频总结
         </a>
@@ -554,309 +894,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/05/02/Android/Android%20APP/Binder/" target="_self">
-          Binder
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/05/02/Android/Android%20APP/Binder/" target="_self">
-        <div>
-          （不是很懂，待学习） Binder：Android里的IPC（跨进程通信）机制，让不同进程之间可以通信。    角色 说明 典型实例    Client 发起调用的一方 普通 App   Server 提供服务的一方 system_server 中的系统服务   ServiceManager 服务注册表，负责服务的注册和查找 servicemanager 进程   Binder 驱动 内核模块，负
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-05-02 20:12" pubdate>
-              2026-05-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/30/Android/Android%20APP/Intent/" target="_self">
-          Intent
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/30/Android/Android%20APP/Intent/" target="_self">
-        <div>
-          ​	组件之间互相调用与通信，都是通过Intent（意图）来实现的。一个组件可以通过Intent来做不同的事情，可以接收与发送不同的Intent。 Intent也分为两类： 123456789// 显式 Intent：明确指定目标Intent intent = new Intent();intent.setClassName(&quot;com.target.app&quot;, &quot;com
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-30 17:16" pubdate>
-              2026-04-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/30/Android/Android%20APP/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" target="_self">
-          四大组件
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/30/Android/Android%20APP/%E5%9B%9B%E5%A4%A7%E7%BB%84%E4%BB%B6/" target="_self">
-        <div>
-          ​	一个Android App由四大组件为核心构成。每个组件都可以选择是否导出（exported） Activity​	负责用户界面展示，一个屏幕页面对应一个Activity。（app的入口界面–&gt;MainActivity） 12345678&lt;activity          android:name=&quot;com.demo.exportedcomponents.MainAct
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-30 10:10" pubdate>
-              2026-04-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-APP/" class="category-chain-item">Android APP</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/04/29/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E8%AE%A4%E8%AF%86/" target="_self">
-          Android认识
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/04/29/Android/Android%20%E5%9F%BA%E7%A1%80/Android%E8%AE%A4%E8%AF%86/" target="_self">
-        <div>
-          ​	Android是一个完整的操作系统，底层基于Linux内核（基于Linux内核的移动操作系统软件栈），从下到上可以大致分为以下5层 ​	整体利用过程可以看作：应用通过 Framework 调用系统能力，系统能力通过 Native + HAL 操作硬件，最终由 Linux 内核控制真实设备 （其实不太懂，后续慢慢补充，先知道有这几部分） Linux Kernel（Linux 内核层）Androi
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-04-29 21:26" pubdate>
-              2026-04-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/08/05/%E5%B7%A5%E5%85%B7/blog%20code/" target="_self">
-          blog code
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/05/%E5%B7%A5%E5%85%B7/blog%20code/" target="_self">
-        <div>
-          1234567891011121314npm install hexo -g #安装Hexonpm update hexo -g #升级hexo init #初始化博客​hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章hexo g == hexo generate #生成hexo s == hexo server #启动服务预览h
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-08-05 15:48" pubdate>
-              2025-08-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
