@@ -248,15 +248,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/17/pwn/%E6%AF%94%E8%B5%9B/hack-the-box/" target="_self">
-          hack_the_box
+        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-force/" target="_self">
+          house_of_force
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/17/pwn/%E6%AF%94%E8%B5%9B/hack-the-box/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-force/" target="_self">
         <div>
-          （无聊，打着玩） Router Web  直接.&#x2F;run.sh模拟环境 rootfs可以分解为根目录 然后寻找对应的web服务文件得到router-web-panel 逆向分析main（）12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455
+          基础glibc 2.23 ～ 2.28 （glibc 2.29 左右增加了 top chunk 大小检查） 修改 top chunk 的 size，让 malloc 认为堆顶还有极大的空间，从而把下一次分配移动到攻击者指定的位置。 使用示例12345678910111213141516171819202122232425262728293031323334353637383940414243444
         </div>
       </a>
 
@@ -264,8 +264,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-17 18:20" pubdate>
-              2026-07-17
+            <time datetime="2026-08-12 08:10" pubdate>
+              2026-08-12
             </time>
           </div>
         
@@ -285,8 +285,15 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
   
 
   
@@ -309,15 +316,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/12/pwn/%E6%AF%94%E8%B5%9B/BroncoCTF/" target="_self">
-          BroncoCTF
+        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-spirit/" target="_self">
+          house_of_spirit
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/12/pwn/%E6%AF%94%E8%B5%9B/BroncoCTF/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-spirit/" target="_self">
         <div>
-          1.Proper Pwning分析123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596
+          基础在任意libc版本理论上均可成立 伪造一个fastbin chunk 然后让free()将一个“栈上的指针”当成堆块释放 最后通过malloc()将这块栈内存申请回来 fake_fastbin_chunk条件1.fake chunk地址必须16字节对齐 2.size合法 3.fake chunk 后方必须有可访问且合理的 next chunk size （旧版glibc在fastbin fre
         </div>
       </a>
 
@@ -325,8 +332,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-12 15:59" pubdate>
-              2026-07-12
+            <time datetime="2026-08-12 07:37" pubdate>
+              2026-08-12
             </time>
           </div>
         
@@ -346,8 +353,15 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
   
 
   
@@ -370,15 +384,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/11/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/glibc%E5%A0%86/" target="_self">
-          glibc堆
+        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/tcache-poisoning/" target="_self">
+          tcache_poisoning
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/11/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/glibc%E5%A0%86/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/tcache-poisoning/" target="_self">
         <div>
-          堆管理器tcacheglibc2.26 后进先出（LIFO）单链表 数据结构每个线程有 64 个 tcache bin，分别对应 chunk size 从 0x20 到 0x410（16 字节对齐）： 123456789101112// glibc 源码简化版#define TCACHE_MAX_BINS 64typedef struct tcache_entry &#123;    struct
+          基础适用范围适用2.26~2.31 （glibc2.32以后加入safe-Linking） 12345struct tcache_entry&#123;    struct tcache_entry *next;    uintptr_t key;&#125;;  next不再保存真实地址 1next =target ^ (heap_base &gt;&gt; 12)    使用示例1234567
         </div>
       </a>
 
@@ -386,8 +400,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-11 21:06" pubdate>
-              2026-07-11
+            <time datetime="2026-08-12 06:41" pubdate>
+              2026-08-12
             </time>
           </div>
         
@@ -438,15 +452,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/11/pwn/%E6%AF%94%E8%B5%9B/%E6%A6%95%E7%9B%BE%E6%9D%AF/" target="_self">
-          榕盾杯
+        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-botcake/" target="_self">
+          house_of_botcake
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/11/pwn/%E6%AF%94%E8%B5%9B/%E6%A6%95%E7%9B%BE%E6%9D%AF/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-botcake/" target="_self">
         <div>
-          1.ROP逆向add（）  show（）  分析由于show可以显示数据，add可以写入数据 用show泄露栈上的libc地址，得到基地址并取得system等等的gadget 合理控制n9的数值就可以任意写入那9个数据的栈之前的位置，通过布置栈上的返回地址以及之后的栈链从而达到getshell目的   exp123456789101112131415161718192021222324252627
+          基础针对tcache的堆利用技术 核心：  绕过 glibc 2.29 引入的 tcache double-free 检查。 制造一个“重叠 chunk”。 利用重叠区域修改 tcache chunk 的 next 指针。 让后续 malloc 返回任意地址。  适用范围glibc&lt;&#x3D;2.31 2.32即以后引入了Safe-Linking double_free检测chunk_p(
         </div>
       </a>
 
@@ -454,8 +468,144 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-11 19:44" pubdate>
-              2026-07-11
+            <time datetime="2026-08-12 04:21" pubdate>
+              2026-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/11/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-Husk/" target="_self">
+          house_of_Husk
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/11/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-Husk/" target="_self">
+        <div>
+          基础glibc 的 printf 支持自定义格式符 12345678910111213glibc 内部维护了几个表：__printf_function_table__printf_arginfo_table__printf_va_arg_table当程序使用类似：printf(&quot;%!&quot;, ...);而 ! 不是普通格式字符时，glibc 会检查__printf_arginfo_
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-11 08:17" pubdate>
+              2026-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/" target="_self">
+          NepCTF_2026
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/" target="_self">
+        <div>
+          different_ROP  给了这俩文件 IDA打开一看，打不开，根据题目提示是小众架构，去下载IDA插件成功打开   没有栈保护，没有PIE。 file查看为32位   简单运行发现，题目在提示我们这是一道Hexagon ROP的题目 并且提示用orw来解决 Hexagon架构  栈模型，没有反汇编 用ai可以轻松反汇编完成，不用ai的话得手撕汇编    寄存器 全称 类型 作用 类似架构
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-04 03:26" pubdate>
+              2026-08-04
             </time>
           </div>
         
@@ -499,15 +649,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/09/pwn/%E6%AF%94%E8%B5%9B/ciscn/" target="_self">
-          2026-ciscn半决赛（复现）
+        <a href="/2026/07/22/%E5%B7%A5%E5%85%B7/nmap/" target="_self">
+          nmap
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/09/pwn/%E6%AF%94%E8%B5%9B/ciscn/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/22/%E5%B7%A5%E5%85%B7/nmap/" target="_self">
         <div>
-          好久没打ctf了，刚好都忘了，blog也啥都没写，之前写语雀上的，重新记一下吧 catchmelibc–&gt;2.27     patch 文件手动123patchelf --set-interpreter ./ld-linux-x86-64.so.2 binarypatchelf --replace-needed libc.so.6 libc-2.31.so binary  xclibchtt
+          Nmap 常用参数使用指南nmap 是用于网络资产发现、端口扫描和服务识别的工具。仅应在自己拥有或已获明确授权的网络与主机上使用。 基本语法1nmap [选项] &lt;目标&gt;  目标可以是单个 IP、域名、CIDR 网段或 IP 范围： 1234nmap 192.168.1.10nmap example.comnmap 192.168.1.0/24nmap 192.168.1.1-100
         </div>
       </a>
 
@@ -515,8 +665,123 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-09 18:04" pubdate>
-              2026-07-09
+            <time datetime="2026-07-22 17:08" pubdate>
+              2026-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/07/22/web/%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A8/" target="_self">
+          浏览器
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/22/web/%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A8/" target="_self">
+        <div>
+          HTTPHTTP（HyperText Transfer Protocol，超文本传输协议） 用于客户端和服务器之间传输资源。 1234567891011121314151617181920212223242526272829303132333435简单理解：浏览器（客户端）发送 HTTP 请求 → Web 服务器处理 → 返回 HTTP 响应 → 浏览器展示内容客户端访问：https://exam
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-22 14:23" pubdate>
+              2026-07-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/%E5%9F%BA%E7%A1%80/" class="category-chain-item">基础</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/" target="_self">
+          2025isctf
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/" target="_self">
+        <div>
+          1.签到  某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写   设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie   两次写入一个格式化字符串漏洞   还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425f
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-07-21 22:38" pubdate>
+              2026-07-21
             </time>
           </div>
         
@@ -560,15 +825,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/06/24/Android/%E9%9D%B6%E5%9C%BA/InjuredAndroid/" target="_self">
-          InjuredAndroid
+        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/20250xgame/" target="_self">
+          20250xgame
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/24/Android/%E9%9D%B6%E5%9C%BA/InjuredAndroid/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/20250xgame/" target="_self">
         <div>
-          
+          T1.test_your_nc直接nc连就有权限 ps：nc一下直接卡住可能是程序在等待数据输入！！！ 不要傻傻以为程序卡住了没连上 T2.stack overflowread读取超过数据本身长度，存在简单栈溢出 backdoor函数里并不是真正的或权限的system shift+F12找到调用&#x2F;bin&#x2F;sh的函数 覆盖返回地址为该地址（直接覆盖返回地址为&#x2F;bin&#
         </div>
       </a>
 
@@ -576,8 +841,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-24 22:11" pubdate>
-              2026-06-24
+            <time datetime="2026-07-21 22:38" pubdate>
+              2026-07-21
             </time>
           </div>
         
@@ -592,256 +857,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
   
   
     <span>></span>
     
-  <a href="/categories/Android/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/18/Android/Android%20JNI/JNI/" target="_self">
-          JNI
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/18/Android/Android%20JNI/JNI/" target="_self">
-        <div>
-          JNI（Java Native Interface，Java 本地接口）是 Android 和 Java 中用于让 Java 代码调用 C&#x2F;C++ 代码的一套标准机制。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-18 17:53" pubdate>
-              2026-06-18
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-JNI/" class="category-chain-item">Android JNI</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/16/Android/Binder/CVE-2023-20938/" target="_self">
-          CVE-2023-20938
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/Android/Binder/CVE-2023-20938/" target="_self">
-        <div>
-          知识前置binder_transaction如果直接 12345App A ↓发送FD=3 ↓App B  进程A的FD与进程B的FD完全不一样，所以需要binder_transaction 12345678910static void binder_transaction(...)&#123;  ...  // Iterate through all Binder objects in the
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-16 19:17" pubdate>
-              2026-06-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Binder/" class="category-chain-item">Binder</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/16/Android/Binder/Binder%E6%BC%8F%E6%B4%9E/" target="_self">
-          Binder漏洞
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/Android/Binder/Binder%E6%BC%8F%E6%B4%9E/" target="_self">
-        <div>
-          
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-16 19:09" pubdate>
-              2026-06-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Binder/" class="category-chain-item">Binder</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/06/16/Android/Android%20%E5%9F%BA%E7%A1%80/Binder%E5%9F%BA%E7%A1%80/" target="_self">
-          Binder基础
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/Android/Android%20%E5%9F%BA%E7%A1%80/Binder%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          一个面向 Android 本机进程通信的、高性能、可鉴权、可传对象的 RPC 机制。 Binder本质在做：“跨进程调用”伪装成“本地对象方法调用”  知识前置进程空间一个进程空间分为：  用户空间：数据不可共享 内核空间：数据可共享  （所有进程共用1个内核空间） 在进程内，用户空间与内核空间交互需要依靠系统调用 12copy_from_user（）：将用户空间的数据拷贝到内核空间copy_to
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-16 16:19" pubdate>
-              2026-06-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/Android/Android-%E5%9F%BA%E7%A1%80/" class="category-chain-item">Android 基础</a>
+  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
   
   
 
@@ -863,7 +884,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#board">4</a><a class="page-number" href="/page/5/#board">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/4/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

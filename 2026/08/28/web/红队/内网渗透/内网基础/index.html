@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/08/28/web/红队/内网渗透/内网基础/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一.简介内网（Internal Network）就是组织内部用于连接服务器、员工电脑、数据库、办公设备等资源的网络。 1234567891011121314151617181920212223242526272829303132┌─────────────────────────────────────────────────────────────────────┐│">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网基础">
+<meta property="og:url" content="https://yy-t1.github.io/2026/08/28/web/%E7%BA%A2%E9%98%9F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="一.简介内网（Internal Network）就是组织内部用于连接服务器、员工电脑、数据库、办公设备等资源的网络。 1234567891011121314151617181920212223242526272829303132┌─────────────────────────────────────────────────────────────────────┐│">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-28T08:06:11.000Z">
+<meta property="article:modified_time" content="2026-08-28T12:41:24.973Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+        <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
+  
+  <title>内网基础 - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="内网基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-28 16:06" pubdate>
+          2026年8月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">内网基础</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一-简介"><a href="#一-简介" class="headerlink" title="一.简介"></a>一.简介</h2><p><strong>内网</strong>（Internal Network）就是组织内部用于连接服务器、员工电脑、数据库、办公设备等资源的网络。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs awk">┌─────────────────────────────────────────────────────────────────────┐<br>│                         企业内网区域全景                              │<br>│                                                                      │<br>│   互联网                                                              │<br>│     │                                                                 │<br>│  ┌──┴──────────────────────────────────────────────────────┐        │<br>│  │                 边界互联区                                 │        │<br>│  │  防火墙/NGFW · IPS · 上网行为管理 · 路由器                  │        │<br>│  └──┬──────────────┬──────────────────┬─────────────────────┘        │<br>│     │              │                  │                               │<br>│  ┌──┴──────┐  ┌────┴──────┐  ┌───────┴────────┐                     │<br>│  │ DMZ 区  │  │  办公区    │  │  运维管理区     │                     │<br>│  │ (外网   │  │  员工PC    │  │  堡垒机/跳板机  │                     │<br>│  │  服务区)│  │  打印机    │  │  漏洞扫描/监控  │                     │<br>│  └─────────┘  └────┬──────┘  └───────┬────────┘                     │<br>│                    │                 │                                │<br>│                    │    ┌────────────┘                                │<br>│                    │    │                                             │<br>│               ┌────┴────┴──────┐                                     │<br>│               │   内网服务区     │                                     │<br>│               │                │                                     │<br>│               │  ┌──────────┐  │                                     │<br>│               │  │ 业务区    │  │  OA<span class="hljs-regexp">/ERP/</span>CRM<span class="hljs-regexp">/邮件/</span>FTP                │<br>│               │  ├──────────┤  │                                     │<br>│               │  │ 数据区    │  │  核心数据库/文件服务器               │<br>│               │  ├──────────┤  │                                     │<br>│               │  │ 研发测试区 │  │  Gitlab<span class="hljs-regexp">/Jenkins/</span>测试环境            │<br>│               │  ├──────────┤  │                                     │<br>│               │  │ 核心保密区 │  │  代码<span class="hljs-regexp">/财务/</span>涉密数据 (可能加网闸)    │<br>│               │  └──────────┘  │                                     │<br>│               └────────────────┘                                     │<br>└─────────────────────────────────────────────────────────────────────┘<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><strong>区域</strong></th>
+<th><strong>定位</strong></th>
+<th><strong>典型资产</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>边界互联区</strong></td>
+<td>内外网出入口</td>
+<td>防火墙、VPN 网关、路由器、IPS</td>
+</tr>
+<tr>
+<td><strong>DMZ 区</strong></td>
+<td>对外提供服务</td>
+<td>Web 网站、邮件前端、API 网关</td>
+</tr>
+<tr>
+<td><strong>办公区</strong></td>
+<td>员工日常办公</td>
+<td>办公 PC、打印机、WiFi</td>
+</tr>
+<tr>
+<td><strong>运维管理区</strong></td>
+<td>全域管控</td>
+<td>堡垒机、监控、漏洞扫描器、跳板机</td>
+</tr>
+<tr>
+<td><strong>内网服务区</strong></td>
+<td>核心业务</td>
+<td>OA&#x2F;ERP&#x2F;CRM、数据库、文件服务器、Gitlab</td>
+</tr>
+<tr>
+<td><strong>研发测试区</strong></td>
+<td>开发测试</td>
+<td>测试服务器、CI&#x2F;CD、代码仓库</td>
+</tr>
+<tr>
+<td><strong>核心保密区</strong></td>
+<td>机密数据</td>
+<td>财务系统、源代码、涉密数据（常加网闸隔离）</td>
+</tr>
+</tbody></table>
+<p>（外网可以访问DMZ区，DMZ区无法访问外网以及内网）</p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">Internet</span><br><span class="hljs-attribute">                                 │</span><br><span class="hljs-attribute">                           ┌─────┴─────┐</span><br><span class="hljs-attribute">                           │  路由器     │</span><br><span class="hljs-attribute">                           └─────┬─────┘</span><br><span class="hljs-attribute">                                 │</span><br><span class="hljs-attribute">                      ╔══════════╧══════════╗</span><br><span class="hljs-attribute">                      ║    主防火墙 (NGFW)    ║</span><br><span class="hljs-attribute">                      ║  NAT / ACL / IPSec  ║</span><br><span class="hljs-attribute">                      ╚══╤══════╤══════╤════╝</span><br><span class="hljs-attribute">                         │      │      │</span><br><span class="hljs-attribute">           ┌─────────────┘      │      └─────────────┐</span><br><span class="hljs-attribute">           │                    │                    │</span><br><span class="hljs-attribute">     ┌─────┴─────┐        ┌────┴────┐         ┌─────┴─────┐</span><br><span class="hljs-attribute">     │   DMZ     │        │ 核心交换 │         │ 办公区交换 │</span><br><span class="hljs-attribute">     │  交换机    │        │   机     │         │    机      │</span><br><span class="hljs-attribute">     └─────┬─────┘        └────┬────┘         └─────┬─────┘</span><br><span class="hljs-attribute">           │                   │                    │</span><br><span class="hljs-attribute">    ┌──────┼──────┐      ┌─────┼─────┐        ┌────┼────┐</span><br><span class="hljs-attribute">    │      │      │      │     │     │        │    │    │</span><br><span class="hljs-attribute">   Web  邮件    API    域控  数据库  ERP      PC  WiFi 打印</span><br><span class="hljs-attribute">   服务器 服务器 网关    DC  Server          终端  AP  机</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">   ┌──────────────┐</span><br><span class="hljs-attribute">   │  运维管理区    │</span><br><span class="hljs-attribute">   │  堡垒机       │──────► 可访问所有区域</span><br><span class="hljs-attribute">   │  日志审计     │</span><br><span class="hljs-attribute">   │  监控系统     │</span><br><span class="hljs-attribute">   └──────────────┘</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">   安全设备部署</span><span class="hljs-punctuation">:</span><br>   <span class="hljs-attribute">────────────</span><br><span class="hljs-attribute">   边界</span><span class="hljs-punctuation">:</span> <span class="hljs-string">防火墙(NGFW) + IPS + 上网行为管理</span><br>   <span class="hljs-attribute">DMZ</span><span class="hljs-punctuation">:</span> <span class="hljs-string"> WAF 保护 Web 服务</span><br>   <span class="hljs-attribute">核心</span><span class="hljs-punctuation">:</span> <span class="hljs-string">数据库审计 + HIDS (所有服务器)</span><br>   <span class="hljs-attribute">终端</span><span class="hljs-punctuation">:</span> <span class="hljs-string">EDR + AV (所有PC和服务器)</span><br>   <span class="hljs-attribute">流量</span><span class="hljs-punctuation">:</span> <span class="hljs-string">态势感知/NDR (核心交换机镜像)</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="二-常见内网设备"><a href="#二-常见内网设备" class="headerlink" title="二.常见内网设备"></a>二.常见内网设备</h2><h3 id="防火墙"><a href="#防火墙" class="headerlink" title="防火墙"></a>防火墙</h3><p>根据预先设置的规则，决定哪些网络流量可以通过，哪些必须拦截。</p>
+<h4 id="绕过方法"><a href="#绕过方法" class="headerlink" title="绕过方法"></a>绕过方法</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros">① DNS/ICMP 隧道绕过<br>     攻击者 ── DNS查询(53) ──► FW放行 ──► DNS服务器<br>     Payload 藏在<span class="hljs-built_in"> DNS </span>TXT 记录中，防火墙只看到<span class="hljs-string">&quot;正常 DNS&quot;</span><br><br>  ② 分片绕过 (IP Fragmentation)<br>     SYN+Header(分片1) → FW不重组 → 放行<br>     恶意Payload(分片2) → FW不重组 → 放行 → 目标重组=攻击到达<br><br>  ③ 源端口欺骗<br>     <span class="hljs-attribute">src_port</span>=53(伪DNS) <span class="hljs-attribute">dst_port</span>=4444 → FW: ACL有53放行规则 → 绕过<br></code></pre></td></tr></table></figure>
+
+<h3 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h3><p><strong>VPN</strong>（虚拟专用网络）在公网上建立加密隧道，实现远程安全接入或站点互联。是企业内网暴露在公网的最常见入口。</p>
+<h4 id="攻击方法"><a href="#攻击方法" class="headerlink" title="攻击方法"></a>攻击方法</h4><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mel">VPN 凭据 = 直通内网入口，凭证泄露即沦陷<br>客户端本地缓存密码可提取：%USERPROFILE%\AppData\Roaming\Sangfor\SSL\<br>FOFA/Shodan 搜索暴露的 VPN 入口是打点优先目标<br></code></pre></td></tr></table></figure>
+
+<h3 id="蜜罐"><a href="#蜜罐" class="headerlink" title="蜜罐"></a>蜜罐</h3><p>蜜罐是故意部署的诱饵系统，通过模拟真实服务&#x2F;资产吸引攻击者交互，从而检测、延迟和分析攻击行为。</p>
+<h4 id="识别蜜罐"><a href="#识别蜜罐" class="headerlink" title="识别蜜罐"></a>识别蜜罐</h4><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs stata">发现可疑主机<br>        │<br>   ┌────▼────┐  00:0C:29/00:50:56(VMware)<br>   │ <span class="hljs-keyword">MAC</span> OUI │  08:00:27(VirtualBox)  ──► ⚠ 虚拟化 <span class="hljs-keyword">MAC</span><br>   └────┬────┘<br>        │ 通过<br>   ┌────▼────┐  3389+22+3306 同一 IP<br>   │服务组合  │  多端口返回相同 Banner     ──► ⚠ 不合理组合<br>   └────┬────┘<br>        │ 合理<br>   ┌────▼────┐  SSH 不能执行命令<br>   │深度交互  │  SMB 无共享列表           ──► ⚠ 功能缺失<br>   └────┬────┘  <span class="hljs-keyword">DB</span> 不能查数据<br>        │ 正常<br>   ┌────▼────┐  延迟方差≈0<br>   │行为分析  │  永不 Idle 超时           ──► ⚠ 响应过于规律<br>   └────┬────┘<br>        │ 自然<br>   ┌────▼────┐  无出站流量<br>   │拓扑检查  │  ARP 表无邻居             ──► ⚠ 孤岛主机<br>   └────┬────┘<br>        │ 正常<br>     大概率真机 ✓<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h3><p>Web 应用防火墙（Web Application Firewall）</p>
+<p>通过分析 HTTP&#x2F;HTTPS 流量识别和阻止 Web 攻击（SQL 注入、XSS、命令注入、文件包含、CSRF 等）。</p>
+<h4 id="绕过方法-1"><a href="#绕过方法-1" class="headerlink" title="绕过方法"></a>绕过方法</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs llvm">● HTTP 参数污染 (HPP)：?id<span class="hljs-operator">=</span><span class="hljs-number">1</span>&amp;id<span class="hljs-operator">=</span><span class="hljs-number">1</span>+union+<span class="hljs-keyword">select</span>...<br>● 分块传输：拆分 Payload 到多个 chunk 中<br>● 双重 URL 编码：<span class="hljs-variable">%2527</span> → <span class="hljs-variable">%27</span> → &#x27;<br>● 内联注释：/*<span class="hljs-title">!50000union</span>*/ <span class="hljs-keyword">select</span><br>● 空格等价替换：/**/、<span class="hljs-variable">%0</span>a、<span class="hljs-variable">%0</span>d、<span class="hljs-variable">%09</span>、<span class="hljs-variable">%0</span><span class="hljs-keyword">c</span><br>● HTTP 请求走私：CL.TE / TE.CL<br>● IP 伪造头：X-Forwarded-For: <span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span> 绕白名单<br>● 冷门方法：OPTIONS、TRACE<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="三-攻击路线"><a href="#三-攻击路线" class="headerlink" title="三.攻击路线"></a>三.攻击路线</h2><h3 id="1-从外网打点进入"><a href="#1-从外网打点进入" class="headerlink" title="1.从外网打点进入"></a>1.从外网打点进入</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs armasm">攻击入口: DMZ 区暴露的 Web 服务漏洞（如 SQL 注入、文件上传、RCE）<br><br>   攻击者<br>     │<br>     │ ① 外网打点，攻破 DMZ Web 服务器<br>     ▼<br>   ┌──────────┐<br>   │ DMZ 区    │  Web 服务器已控<br>   │ Web服务器 │<br>   └────┬─────┘<br>        │<br>        │ ② DMZ → 内网（利用 Web 连内网 DB 的例外通道，或 Webshell 反弹）<br>        │<br>        ├──────────────────────┬──────────────────────┐<br>        │                      │                      │<br>        ▼                      ▼                      ▼<br>   ┌──────────┐         ┌──────────┐          ┌──────────┐<br>   │ 业务区    │         │ 办公区    │          │ 运维区    │<br>   │ DB服务器  │         │ 运维<span class="hljs-built_in">PC</span>    │          │ (如果有路)│<br>   └────┬─────┘         └────┬─────┘          └────┬─────┘<br>        │                    │                      │<br>        │ ③ 从业务区横向      │ ④ 从运维人员<span class="hljs-built_in">PC</span>       │<br>        │    打到核心区        │    跳到核心区         │<br>        ▼                    ▼                      ▼<br>   ┌──────────────────────────────────────────────────┐<br>   │                  核心区                            │<br>   │            域控 / 核心数据库 / 机密文件             │<br>   └──────────────────────────────────────────────────┘<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-从子公司-分支机构突破"><a href="#2-从子公司-分支机构突破" class="headerlink" title="2.从子公司&#x2F;分支机构突破"></a>2.从子公司&#x2F;分支机构突破</h3><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">攻击思路</span><span class="hljs-punctuation">:</span> <span class="hljs-string">分公司防护弱 → 作为跳板 → 通过 VPN/专线进入总部</span><br><br>   <span class="hljs-attribute">攻击者</span><br><span class="hljs-attribute">     │</span><br><span class="hljs-attribute">     │ ① 攻破分公司（防护弱、安全投入不足）</span><br><span class="hljs-attribute">     ▼</span><br><span class="hljs-attribute">   ┌─────────────┐</span><br><span class="hljs-attribute">   │  分公司内网   │</span><br><span class="hljs-attribute">   │  办公终端已控 │</span><br><span class="hljs-attribute">   └──────┬──────┘</span><br><span class="hljs-attribute">          │</span><br><span class="hljs-attribute">          │ ② 通过 IPsec VPN 或 专线 进入总部内网</span><br><span class="hljs-attribute">          │    (分公司到总部的通道通常一直在线)</span><br><span class="hljs-attribute">          ▼</span><br><span class="hljs-attribute">   ┌─────────────────────────────────────────────┐</span><br><span class="hljs-attribute">   │              总部内网                         │</span><br><span class="hljs-attribute">   │                                              │</span><br><span class="hljs-attribute">   │  分两条路径</span><span class="hljs-punctuation">:</span> <span class="hljs-string">                                  │</span><br>   <span class="hljs-attribute">│                                              │</span><br><span class="hljs-attribute">   │  ┌──────────┐         ┌──────────┐          │</span><br><span class="hljs-attribute">   │  │ 业务区    │ ◄─────► │ 运维管理区│          │</span><br><span class="hljs-attribute">   │  └────┬─────┘  互通   └────┬─────┘          │</span><br><span class="hljs-attribute">   │       │                    │                 │</span><br><span class="hljs-attribute">   │       └────────┬───────────┘                 │</span><br><span class="hljs-attribute">   │                │                             │</span><br><span class="hljs-attribute">   │                ▼                             │</span><br><span class="hljs-attribute">   │         ┌──────────┐                        │</span><br><span class="hljs-attribute">   │         │  核心区   │                        │</span><br><span class="hljs-attribute">   │         └──────────┘                        │</span><br><span class="hljs-attribute">   └─────────────────────────────────────────────┘</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">   关键</span><span class="hljs-punctuation">:</span> <span class="hljs-string">业务区和运维区之间通常互通 → 不管走哪条路都能到核心区</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-从办公区突破"><a href="#3-从办公区突破" class="headerlink" title="3.从办公区突破"></a>3.从办公区突破</h3><figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">攻击入口</span><span class="hljs-punctuation">:</span> <span class="hljs-string">邮件钓鱼 / 破解 WiFi / USB 摆渡 / 近源渗透</span><br><br>   <span class="hljs-attribute">攻击者</span><br><span class="hljs-attribute">     │</span><br><span class="hljs-attribute">     │ ① 钓鱼邮件 → 办公人员点击 → 木马植入</span><br><span class="hljs-attribute">     │    或 破解办公 WiFi → 接入内网</span><br><span class="hljs-attribute">     ▼</span><br><span class="hljs-attribute">   ┌──────────┐</span><br><span class="hljs-attribute">   │  办公区    │  PC 已控</span><br><span class="hljs-attribute">   │  员工PC    │</span><br><span class="hljs-attribute">   └────┬─────┘</span><br><span class="hljs-attribute">        │</span><br><span class="hljs-attribute">        │ ② 从办公区横向移动</span><br><span class="hljs-attribute">        │</span><br><span class="hljs-attribute">        ├──────────────────────┬──────────────────────┐</span><br><span class="hljs-attribute">        │                      │                      │</span><br><span class="hljs-attribute">        ▼                      ▼                      ▼</span><br><span class="hljs-attribute">   ┌──────────┐         ┌──────────┐          ┌──────────┐</span><br><span class="hljs-attribute">   │ 业务区    │         │ 运维区    │          │ 直接到    │</span><br><span class="hljs-attribute">   │ OA/ERP   │         │ 堡垒机    │          │ 文件共享   │</span><br><span class="hljs-attribute">   │          │         │ ⚠高价值  │          │          │</span><br><span class="hljs-attribute">   └────┬─────┘         └────┬─────┘          └──────────┘</span><br><span class="hljs-attribute">        │                    │</span><br><span class="hljs-attribute">        │ ③ 横向跳转         │ ③ 拿下运维权限</span><br><span class="hljs-attribute">        ▼                    ▼</span><br><span class="hljs-attribute">   ┌──────────────────────────────────────────┐</span><br><span class="hljs-attribute">   │              核心区                        │</span><br><span class="hljs-attribute">   └──────────────────────────────────────────┘</span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">   办公区优势</span><span class="hljs-punctuation">:</span><br>   ──────────<br>   <span class="hljs-bullet">-</span> <span class="hljs-string">终端数量多、防护不一致、人员安全意识参差</span><br>   <span class="hljs-bullet">-</span> <span class="hljs-string">运维人员的 PC 如果在办公区 → 可能存有堡垒机凭据/SSH 密钥</span><br>   <span class="hljs-bullet">-</span> <span class="hljs-string">WiFi 可能和有线内网在同一网段（隔离不彻底）</span><br></code></pre></td></tr></table></figure>
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/%E7%BA%A2%E9%98%9F/" class="category-chain-item">红队</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/%E7%BA%A2%E9%98%9F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" class="category-chain-item">内网渗透</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>内网基础</div>
+      <div>https://yy-t1.github.io/2026/08/28/web/红队/内网渗透/内网基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年8月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/08/28/web/%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B/xss/" title="xss">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">xss</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/27/web/src/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" title="文件上传漏洞">
+                        <span class="hidden-mobile">文件上传漏洞</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

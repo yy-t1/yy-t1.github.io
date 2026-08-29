@@ -248,15 +248,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/tcache-poisoning/" target="_self">
-          tcache_poisoning
+        <a href="/2026/08/25/web/CVE/CVE-2026-53519%EF%BC%88%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%EF%BC%89/" target="_self">
+          CVE-2026-53519（哪吒面板）
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/tcache-poisoning/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/25/web/CVE/CVE-2026-53519%EF%BC%88%E5%93%AA%E5%90%92%E9%9D%A2%E6%9D%BF%EF%BC%89/" target="_self">
         <div>
-          基础适用范围适用2.26~2.31 （glibc2.32以后加入safe-Linking） 12345struct tcache_entry&#123;    struct tcache_entry *next;    uintptr_t key;&#125;;  next不再保存真实地址 1next =target ^ (heap_base &gt;&gt; 12)    使用示例1234567
+          未授权路径穿越漏洞 开发者错误地使用字符串前缀判断 URL，导致攻击者可以绕过目录限制读取服务器任意文件 哪吒监控自制服务器监控平台 类似： 1234567891011         浏览器            |            |    +---------------+    | Nezha Dashboard|    +---------------+            |
         </div>
       </a>
 
@@ -264,8 +264,130 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-08-12 06:41" pubdate>
-              2026-08-12
+            <time datetime="2026-08-25 17:39" pubdate>
+              2026-08-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/CVE/" class="category-chain-item">CVE</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/25/web/%E9%9D%B6%E5%9C%BA/crAPI/" target="_self">
+          crAPI
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/25/web/%E9%9D%B6%E5%9C%BA/crAPI/" target="_self">
+        <div>
+          API简介API ：程序之间约定好的“通信接口” 挑战1.获取其他用户车辆的详细信息获取车架ID信息评论的页面存在其他用户发表的信息   正常应该只能看到其发表人和日期与内容 但是抓包发现存在车辆号vehicleid     定位API调用信息  refresh location可以刷新地址 抓包分析   可以试试将车号换为其它车号发包尝试越权   成功返回其他车辆地址信息 2.获取其他用户的维修
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-25 14:26" pubdate>
+              2026-08-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/%E9%9D%B6%E5%9C%BA/" class="category-chain-item">靶场</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/25/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/FSOP/" target="_self">
+          FSOP
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/25/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/FSOP/" target="_self">
+        <div>
+          FSOP 就是利用 glibc 的 FILE&#x2F;_IO_FILE 对象及其 IO 状态、链表和函数分派机制，让 glibc 自己沿着攻击者构造的 IO 路径执行 核心思路1234567891011121314正常的 _IO_list_all        ↓     正常 FILE        ↓     正常 FILE          被修改的 _IO_list_all
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-25 11:07" pubdate>
+              2026-08-25
             </time>
           </div>
         
@@ -290,7 +412,7 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/%E5%A0%86/" class="category-chain-item">堆</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/" class="category-chain-item">I-O</a>
   
   
 
@@ -316,15 +438,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-botcake/" target="_self">
-          house_of_botcake
+        <a href="/2026/08/23/web/%E5%9F%BA%E7%A1%80/Nginx/" target="_self">
+          Nginx
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-botcake/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/23/web/%E5%9F%BA%E7%A1%80/Nginx/" target="_self">
         <div>
-          基础针对tcache的堆利用技术 核心：  绕过 glibc 2.29 引入的 tcache double-free 检查。 制造一个“重叠 chunk”。 利用重叠区域修改 tcache chunk 的 next 指针。 让后续 malloc 返回任意地址。  适用范围glibc&lt;&#x3D;2.31 2.32即以后引入了Safe-Linking double_free检测chunk_p(
+          基础一个非常高性能的 HTTP&#x2F;Web 服务器，同时也是一个反向代理服务器 最典型的网站架构是： 1234567891011121314151617             Internet                │                │ HTTP/HTTPS                ▼          ┌───────────┐          │   N
         </div>
       </a>
 
@@ -332,259 +454,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-08-12 04:21" pubdate>
-              2026-08-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/08/11/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-Husk/" target="_self">
-          house_of_Husk
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/11/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-Husk/" target="_self">
-        <div>
-          基础glibc 的 printf 支持自定义格式符 12345678910111213glibc 内部维护了几个表：__printf_function_table__printf_arginfo_table__printf_va_arg_table当程序使用类似：printf(&quot;%!&quot;, ...);而 ! 不是普通格式字符时，glibc 会检查__printf_arginfo_
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-08-11 08:17" pubdate>
-              2026-08-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
-  
-  
-
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/" target="_self">
-          NepCTF_2026
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/04/pwn/%E6%AF%94%E8%B5%9B/NepCTF-2026/" target="_self">
-        <div>
-          different_ROP  给了这俩文件 IDA打开一看，打不开，根据题目提示是小众架构，去下载IDA插件成功打开   没有栈保护，没有PIE。 file查看为32位   简单运行发现，题目在提示我们这是一道Hexagon ROP的题目 并且提示用orw来解决 Hexagon架构  栈模型，没有反汇编 用ai可以轻松反汇编完成，不用ai的话得手撕汇编    寄存器 全称 类型 作用 类似架构
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-08-04 03:26" pubdate>
-              2026-08-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/07/22/%E5%B7%A5%E5%85%B7/nmap/" target="_self">
-          nmap
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/22/%E5%B7%A5%E5%85%B7/nmap/" target="_self">
-        <div>
-          Nmap 常用参数使用指南nmap 是用于网络资产发现、端口扫描和服务识别的工具。仅应在自己拥有或已获明确授权的网络与主机上使用。 基本语法1nmap [选项] &lt;目标&gt;  目标可以是单个 IP、域名、CIDR 网段或 IP 范围： 1234nmap 192.168.1.10nmap example.comnmap 192.168.1.0/24nmap 192.168.1.1-100
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-22 17:08" pubdate>
-              2026-07-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E5%B7%A5%E5%85%B7/" class="category-chain-item">工具</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2026/07/22/web/%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A8/" target="_self">
-          浏览器
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/22/web/%E5%9F%BA%E7%A1%80/%E6%B5%8F%E8%A7%88%E5%99%A8/" target="_self">
-        <div>
-          HTTPHTTP（HyperText Transfer Protocol，超文本传输协议） 用于客户端和服务器之间传输资源。 1234567891011121314151617181920212223242526272829303132333435简单理解：浏览器（客户端）发送 HTTP 请求 → Web 服务器处理 → 返回 HTTP 响应 → 浏览器展示内容客户端访问：https://exam
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-22 14:23" pubdate>
-              2026-07-22
+            <time datetime="2026-08-23 22:38" pubdate>
+              2026-08-23
             </time>
           </div>
         
@@ -628,15 +499,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/" target="_self">
-          2025isctf
+        <a href="/2026/08/23/web/%E5%9F%BA%E7%A1%80/Tomcat/" target="_self">
+          Tomcat
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025isctf/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/23/web/%E5%9F%BA%E7%A1%80/Tomcat/" target="_self">
         <div>
-          1.签到  某个数设置为固定数就能getshell 不愧是签到，所以exp没保存，现在也没打算补写   设置成这里比较的数，而不是直接那个负数。 2.ez-format开启了canary和pie   两次写入一个格式化字符串漏洞   还有后门函数，所以第一次泄露canary和程序基地址 后面直接覆盖即可 exp： 12345678910111213141516171819202122232425f
+          基础Tomcat 是一个 Java Web 应用服务器，主要负责运行 Java Servlet &#x2F; JSP Web 应用 （Tomcat 是一个 Servlet 容器） 123456789101112131415浏览器  │  │ HTTP  ↓┌─────────────────┐│     Tomcat      ││                 ││  HTTP Connect
         </div>
       </a>
 
@@ -644,8 +515,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-21 22:38" pubdate>
-              2026-07-21
+            <time datetime="2026-08-23 22:02" pubdate>
+              2026-08-23
             </time>
           </div>
         
@@ -660,12 +531,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  <a href="/categories/web/" class="category-chain-item">web</a>
   
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/web/%E5%9F%BA%E7%A1%80/" class="category-chain-item">基础</a>
   
   
 
@@ -689,15 +560,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/20250xgame/" target="_self">
-          20250xgame
+        <a href="/2026/08/22/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/I-O%E5%9F%BA%E7%A1%80/" target="_self">
+          I/O基础
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/20250xgame/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/22/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/I-O%E5%9F%BA%E7%A1%80/" target="_self">
         <div>
-          T1.test_your_nc直接nc连就有权限 ps：nc一下直接卡住可能是程序在等待数据输入！！！ 不要傻傻以为程序卡住了没连上 T2.stack overflowread读取超过数据本身长度，存在简单栈溢出 backdoor函数里并不是真正的或权限的system shift+F12找到调用&#x2F;bin&#x2F;sh的函数 覆盖返回地址为该地址（直接覆盖返回地址为&#x2F;bin&#
+          I&#x2F;O 的整体结构1234567891011printf / puts / fgets / fflush        ↓      FILE *        ↓   _IO_FILE_plus        ↓    vtable 跳转表        ↓_IO_file_* / _IO_wfile_*        ↓      read / write  _IO_FILEIO_F
         </div>
       </a>
 
@@ -705,8 +576,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-21 22:38" pubdate>
-              2026-07-21
+            <time datetime="2026-08-22 11:46" pubdate>
+              2026-08-22
             </time>
           </div>
         
@@ -726,8 +597,15 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/I-O/" class="category-chain-item">I-O</a>
+  
+  
+
   
 
   
@@ -750,15 +628,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/" target="_self">
-          2025moectf
+        <a href="/2026/08/19/pwn/pwn%E5%9F%BA%E7%A1%80/v8/CVE-2021-38003/" target="_self">
+          CVE-2021-38003
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025moectf/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/19/pwn/pwn%E5%9F%BA%E7%A1%80/v8/CVE-2021-38003/" target="_self">
         <div>
-          1.p64，u64       通过代码审计已知：  程序打印出：：num的值 输入num判断相等即可跳过if获取权限  2.构造payload   12345678910from pwn import *  # 导入 pwn 工具库，提供远程连接、数据收发等功能 # r = process(&#x27;./pwn&#x27;)  # 本地调试时使用，启动本地程序（注释掉了）r = remote(
+          基础Chrome 95.0.4638.69 之前版本 核心问题： V8 JSON.stringify 泄露 TheHole 导致堆破坏 TheHole数组未存储数据时，内部其实是以TheHole形式存在的 （TheHole并不是js可访问的值） JSON.stringify（）漏洞发生处 123456789101112131415161718192021let a=[1,2,3];JSON.str
         </div>
       </a>
 
@@ -766,8 +644,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-21 22:38" pubdate>
-              2026-07-21
+            <time datetime="2026-08-19 18:40" pubdate>
+              2026-08-19
             </time>
           </div>
         
@@ -787,8 +665,15 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/v8/" class="category-chain-item">v8</a>
+  
+  
+
   
 
   
@@ -811,15 +696,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025newstar/" target="_self">
-          2025newstar
+        <a href="/2026/08/18/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-einherjar/" target="_self">
+          house_of_einherjar
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/07/21/pwn/%E6%AF%94%E8%B5%9B/2025newstar/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/18/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-einherjar/" target="_self">
         <div>
-          1.GNU Debugger考查对gdb的使用 在gdb里: 先run ip 端口：启动程序 第一关查看r12的值（16进制）：  p /x $r12 第二关查看某地址的字符串：x/s 地址 第三关断点地址：b *地址 第四关改地址的值：set &#123;int&#125;0x7fffffffdaa4 = 0xdeadbeef 查看x/wx 0x7fffffffdaa4 即可 没成功重新启动容器
+          基础glibc 2.23 ～ 2.43 利用 off-by-one null修改相邻 chunk size 的最低字节触发chunk合并，从而实现堆重叠 使用示例12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364
         </div>
       </a>
 
@@ -827,8 +712,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-07-21 22:14" pubdate>
-              2026-07-21
+            <time datetime="2026-08-18 08:03" pubdate>
+              2026-08-18
             </time>
           </div>
         
@@ -848,8 +733,151 @@
   
     <span>></span>
     
-  <a href="/categories/pwn/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
   
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/16/pwn/pwn%E5%9F%BA%E7%A1%80/v8/v8%E5%9F%BA%E7%A1%80/" target="_self">
+          v8基础
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/16/pwn/pwn%E5%9F%BA%E7%A1%80/v8/v8%E5%9F%BA%E7%A1%80/" target="_self">
+        <div>
+          前言V8 是 Google 开发的 JavaScript 引擎，主要作用是把 JavaScript 代码解析、编译并执行起来 常用于：  Chrome&#x2F;Chromium：执行网页中的 JavaScript Node.js：让 JavaScript 能在服务器和命令行运行 Electron、Deno 等程序：作为内置脚本引擎。  环境搭建12345678910111213141516171
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-16 10:34" pubdate>
+              2026-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/v8/" class="category-chain-item">v8</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-lore/" target="_self">
+          house_of_lore
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/08/12/pwn/pwn%E5%9F%BA%E7%A1%80/house_of/house-of-lore/" target="_self">
+        <div>
+          基础经典版本：glibc 2.23 ～ 2.24 后续也适用，需查看对于smallbin malloc段的相应代码做出改进 核心：伪造smallbin链表，使得malloc返回攻击者控制的位置 smallbin是双向链表，victim-&gt;bk不能随便伪造，有检测需要绕过 123456789victim = last(bin);bck = victim-&gt;bk;if (bck-&gt;f
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-08-12 08:29" pubdate>
+              2026-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/" class="category-chain-item">pwn基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/pwn/pwn%E5%9F%BA%E7%A1%80/house-of/" class="category-chain-item">house_of</a>
+  
+  
+
   
 
   
@@ -870,7 +898,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/#board">7</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

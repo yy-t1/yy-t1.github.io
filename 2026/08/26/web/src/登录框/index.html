@@ -1,0 +1,821 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+    <link rel="canonical" href="https://yy-t1.github.io/2026/08/26/web/src/登录框/"/>
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="bsahfm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.弱口令毋庸置疑 12345678910111213常见用户名：adminrootadmin123testtest01常见密码：admin1234561231231admin123admin@123    FOFA语法： 1title&#x3D;&quot;管理平台&quot; &amp;&amp; status_code&#x3D;&quot;200&quot; &amp;&amp; body!&#x3D;&quot;验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="登录框">
+<meta property="og:url" content="https://yy-t1.github.io/2026/08/26/web/src/%E7%99%BB%E5%BD%95%E6%A1%86/index.html">
+<meta property="og:site_name" content="bsahfm">
+<meta property="og:description" content="1.弱口令毋庸置疑 12345678910111213常见用户名：adminrootadmin123testtest01常见密码：admin1234561231231admin123admin@123    FOFA语法： 1title&#x3D;&quot;管理平台&quot; &amp;&amp; status_code&#x3D;&quot;200&quot; &amp;&amp; body!&#x3D;&quot;验证">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-26T13:39:57.000Z">
+<meta property="article:modified_time" content="2026-08-27T12:55:58.852Z">
+<meta property="article:author" content="bsahfm">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+        <meta name="google-site-verification" content="google24f795c42c9493e5.html" />
+  
+  <title>登录框 - bsahfm</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yy-t1.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","app_key":"xxsSPn2ge0tYPU7nwv5Gyd1r","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>tyy</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="登录框"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-26 21:39" pubdate>
+          2026年8月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">登录框</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-弱口令"><a href="#1-弱口令" class="headerlink" title="1.弱口令"></a>1.弱口令</h2><p>毋庸置疑</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs subunit">常见用户名：<br>admin<br>root<br>admin123<br><span class="hljs-keyword">test</span><br><span class="hljs-keyword">test</span>01<br>常见密码：<br>admin<br>123456<br>123123<br>1<br>admin123<br>admin@123<br></code></pre></td></tr></table></figure>
+
+
+
+<p>FOFA语法：</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sas"><span class="hljs-keyword">title</span>=<span class="hljs-string">&quot;管理平台&quot;</span> <span class="hljs-variable">&amp;&amp;</span> status_code=<span class="hljs-string">&quot;200&quot;</span> <span class="hljs-variable">&amp;&amp;</span> body!=<span class="hljs-string">&quot;验证码&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>搜索默认账号密码，测试密码，弱口令，厂商名称</p>
+<p>（先手测几个试试，没有限制再爆破）</p>
+<p>（如果有 IP 频率限制，可以尝试在 HTTP 头中添加 <code>X-Forwarded-For</code> 伪造 IP；如果有简单的验证码，可以尝试复用验证码或删除验证码参数来绕过）</p>
+<h2 id="2-万能密码"><a href="#2-万能密码" class="headerlink" title="2.万能密码"></a>2.万能密码</h2><p>利用 SQL 语句的逻辑判断缺陷，构造恒为“真”的条件来绕过密码验证。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript">&#x27; <span class="hljs-keyword">or</span> <span class="hljs-number">1</span>=<span class="hljs-number">1</span><span class="hljs-comment">#</span><br>admin&#x27; <span class="hljs-comment">--</span><br>admin&#x27; <span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-返回包篡改"><a href="#3-返回包篡改" class="headerlink" title="3.返回包篡改"></a>3.返回包篡改</h2><p>通过修改返回包中的状态码或结果字段，让前端认为登录请求已成功。</p>
+<p>1.修改状态码：将表示失败的 400 或 401 等状态码，改为表示成功的 200</p>
+<p>2.修改结果字段：将 fail、false 等表示失败的关键词，替换为 true、success 等表示成功的关键词</p>
+<p>（使用登录成功的返回包给登录失败的）</p>
+<h2 id="4-sql注入"><a href="#4-sql注入" class="headerlink" title="4.sql注入"></a>4.sql注入</h2><ul>
+<li><strong>报错注入</strong>：在用户名后加单引号 <code>&#39;</code>，看页面是否报错。</li>
+<li><strong>盲注</strong>：输入 <code>admin&#39; and sleep(5)#</code>，如果页面加载明显变慢（转圈5秒），说明数据库执行了延时指令，漏洞存在。</li>
+</ul>
+<h2 id="5-XSS-跨站脚本攻击"><a href="#5-XSS-跨站脚本攻击" class="headerlink" title="5.XSS(跨站脚本攻击)"></a>5.XSS(跨站脚本攻击)</h2><p>可能存在位置：</p>
+<ol>
+<li><strong>账号密码输入框</strong>：输入的恶意脚本会被直接执行</li>
+<li><strong>URL 参数</strong>：登录页面的 URL 中某个参数存在注入点</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-title function_">alert</span>(<span class="hljs-string">&#x27;666&#x27;</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="6-SSRF-服务端请求伪造"><a href="#6-SSRF-服务端请求伪造" class="headerlink" title="6. SSRF (服务端请求伪造)"></a>6. SSRF (服务端请求伪造)</h2><p>URL：服务器会根据用户提供的 URL 发起请求，若该 URL 可控，攻击者就可以构造恶意地址，让服务器访问内部资源或外部恶意服务。</p>
+<p>常见的测试入口包括：</p>
+<ul>
+<li>登录页面中远程加载的图片资源</li>
+<li>URL 中包含的链接跳转参数</li>
+</ul>
+<h2 id="7-URL跳转"><a href="#7-URL跳转" class="headerlink" title="7.URL跳转"></a>7.URL跳转</h2><p>登录成功后，系统通常会跳转回之前的页面，这个跳转地址往往由 URL 参数控制（如 <code>returnUrl</code>）。</p>
+<p><strong>检测思路</strong>：和SSRF很想，测试SSRF的时候可以顺手测了。将 URL 参数修改为恶意的钓鱼网站地址（如 <code>http://evil.com</code>）。如果登录后直接跳转到了该网址，即存在跳转漏洞，常被用于钓鱼攻击。</p>
+<h2 id="8-用户名枚举"><a href="#8-用户名枚举" class="headerlink" title="8.用户名枚举"></a>8.用户名枚举</h2><p>系统对“账号不存在”和“密码错误”给出了不同的提示，或者响应时间有明显差异。</p>
+<p>这会导致攻击者可以先筛选出所有存在的账号，再进行定向爆破</p>
+<p>（分别输入一个不存在的账号和一个存在的账号，对比页面的提示文字或接口返回的错误代码是否不同。）</p>
+<h2 id="9-目录扫描"><a href="#9-目录扫描" class="headerlink" title="9.目录扫描"></a>9.目录扫描</h2><p>登录页周围可能遗留了敏感文件，如源代码备份、接口文档或 Git 配置信息。</p>
+<h2 id="10-隐藏注册接口"><a href="#10-隐藏注册接口" class="headerlink" title="10.隐藏注册接口"></a>10.隐藏注册接口</h2><p>前端未显示注册按钮，但后端接口存在,本来只有登录口，没有注册功能。</p>
+<p>尝试访问 <code>/register</code>, <code>/user/reg</code>, <code>/api/signup</code> 等常见路径</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arduino">/<span class="hljs-keyword">register</span><br>/<span class="hljs-keyword">register</span>.php<br>/<span class="hljs-keyword">register</span>.jsp<br>/<span class="hljs-keyword">register</span>.html<br></code></pre></td></tr></table></figure>
+
+<p>（我的第一个漏洞就是利用隐藏的注册接口登录上去，然后再水平越权找到的敏感信息）</p>
+<h2 id="11-密码修改接口"><a href="#11-密码修改接口" class="headerlink" title="11.密码修改接口"></a>11.密码修改接口</h2><p>1.修改密码时通过抓包改ID</p>
+<p>2.接口可能存在缺陷，不传旧密码会默认为管理员跳过检验（抓包修改）</p>
+<p>3.隐藏的重置密码接口</p>
+<ul>
+<li><code>/api/user/reset_password</code></li>
+<li><code>/api/admin/change_pwd</code></li>
+<li><code>/user/update?action=password</code></li>
+</ul>
+<p>向这些发送POST请求带上 <code>user_id=admin&amp;new_pass=123456</code>，如果无鉴权可能可以直接更改</p>
+<h2 id="12-JS中提取接口"><a href="#12-JS中提取接口" class="headerlink" title="12.JS中提取接口"></a>12.JS中提取接口</h2><p>前端JavaScript文件可能存在隐藏的接口信息</p>
+<ol>
+<li><strong>未授权访问</strong>：直接拼接后端接口路径，绕过前端UI限制，测试越权或未授权漏洞。</li>
+<li><strong>敏感信息泄露</strong>：发现硬编码的AK&#x2F;SK、测试环境IP、内网域名等。</li>
+<li><strong>隐藏功能点</strong>：发现废弃但未下线的旧版本接口（通常缺乏安全校验）。</li>
+</ol>
+<h2 id="13-验证码"><a href="#13-验证码" class="headerlink" title="13.验证码"></a>13.验证码</h2><ol>
+<li>验证码复用</li>
+<li>验证码置空（抓包删除其参数值或直接删除整个参数）</li>
+<li>只在前端用 JS 判断验证码是否正确，后端完全不校验。</li>
+<li>未限制生成频率，攻击者高频请求验证码接口，会导致服务器资源耗尽。</li>
+</ol>
+<p>（找到验证码图片的 URL（如 <code>/code.php?t=123</code>）发送到 Intruder，设置高并发线程（如 50-100 线程）无限请求，观察响应是否变慢，CPU是否飙升）</p>
+<h2 id="14-手机号验证码漏洞"><a href="#14-手机号验证码漏洞" class="headerlink" title="14.手机号验证码漏洞"></a>14.手机号验证码漏洞</h2><ol>
+<li>短信轰炸（批量多次发送）</li>
+<li>验证码直接返回在HTTP的数据包里</li>
+<li>验证码双发&#x2F;并发绕过 </li>
+<li>验证码爆破</li>
+<li>测试验证码未删除</li>
+</ol>
+<h2 id="15-其他端口"><a href="#15-其他端口" class="headerlink" title="15.其他端口"></a>15.其他端口</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> -sS -p <span class="hljs-number">1</span>-<span class="hljs-number">65535</span> -v &lt;Target_IP&gt;<br></code></pre></td></tr></table></figure>
+
+<p>  ○ 8080 &#x2F; 8081 &#x2F; 9090：常见于 Tomcat、JBoss 或开发测试环境 Web 服务。<br>  ○ 7001 &#x2F; 7002：WebLogic 控制台（常存在反序列化漏洞）。<br>  ○ 8888：宝塔面板或其他运维管理后台。<br>  ○ 6379：Redis 数据库（检查未授权访问）。<br>  ○ 27017：MongoDB 数据库（检查未授权访问）。</p>
+<h2 id="16-指纹识别与框架漏洞（？）"><a href="#16-指纹识别与框架漏洞（？）" class="headerlink" title="16.指纹识别与框架漏洞（？）"></a>16.指纹识别与框架漏洞（？）</h2><p>识别处底层的开发框架（如 Spring Boot, Shiro, Struts2）或中间件（WebLogic, JBoss）</p>
+<p>利用历史上已知的公开CVE</p>
+<h2 id="17-任意注册或注册覆盖"><a href="#17-任意注册或注册覆盖" class="headerlink" title="17.任意注册或注册覆盖"></a>17.任意注册或注册覆盖</h2><p>注册时抓包改手机号</p>
+<p>重新注册看看是否覆盖新密码</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web/src/" class="category-chain-item">src</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>登录框</div>
+      <div>https://yy-t1.github.io/2026/08/26/web/src/登录框/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bsahfm</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年8月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/08/27/web/src/Spring-Boot%E6%A1%86%E6%9E%B6/" title="Spring_Boot框架">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring_Boot框架</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/08/26/web/src/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E/" title="越权漏洞">
+                        <span class="hidden-mobile">越权漏洞</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"A72cL0RlIkmsXlCGMx51Qi51-gzGzoHsz","appKey":"xxsSPn2ge0tYPU7nwv5Gyd1r","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
